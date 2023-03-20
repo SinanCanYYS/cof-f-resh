@@ -15,14 +15,17 @@ class User {
     this.name = name
   }
 
+  createPicnic(name, location, date) {
+    const picnic = new Picnic(name, location, date)
+    this.joinPicnic(picnic)
+    return picnic
+  }
+
   joinPicnic(picnic) {
     picnic.attendees.push(this)
     this.picnics.push(picnic)
   }
 }
-
-const armagan = new User('Armagan')
-const numan = new User('Numan')
 
 class Picnic {
   attendees = []
@@ -35,23 +38,31 @@ class Picnic {
   }
 }
 
-const armaganspicnic = new Picnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
-const numanspicnic = new Picnic("Numan's picnic", 'Hasenheide', '2023-05-02')
+const armagan = new User('Armagan')
+const numan = new User('Numan')
+// const armaganspicnic = new Picnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
+// const numanspicnic = new Picnic("Numan's picnic", 'Hasenheide', '2023-05-02')
+
+const armaganspicnic = armagan.createPicnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
+const numanspicnic = numan.createPicnic("Numan's picnic", 'Hasenheide', '2023-05-02')
+
+// const armaganspicnic = armagan.picnics[0]
+// const numanspicnic = numan.picnics[0]
 
 numan.joinPicnic(armaganspicnic)
 armagan.joinPicnic(numanspicnic)
 
 // console.log(`armagan has a name of ${armagan.name} and has ${armagan.picnics.length} picnics`)
 // console.log(`numan has a name of ${numan.name} and has ${numan.picnics.length} picnics`)
-console.log(
-  `armaganspicnic has a name of ${armaganspicnic.name} and take place in ${armaganspicnic.location} on ${
-    armaganspicnic.date
-  } has ${armaganspicnic.attendees.length} attendees : ${armaganspicnic.attendees
-    .map(attendee => attendee.name)
-    .join(', ')}`
-)
-console.log(numan)
-console.log(armagan)
+// console.log(
+//   `armaganspicnic has a name of ${armaganspicnic.name} and take place in ${armaganspicnic.location} on ${
+//     armaganspicnic.date
+//   } has ${armaganspicnic.attendees.length} attendees : ${armaganspicnic.attendees
+//     .map(attendee => attendee.name)
+//     .join(', ')}`
+// )
+// console.log(numan)
+// console.log(armagan)
 console.log(armaganspicnic)
 
 //====================================================================================================
