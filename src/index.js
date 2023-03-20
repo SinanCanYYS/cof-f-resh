@@ -9,7 +9,7 @@ console.log('My first project Coffresh')
 // Customer can specify notes for each order
 
 class User {
-  picnic = []
+  picnics = []
 
   constructor(name) {
     this.name = name
@@ -35,21 +35,8 @@ class Picnic {
   }
 }
 
-const armaganspicnic = {
-  name: "Armagan's picnic",
-  location: 'Tempelhofer Feld',
-  date: '2023-05-01',
-  attendees: [armagan],
-  items: [],
-}
-
-const numanspicnic = {
-  name: "Numan's picnic",
-  location: 'Hasenheide',
-  date: '2023-05-02',
-  attendees: [numan],
-  items: [],
-}
+const armaganspicnic = new Picnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
+const numanspicnic = new Picnic("Numan's picnic", 'Hasenheide', '2023-05-02')
 
 numan.joinPicnic(armaganspicnic)
 armagan.joinPicnic(numanspicnic)
