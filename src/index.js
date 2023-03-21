@@ -1,78 +1,76 @@
+const User = require('./user')
+const Restaurant = require('./restaurant')
+const MenuItem = require('./menu')
 console.log('My first project Coffresh')
 
-// I need 4 objects, Customer, Restaurant, Item and Order
-// Customer can choose restaurant
-// Each restaurant has a list of items
-// Customer can place order to Restaurant and Restaurant can accept or reject the order
-// Order can be placed for today or for future
+// I need 4 objects, User (customer or owner), Restaurant, Menu Item and Order
+// User can be 2 types, Customer or Owner
+// Owner can add Menu Items to the Menu
+// Customer can make order to the Restaurant
 // Order can be 2 types, toGo or toEat
-// Restaurant can see the list of orders
-// Customer can specify notes for each order
 // Customer can specify the target time for the order
+// Order can be placed for today or for future
 
 //====================================================================================================
 
-const restaurantFederal = {
-  name: 'Federal Cafe',
-  city: ' Istanbul',
-  district: 'Galata',
-  menu : [],
-}
+const sinan = new User('Sinan', 'Customer')
+const john = new User('John', 'Customer')
+const rafael = new User('Rafael', 'Customer')
+const sinancan = new User('Sinan Can', 'Owner')
+const johnnyjean = new User('Johnny Jean', 'Owner')
+const rafaelnadal = new User('Rafael Nadal', 'Owner')
 
-const restaurantStarbucks = {
-  name: 'Starbucks',
-  city: 'Istanbul',
-  district: 'Taksim',
-  menu : [],
-}
+const federal = new Restaurant('Federal Cafe', sinancan, ' Istanbul', 'Galata')
+const starbucks = new Restaurant('Starbucks', johnnyjean, 'Istanbul', 'Taksim')
+const bigchefs = new Restaurant('Big Chefs', rafaelnadal, 'Istanbul', 'Taksim')
 
-const sinan = {
-  name: 'Sinan',
+const americano = new MenuItem('Americano', 'Drink', 3)
+const cappuccino = new MenuItem('Cappuccino', 'Drink', 4)
+const omelette = new MenuItem('Omelette', 'Food', 6)
 
-  order: [],
-}
-const john = {
-  name: 'John',
-  order: [],
-}
+sinancan.addMenuItem(federal, [americano, cappuccino, omelette])
+johnnyjean.addMenuItem(starbucks, [americano, cappuccino])
+rafaelnadal.addMenuItem(bigchefs, [omelette, (salmonSalad = new MenuItem('Salmon Salad', 'Food', 8))])
 
-const itemKaffee = {
-  itemName: 'Kaffee',
-  price : 3 euro,
-}
+const sinansOrder = sinan.makeOrder(
+  'toEat',
+  [omelette, americano],
+  '2023-05-01',
+  '2023-05-01',
+  '10:00',
+  '10:30',
+  'Federal',
+  'Please extra milk'
+)
+const johnsOrder = john.makeOrder(
+  'toGo',
+  [americano],
+  '2023-05-01',
+  '2023-05-01',
+  '12:00',
+  '12:30',
+  'Starbucks',
+  'no sugar'
+)
+const rafaelOrder = rafael.makeOrder(
+  'toEat',
+  [cappuccino],
+  '2023-05-01',
+  '2023-05-01',
+  '12:00',
+  '12:30',
+  'Big Chefs',
+  'no sugar'
+)
 
-const itemCappuccino = {
-  itemName: 'Cappuccino',
-  price : 4 euro,
-}
+// console.log(`Sinan has an order of ${sinansOrder.name} and has ${sinansOrder.items.length} items in it`)
+// console.log(`John has an order of ${johnsOrder.name} and has ${johnsOrder.items.length} items in it`)
+// console.log(`Sinan has an order of ${sinansOrder.name} and total cost is ${sinansOrder.totalCost}`)
+// console.log(`John has an order of ${johnsOrder.name} and total cost is ${johnsOrder.totalCost}`)
+// console.log(federal.owner.name)
+// console.log(sinan)
 
-const sinansOrder = {
-  name: "Sinan's Order",
-  type: 'toEat',
-  items: [],
-  date: '2023-05-01',
-  targetDate: '2023-05-01',
-  orderTime: '10:00',
-  targetTime: '10:30',
-  restaurant: 'Federal Cafe',
-  status: 'pending',
-  notes: 'Please extra milk',
-}
-
-const johnsOrder = {
-  name: "John's Order",
-  type: 'toGo',
-  items: [],
-  date: '2023-05-01',
-  targetDate: '2023-05-01',
-  orderTime: '12:00',
-  targetTime: '12:30',
-  restaurant: 'Starbucks',
-  status: 'pending',
-  notes: 'no sugar',
-}
-
-
-
-
-console.log(`Sinan has an order of ${sinansOrder.name} and has ${sinansOrder.items.length} items`)
+console.log(federal.menu)
+console.log(starbucks.menu)
+console.log(bigchefs.menu)
+console.log(MenuItem)
