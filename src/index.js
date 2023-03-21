@@ -8,6 +8,20 @@ console.log('My first project Coffresh')
 // Customer can choose restaurant
 // Customer can specify notes for each order
 
+class Item {
+  quantity = 0
+  whoisBringingWhat = []
+
+  constructor(name, desiredQuantity = 1) {
+    this.name = name
+    this.desiredQuantity = desiredQuantity
+  }
+
+  get quantity() {
+    return this.whoisBringingWhat.reduce((acc, curr) => acc + curr.quantity, 0)
+  }
+}
+
 class User {
   picnics = []
 
@@ -24,6 +38,35 @@ class User {
   joinPicnic(picnic) {
     picnic.attendees.push(this)
     this.picnics.push(picnic)
+  }
+
+  bringItem(name, quantity, picnic) {
+    let item = picnic.items.find(item => item.name === name)
+
+    if (!item) {
+      item = new Item(name, quantity)
+      picnic.items.push(item)
+    }
+
+    item.quantity += quantity
+    item.whoisBringingWhat.push({
+      user: this,
+      quantity: quantity,
+    })
+  }
+
+  leavePicnic(picnic) {
+    picnic.attendees = picnic.attendees.filter(attendee => attendee !== this)
+    this.picnics = this.picnics.filter(p => p !== picnic)
+
+    picnic.items.forEach(item => {
+      item.whoisBringingWhat = item.whoisBringingWhat.filter(whoisBringingWhat => whoisBringingWhat.user !== this)
+
+      if (item.whoisBringingWhat.length === 0) {
+        picnic.items = picnic.items.filter(i => i !== item)
+      }
+      item.quantity = item.whoisBringingWhat.reduce((acc, curr) => acc + curr.quantity, 0)
+    })
   }
 }
 
@@ -51,6 +94,7 @@ const numanspicnic = numan.createPicnic("Numan's picnic", 'Hasenheide', '2023-05
 
 numan.joinPicnic(armaganspicnic)
 armagan.joinPicnic(numanspicnic)
+armagan.bringItem('beer', 6, numanspicnic)
 
 // console.log(`armagan has a name of ${armagan.name} and has ${armagan.picnics.length} picnics`)
 // console.log(`numan has a name of ${numan.name} and has ${numan.picnics.length} picnics`)
@@ -67,39 +111,39 @@ console.log(armaganspicnic)
 
 //====================================================================================================
 
-const restaurantFederal = {
-  name: 'Federal Cafe',
-}
+// const restaurantFederal = {
+//   name: 'Federal Cafe',
+// }
 
-const restaurantViyana = {
-  name: 'Viyana Kahvesi',
-}
+// const restaurantViyana = {
+//   name: 'Viyana Kahvesi',
+// }
 
-const sinan = {
-  name: 'Sinan',
-  order: [],
-}
-const yesim = {
-  name: 'Yesim',
-  order: [],
-}
+// const sinan = {
+//   name: 'Sinan',
+//   order: [],
+// }
+// const yesim = {
+//   name: 'Yesim',
+//   order: [],
+// }
 
-const itemKaffee = {
-  itemName: 'Kaffee',
-}
+// const itemKaffee = {
+//   itemName: 'Kaffee',
+// }
 
-const itemCappucino = {
-  itemName: 'Cappucino',
-}
+// const itemCappucino = {
+//   itemName: 'Cappucino',
+// }
 
-const sinansOrder = {
-  name: "Sinan's Order",
-  items: [],
-  date: '2023-05-01',
-  targetDate: '2023-05-01',
-  restaurant: 'Coffresh',
-  status: 'pending',
-  notes: 'I want to order a coffee',
-  orderTime: '10:00',
-  targetTime: '10:30',
-}
+// const sinansOrder = {
+//   name: "Sinan's Order",
+//   items: [],
+//   date: '2023-05-01',
+//   targetDate: '2023-05-01',
+//   restaurant: 'Coffresh',
+//   status: 'pending',
+//   notes: 'I want to order a coffee',
+//   orderTime: '10:00',
+//   targetTime: '10:30',
+// }
