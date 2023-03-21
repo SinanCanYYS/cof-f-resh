@@ -1,149 +1,78 @@
 console.log('My first project Coffresh')
 
-// I need 3 objects, Customer, Order and Restaurant
-// Customer can place order to Restaurant and Restaurant can accept or reject the order
-// Customer can cancel the order
-// Restaurant can see the list of orders
-// Restaurant can see the details of the order
+// I need 4 objects, Customer, Restaurant, Item and Order
 // Customer can choose restaurant
+// Each restaurant has a list of items
+// Customer can place order to Restaurant and Restaurant can accept or reject the order
+// Order can be placed for today or for future
+// Order can be 2 types, toGo or toEat
+// Restaurant can see the list of orders
 // Customer can specify notes for each order
-
-class Item {
-  quantity = 0
-  whoisBringingWhat = []
-
-  constructor(name, desiredQuantity = 1) {
-    this.name = name
-    this.desiredQuantity = desiredQuantity
-  }
-
-  get quantity() {
-    return this.whoisBringingWhat.reduce((acc, curr) => acc + curr.quantity, 0)
-  }
-}
-
-class User {
-  picnics = []
-
-  constructor(name) {
-    this.name = name
-  }
-
-  createPicnic(name, location, date) {
-    const picnic = new Picnic(name, location, date)
-    this.joinPicnic(picnic)
-    return picnic
-  }
-
-  joinPicnic(picnic) {
-    picnic.attendees.push(this)
-    this.picnics.push(picnic)
-  }
-
-  bringItem(name, quantity, picnic) {
-    let item = picnic.items.find(item => item.name === name)
-
-    if (!item) {
-      item = new Item(name, quantity)
-      picnic.items.push(item)
-    }
-
-    item.quantity += quantity
-    item.whoisBringingWhat.push({
-      user: this,
-      quantity: quantity,
-    })
-  }
-
-  leavePicnic(picnic) {
-    picnic.attendees = picnic.attendees.filter(attendee => attendee !== this)
-    this.picnics = this.picnics.filter(p => p !== picnic)
-
-    picnic.items.forEach(item => {
-      item.whoisBringingWhat = item.whoisBringingWhat.filter(whoisBringingWhat => whoisBringingWhat.user !== this)
-
-      if (item.whoisBringingWhat.length === 0) {
-        picnic.items = picnic.items.filter(i => i !== item)
-      }
-      item.quantity = item.whoisBringingWhat.reduce((acc, curr) => acc + curr.quantity, 0)
-    })
-  }
-}
-
-class Picnic {
-  attendees = []
-  items = []
-
-  constructor(name, location, date) {
-    this.name = name
-    this.location = location
-    this.date = date
-  }
-}
-
-const armagan = new User('Armagan')
-const numan = new User('Numan')
-// const armaganspicnic = new Picnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
-// const numanspicnic = new Picnic("Numan's picnic", 'Hasenheide', '2023-05-02')
-
-const armaganspicnic = armagan.createPicnic("Armagan's picnic", 'Tempelhofer Feld', '2023-05-01')
-const numanspicnic = numan.createPicnic("Numan's picnic", 'Hasenheide', '2023-05-02')
-
-// const armaganspicnic = armagan.picnics[0]
-// const numanspicnic = numan.picnics[0]
-
-numan.joinPicnic(armaganspicnic)
-armagan.joinPicnic(numanspicnic)
-armagan.bringItem('beer', 6, numanspicnic)
-
-// console.log(`armagan has a name of ${armagan.name} and has ${armagan.picnics.length} picnics`)
-// console.log(`numan has a name of ${numan.name} and has ${numan.picnics.length} picnics`)
-// console.log(
-//   `armaganspicnic has a name of ${armaganspicnic.name} and take place in ${armaganspicnic.location} on ${
-//     armaganspicnic.date
-//   } has ${armaganspicnic.attendees.length} attendees : ${armaganspicnic.attendees
-//     .map(attendee => attendee.name)
-//     .join(', ')}`
-// )
-// console.log(numan)
-// console.log(armagan)
-console.log(armaganspicnic)
+// Customer can specify the target time for the order
 
 //====================================================================================================
 
-// const restaurantFederal = {
-//   name: 'Federal Cafe',
-// }
+const restaurantFederal = {
+  name: 'Federal Cafe',
+  city: ' Istanbul',
+  district: 'Galata',
+  menu : [],
+}
 
-// const restaurantViyana = {
-//   name: 'Viyana Kahvesi',
-// }
+const restaurantStarbucks = {
+  name: 'Starbucks',
+  city: 'Istanbul',
+  district: 'Taksim',
+  menu : [],
+}
 
-// const sinan = {
-//   name: 'Sinan',
-//   order: [],
-// }
-// const yesim = {
-//   name: 'Yesim',
-//   order: [],
-// }
+const sinan = {
+  name: 'Sinan',
 
-// const itemKaffee = {
-//   itemName: 'Kaffee',
-// }
+  order: [],
+}
+const john = {
+  name: 'John',
+  order: [],
+}
 
-// const itemCappucino = {
-//   itemName: 'Cappucino',
-// }
+const itemKaffee = {
+  itemName: 'Kaffee',
+  price : 3 euro,
+}
 
-// const sinansOrder = {
-//   name: "Sinan's Order",
-//   items: [],
-//   date: '2023-05-01',
-//   targetDate: '2023-05-01',
-//   restaurant: 'Coffresh',
-//   status: 'pending',
-//   notes: 'I want to order a coffee',
-//   orderTime: '10:00',
-//   targetTime: '10:30',
-// }
+const itemCappuccino = {
+  itemName: 'Cappuccino',
+  price : 4 euro,
+}
+
+const sinansOrder = {
+  name: "Sinan's Order",
+  type: 'toEat',
+  items: [],
+  date: '2023-05-01',
+  targetDate: '2023-05-01',
+  orderTime: '10:00',
+  targetTime: '10:30',
+  restaurant: 'Federal Cafe',
+  status: 'pending',
+  notes: 'Please extra milk',
+}
+
+const johnsOrder = {
+  name: "John's Order",
+  type: 'toGo',
+  items: [],
+  date: '2023-05-01',
+  targetDate: '2023-05-01',
+  orderTime: '12:00',
+  targetTime: '12:30',
+  restaurant: 'Starbucks',
+  status: 'pending',
+  notes: 'no sugar',
+}
+
+
+
+
+console.log(`Sinan has an order of ${sinansOrder.name} and has ${sinansOrder.items.length} items`)
