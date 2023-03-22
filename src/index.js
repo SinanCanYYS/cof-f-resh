@@ -32,36 +32,15 @@ sinancan.addMenuItem(federal, [americano, cappuccino, omelette])
 johnnyjean.addMenuItem(starbucks, [americano, cappuccino])
 rafaelnadal.addMenuItem(bigchefs, [omelette, (salmonSalad = new MenuItem('Salmon Salad', 'Food', 8))])
 
-const sinansOrder = sinan.makeOrder(
-  'toEat',
-  [omelette, americano],
-  '2023-05-01',
-  '2023-05-01',
-  '10:00',
-  '10:30',
-  'Federal',
-  'Please extra milk'
-)
-const johnsOrder = john.makeOrder(
-  'toGo',
-  [americano],
-  '2023-05-01',
-  '2023-05-01',
-  '12:00',
-  '12:30',
-  'Starbucks',
-  'no sugar'
-)
-const rafaelOrder = rafael.makeOrder(
-  'toEat',
-  [cappuccino],
-  '2023-05-01',
-  '2023-05-01',
-  '12:00',
-  '12:30',
-  'Big Chefs',
-  'no sugar'
-)
+const sinansOrder = sinan.makeOrder('Federal', 'toEat', '2023-05-01', '10:30', 'Please extra milk')
+const johnsOrder = john.makeOrder('Starbucks', 'toGo', '2023-05-01', '12:30', 'no sugar')
+const rafaelOrder = rafael.makeOrder('Big Chefs', 'toEat', '2023-05-01', '12:00', '12:30', 'no sugar')
+
+sinan.addOrderItem(sinansOrder, americano, 2)
+sinan.addOrderItem(sinansOrder, cappuccino, 1)
+sinan.addOrderItem(sinansOrder, omelette, 1)
+sinan.addOrderItem(sinansOrder, americano, 1)
+rafael.addOrderItem(sinansOrder, salmonSalad, 1)
 
 // console.log(`Sinan has an order of ${sinansOrder.name} and has ${sinansOrder.items.length} items in it`)
 // console.log(`John has an order of ${johnsOrder.name} and has ${johnsOrder.items.length} items in it`)
@@ -70,7 +49,9 @@ const rafaelOrder = rafael.makeOrder(
 // console.log(federal.owner.name)
 // console.log(sinan)
 
-console.log(federal.menu)
-console.log(starbucks.menu)
-console.log(bigchefs.menu)
-console.log(MenuItem)
+// console.log(federal.menu)
+// console.log(starbucks.menu)
+// console.log(bigchefs.menu)
+// console.log(MenuItem)
+
+console.log(sinansOrder)

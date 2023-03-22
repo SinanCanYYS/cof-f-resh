@@ -6,22 +6,20 @@ class User {
     this.type = type
   }
 
-  makeOrder(orderType, items, date, targetDate, orderTime, targetTime, restaurant, notes) {
+  makeOrder(orderType, date, targetDate, orderTime, targetTime, restaurant, notes) {
     if (this.type === 'Customer') {
-      const newOrder = new Order(
-        this.name,
-        orderType,
-        items,
-        date,
-        targetDate,
-        orderTime,
-        targetTime,
-        restaurant,
-        notes
-      )
+      const newOrder = new Order(this.name, orderType, date, targetDate, orderTime, targetTime, restaurant, notes)
       return newOrder
     } else {
       console.log('You are not a customer')
+    }
+  }
+
+  addOrderItem(order, item, quantity) {
+    if (this.type === 'Customer' && this.name === order.name) {
+      order.items.push(item, quantity)
+    } else {
+      console.log('You are not the customer of this order')
     }
   }
 

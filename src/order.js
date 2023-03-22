@@ -1,15 +1,15 @@
 class Order {
   status = 'pending'
   totalCost = 0
-  constructor(name, orderType, items, date, targetDate, orderTime, targetTime, restaurant, notes) {
+  items = []
+  date = new Date().toLocaleDateString
+  time = new Date().toLocaleTimeString
+  constructor(name, restaurant, orderType, targetDate, targetTime, notes) {
     this.name = name
-    this.orderType = orderType
-    this.items = items
-    this.date = date
-    this.targetDate = targetDate
-    this.orderTime = orderTime
-    this.targetTime = targetTime
     this.restaurant = restaurant
+    this.orderType = orderType
+    this.targetDate = targetDate
+    this.targetTime = targetTime
     this.notes = notes
   }
 }
