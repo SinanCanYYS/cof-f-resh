@@ -8,9 +8,10 @@ class MenuItem {
 
 class OrderItem {
   constructor(item, quantity) {
-    this.item = item
+    this.name = item
     this.quantity = quantity
   }
 }
 
 module.exports = MenuItem
+module.exports = OrderItem

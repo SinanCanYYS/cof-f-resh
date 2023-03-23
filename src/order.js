@@ -15,21 +15,22 @@ class Order {
 
   get orderDeatils() {
     return `
-    Name : ${this.name}
-    Restaurant : ${this.restaurant.name}
-    Order Type : ${this.orderType}
-    Status : ${this.status}
-    Total Cost : ${this.totalCost}
-    Order Date  / Time : ${this.date} / ${this.time}
-    Target Date / Time : ${this.targetDate} / ${this.targetTime}
+    Customer Name   : ${this.name}
+    Restaurant      : ${this.restaurant.name}
+    Order Type      : ${this.orderType}
+    Status          : ${this.status}
+    Total Cost      : ${this.totalCost}
+    Order Date/Time : ${this.date} / ${this.time}
+    Target Date/Time : ${this.targetDate} / ${this.targetTime}
     Notes : ${this.notes}`
   }
 
-  // get orderDeatils2() {
-  //   this.items.forEach(item => {
-  //     return item[0].name
-  //   })
-  // }
+  get orderDeatils2() {
+    this.items.forEach(line => {
+      return `
+      ${line.quantity} pcs ${line.name}`
+    })
+  }
 }
 
 module.exports = Order

@@ -1,7 +1,7 @@
 const User = require('./user')
 const Restaurant = require('./restaurant')
 const MenuItem = require('./menu')
-console.log('My first project Coffresh')
+console.log('My first project Cof-f-resh')
 
 // I need 4 objects, User, Restaurant, Menu Item and Order
 // User can be 2 types, Customer or Owner
@@ -33,33 +33,26 @@ sinancan.addMenuItem(federal, americano)
 sinancan.addMenuItem(federal, cappuccino)
 sinancan.addMenuItem(federal, omelette)
 sinancan.addMenuItem(federal, salmonSalad)
-johnnyjean.addMenuItem(starbucks, americano)
-johnnyjean.addMenuItem(starbucks, cappuccino)
-rafaelnadal.addMenuItem(bigchefs, salmonSalad)
-rafaelnadal.addMenuItem(bigchefs, omelette)
 sinancan.addMenuItem(federal, americano)
 
+// johnnyjean.addMenuItem(starbucks, americano)
+// johnnyjean.addMenuItem(starbucks, cappuccino)
+// rafaelnadal.addMenuItem(bigchefs, salmonSalad)
+// rafaelnadal.addMenuItem(bigchefs, omelette)
+
 const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
-const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
-const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
+// const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
+// const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
 sinan.addOrderItem(sinansOrder, americano, 2)
 sinan.addOrderItem(sinansOrder, cappuccino, 1)
 sinan.addOrderItem(sinansOrder, omelette, 1)
 sinan.addOrderItem(sinansOrder, americano, 1)
 
-//console.log(sinansOrder.items[0].name, sinansOrder.items[0].type)
-//console.log(sinansOrder.orderDeatils)
-console.log(sinansOrder)
+console.log(sinansOrder.orderDeatils)
+console.log(sinansOrder.orderDeatils2)
+console.log(sinansOrder.items)
 
 // rafael.addOrderItem(sinansOrder, salmonSalad, 1)
 
-// console.log(`Sinan has an order of ${sinansOrder.name} and has ${sinansOrder.items.length} items in it`)
-// console.log(`John has an order of ${johnsOrder.name} and has ${johnsOrder.items.length} items in it`)
-// console.log(`Sinan has an order of ${sinansOrder.name} and total cost is ${sinansOrder.totalCost}`)
-// console.log(`John has an order of ${johnsOrder.name} and total cost is ${johnsOrder.totalCost}`)
-// console.log(federal.owner.name)
-// console.log(sinan)
 // console.log(federal.menu)
-// console.log(starbucks.menu)
-// console.log(bigchefs.menu)
