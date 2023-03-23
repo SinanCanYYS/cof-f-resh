@@ -39,17 +39,18 @@ rafaelnadal.addMenuItem(bigchefs, salmonSalad)
 rafaelnadal.addMenuItem(bigchefs, omelette)
 sinancan.addMenuItem(federal, americano)
 
-const sinansOrder = sinan.createOrder('Federal', 'toEat', '01/05/2023', '10:30', 'Please extra milk')
-const johnsOrder = john.createOrder('Starbucks', 'toGo', '01/05/2023', '12:30', 'no sugar')
-const rafaelOrder = rafael.createOrder('Big Chefs', 'toEat', '01/05/2023', '12:00', '12:30', 'no sugar')
+const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
+const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
+const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
 sinan.addOrderItem(sinansOrder, americano, 2)
 sinan.addOrderItem(sinansOrder, cappuccino, 1)
 sinan.addOrderItem(sinansOrder, omelette, 1)
 sinan.addOrderItem(sinansOrder, americano, 1)
 
+//console.log(sinansOrder.items[0].name, sinansOrder.items[0].type)
+//console.log(sinansOrder.orderDeatils)
 console.log(sinansOrder)
-console.log(sinansOrder.orderDeatils)
 
 // rafael.addOrderItem(sinansOrder, salmonSalad, 1)
 
@@ -59,8 +60,6 @@ console.log(sinansOrder.orderDeatils)
 // console.log(`John has an order of ${johnsOrder.name} and total cost is ${johnsOrder.totalCost}`)
 // console.log(federal.owner.name)
 // console.log(sinan)
-
 // console.log(federal.menu)
 // console.log(starbucks.menu)
 // console.log(bigchefs.menu)
-// console.log(MenuItem)

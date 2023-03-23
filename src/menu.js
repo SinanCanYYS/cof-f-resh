@@ -5,4 +5,12 @@ class MenuItem {
     this.price = price
   }
 }
+
+class OrderItem {
+  constructor(item, quantity) {
+    this.item = item
+    this.quantity = quantity
+  }
+}
+
 module.exports = MenuItem

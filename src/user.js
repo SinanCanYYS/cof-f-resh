@@ -1,4 +1,5 @@
 const Order = require('./order')
+const OrderItem = require('./menu')
 
 class User {
   constructor(name, type) {
@@ -17,7 +18,7 @@ class User {
 
   addOrderItem(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {
-      order.items.push(item, quantity)
+      order.items.push(new OrderItem(item.name, quantity))
     } else {
       console.log('You are not the customer of this order')
     }
