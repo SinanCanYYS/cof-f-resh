@@ -30,5 +30,13 @@ class User {
       console.log('You are not the owner of this restaurant')
     }
   }
+
+  addIngredient(restaurant, ingredient) {
+    if (this.type === 'Owner' && this.name === restaurant.owner.name) {
+      restaurant.ingredients.push(ingredient)
+    } else {
+      console.log('You are not the owner of this restaurant')
+    }
+  }
 }
 module.exports = User
