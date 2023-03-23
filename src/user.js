@@ -6,7 +6,7 @@ class User {
     this.type = type
   }
 
-  makeOrder(orderType, date, targetDate, orderTime, targetTime, restaurant, notes) {
+  createOrder(orderType, date, targetDate, orderTime, targetTime, restaurant, notes) {
     if (this.type === 'Customer') {
       const newOrder = new Order(this.name, orderType, date, targetDate, orderTime, targetTime, restaurant, notes)
       return newOrder

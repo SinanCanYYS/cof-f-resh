@@ -12,5 +12,16 @@ class Order {
     this.targetTime = targetTime
     this.notes = notes
   }
+
+  get orderDeatils() {
+    return `
+    Name : ${this.name}
+    Restaurant : ${this.restaurant}
+    Order Type : ${this.orderType}
+    Order Date  / Time : ${this.date} /  ${this.time}
+    Target Date / Time : ${this.targetDate} / ${this.targetTime}
+    Notes : ${this.notes}
+    Items : ${this.items}`
+  }
 }
 module.exports = Order
