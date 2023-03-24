@@ -41,7 +41,7 @@ sinancan.addMenuItem(federal, americano)
 // rafaelnadal.addMenuItem(bigchefs, omelette)
 
 const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
-// const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
+const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
 // const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
 sinan.addOrderItem(sinansOrder, americano, 2)
@@ -51,7 +51,11 @@ sinan.addOrderItem(sinansOrder, americano, 1)
 
 console.log(sinansOrder.orderDeatils)
 console.log(sinansOrder.orderDeatils2)
-console.log(sinansOrder.items)
+
+console.log(johnsOrder.orderDeatils)
+console.log(johnsOrder.orderDeatils2)
+
+//console.log(sinansOrder.items)
 
 // rafael.addOrderItem(sinansOrder, salmonSalad, 1)
 
