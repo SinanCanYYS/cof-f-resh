@@ -14,22 +14,26 @@ class Order {
   }
 
   get orderDeatils() {
-    return `
-    Customer Name   : ${this.name}
-    Restaurant      : ${this.restaurant.name}
-    Order Type      : ${this.orderType}
-    Status          : ${this.status}
-    Total Cost      : ${this.totalCost}
-    Order Date/Time : ${this.date} / ${this.time}
-    Target Date/Time : ${this.targetDate} / ${this.targetTime}
-    Notes : ${this.notes}`
-  }
-
-  get orderDeatils2() {
-    this.items.forEach(line => {
-      return `
+    return (
+      `
+    Customer Name     : ${this.name}
+    Restaurant        : ${this.restaurant.name}
+    Order Type        : ${this.orderType}
+    Status            : ${this.status}
+    Total Cost        : ${this.totalCost}
+    Order Date/Time   : ${this.date} / ${this.time}
+    Target Date/Time  : ${this.targetDate} / ${this.targetTime}
+    Notes             : ${this.notes}
+    ----------------------------------------------------------
+    Order details     :
+    ` +
+      this.items
+        .map(line => {
+          return `
       ${line.quantity} pcs ${line.name}`
-    })
+        })
+        .join('')
+    )
   }
 }
 

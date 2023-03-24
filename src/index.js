@@ -42,21 +42,28 @@ sinancan.addMenuItem(federal, americano)
 
 const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
 const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
+const rafaelOrder = rafael.createOrder(federal, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
+
+federal.orderList.push(sinansOrder)
+federal.orderList.push(rafaelOrder)
 // const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
-sinan.addOrderItem(sinansOrder, americano, 2)
-sinan.addOrderItem(sinansOrder, cappuccino, 1)
-sinan.addOrderItem(sinansOrder, omelette, 1)
-sinan.addOrderItem(sinansOrder, americano, 1)
+sinan.addOrderElement(sinansOrder, americano, 2)
+sinan.addOrderElement(sinansOrder, cappuccino, 1)
+sinan.addOrderElement(sinansOrder, omelette, 1)
+sinan.addOrderElement(sinansOrder, americano, 1)
+john.addOrderElement(johnsOrder, cappuccino, 5)
+john.addOrderElement(johnsOrder, americano, 1)
 
 console.log(sinansOrder.orderDeatils)
-console.log(sinansOrder.orderDeatils2)
 
-console.log(johnsOrder.orderDeatils)
-console.log(johnsOrder.orderDeatils2)
+//console.log(johnsOrder.orderDeatils)
 
+console.log(federal.PendingOrders)
+rafaelOrder.status = 'confirmed'
+console.log(federal.PendingOrders)
 //console.log(sinansOrder.items)
 
-// rafael.addOrderItem(sinansOrder, salmonSalad, 1)
+// rafael.addOrderElement(sinansOrder, salmonSalad, 1)
 
 // console.log(federal.menu)
