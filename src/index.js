@@ -24,16 +24,17 @@ const federal = new Restaurant('Federal Cafe', sinancan, ' Istanbul', 'Galata')
 const starbucks = new Restaurant('Starbucks', johnnyjean, 'Istanbul', 'Taksim')
 const bigchefs = new Restaurant('Big Chefs', rafaelnadal, 'Istanbul', 'Taksim')
 
-const americano = new MenuItem('Americano', 'Drink', 3)
-const cappuccino = new MenuItem('Cappuccino', 'Drink', 4)
-const omelette = new MenuItem('Omelette', 'Food', 6)
-const salmonSalad = new MenuItem('Salmon Salad', 'Food', 8)
+const americano = new MenuItem('Americano', 'Drink', 'Hot Drink')
+const cappuccino = new MenuItem('Cappuccino', 'Drink', 'Hot Drink')
+const omelette = new MenuItem('Omelette', 'Food', 'Breakfast')
+const salmonSalad = new MenuItem('Salmon Salad', 'Food', 'Lunch')
 
-sinancan.addMenuItem(federal, americano)
-sinancan.addMenuItem(federal, cappuccino)
-sinancan.addMenuItem(federal, omelette)
-sinancan.addMenuItem(federal, salmonSalad)
-sinancan.addMenuItem(federal, americano)
+sinancan.addMenuItem(federal, americano, 3)
+sinancan.addMenuItem(federal, cappuccino, 4)
+sinancan.addMenuItem(federal, omelette, 6)
+sinancan.addMenuItem(federal, salmonSalad, 8)
+sinancan.addMenuItem(federal, americano, 3)
+johnnyjean.addMenuItem(starbucks, cappuccino, 10)
 
 // johnnyjean.addMenuItem(starbucks, americano)
 // johnnyjean.addMenuItem(starbucks, cappuccino)
@@ -44,26 +45,28 @@ const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', '
 const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
 const rafaelOrder = rafael.createOrder(federal, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
-federal.orderList.push(sinansOrder)
-federal.orderList.push(rafaelOrder)
+//federal.orderList.push(sinansOrder)
+//federal.orderList.push(rafaelOrder)
 // const rafaelOrder = rafael.createOrder(bigchefs, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
 sinan.addOrderElement(sinansOrder, americano, 2)
-sinan.addOrderElement(sinansOrder, cappuccino, 1)
+sinan.addOrderElement(sinansOrder, cappuccino, 4)
 sinan.addOrderElement(sinansOrder, omelette, 1)
 sinan.addOrderElement(sinansOrder, americano, 1)
 john.addOrderElement(johnsOrder, cappuccino, 5)
 john.addOrderElement(johnsOrder, americano, 1)
 
+console.log(federal.menu)
 console.log(sinansOrder.orderDeatils)
+console.log(starbucks.menu)
+// console.log(federal.orderList)
+sinancan.confirmOrder(sinansOrder)
+console.log('=====================================================')
+// console.log(federal.orderList)
 
 //console.log(johnsOrder.orderDeatils)
 
-console.log(federal.PendingOrders)
-rafaelOrder.status = 'confirmed'
-console.log(federal.PendingOrders)
+//console.log(federal.PendingOrders)
+//rafaelOrder.status = 'confirmed'
+console.log(federal.pendingOrders)
 //console.log(sinansOrder.items)
-
-// rafael.addOrderElement(sinansOrder, salmonSalad, 1)
-
-// console.log(federal.menu)

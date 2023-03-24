@@ -9,7 +9,7 @@ class Restaurant {
     this.district = district
   }
 
-  get PendingOrders() {
+  get pendingOrders() {
     return this.orderList.filter(order => order.status === 'pending')
   }
 }

@@ -20,7 +20,7 @@ class Order {
     Restaurant        : ${this.restaurant.name}
     Order Type        : ${this.orderType}
     Status            : ${this.status}
-    Total Cost        : ${this.totalCost}
+    Total Cost        : ${this.totalCost} €
     Order Date/Time   : ${this.date} / ${this.time}
     Target Date/Time  : ${this.targetDate} / ${this.targetTime}
     Notes             : ${this.notes}

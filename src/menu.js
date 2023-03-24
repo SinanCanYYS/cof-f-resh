@@ -1,8 +1,9 @@
 class MenuItem {
-  constructor(name, type, price) {
+  price = 0
+  constructor(name, type, subType) {
     this.name = name
     this.type = type
-    this.price = price
+    this.subType = subType
   }
 }
 
