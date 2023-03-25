@@ -1,5 +1,6 @@
 const Order = require('./order')
 const OrderElement = require('./orderelement')
+const MenuItem = require('./menu')
 
 class User {
   constructor(name, type) {
@@ -19,8 +20,8 @@ class User {
 
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {
-      order.items.push(new OrderElement(item.name, quantity))
-      order.totalCost += item.price * quantity
+      order.items.push(new OrderElement(item, quantity))
+      order.totalCost += order.restaurant.menu.find(menuItem => menuItem.name === item).price * quantity
     } else {
       console.log('You are not the customer of this order')
     }
@@ -50,10 +51,11 @@ class User {
     }
   }
 
-  addMenuItem(restaurant, item, price) {
+  addMenuItem(restaurant, name, type, subType, price) {
     if (this.type === 'Owner' && this.name === restaurant.owner.name) {
-      item.price = price
-      restaurant.menu.push(item)
+      restaurant.menu.map(menuItem => menuItem.name).includes(name)
+        ? console.log('This menu item already exists')
+        : restaurant.menu.push(new MenuItem(name, type, subType, price))
     } else {
       console.log('You are not the owner of this restaurant')
     }
