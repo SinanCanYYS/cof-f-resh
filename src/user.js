@@ -1,6 +1,9 @@
 const Order = require('./order')
 const OrderElement = require('./orderelement')
 const MenuItem = require('./menu')
+const SalesData = require('./stockControl').SalesData
+const StockData = require('./stockControl').StockData
+const PurchaseData = require('./stockControl').PurchaseData
 
 class User {
   constructor(name, type) {
@@ -76,6 +79,32 @@ class User {
   addIngredientToRecipe(restaurant, menuItem, ingredient, quantity) {
     if (this.type === 'Owner' && this.name === restaurant.owner.name) {
       restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
+    } else {
+      console.log('You are not the owner of this restaurant')
+    }
+  }
+
+  inputSalesData(restaurant, menuItem, year, month, quantity) {
+    if (this.type === 'Owner' && this.name === restaurant.owner.name) {
+      const newSalesData = new SalesData(restaurant, menuItem, year, month, quantity)
+      restaurant.sales.push({ newSalesData })
+    } else {
+      console.log('You are not the owner of this restaurant')
+    }
+  }
+  inputStockData(restaurant, ingredient, year, month, quantity) {
+    if (this.type === 'Owner' && this.name === restaurant.owner.name) {
+      const newStockData = new StockData(restaurant, ingredient, year, month, quantity)
+      restaurant.stockQty.push({ newStockData })
+    } else {
+      console.log('You are not the owner of this restaurant')
+    }
+  }
+
+  inputPurchaseData(restaurant, ingredient, year, month, quantity) {
+    if (this.type === 'Owner' && this.name === restaurant.owner.name) {
+      const newPurchaseData = new PurchaseData(restaurant, ingredient, year, month, quantity)
+      restaurant.purchases.push({ newPurchaseData })
     } else {
       console.log('You are not the owner of this restaurant')
     }

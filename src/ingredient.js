@@ -1,4 +1,4 @@
-class ingredient {
+class Ingredient {
   constructor(restaurant, name, type, unit) {
     this.restaurant = restaurant
     this.name = name
@@ -7,4 +7,4 @@ class ingredient {
   }
 }
 
-module.exports = ingredient
+module.exports = Ingredient

@@ -2,6 +2,9 @@ class Restaurant {
   menu = []
   ingredients = []
   orderList = []
+  sales = []
+  stockQty = []
+  purchases = []
   constructor(name, owner, city, district) {
     this.name = name
     this.owner = owner

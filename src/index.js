@@ -64,6 +64,7 @@ sinan.addOrderElement(sinansOrder, federalAmericano, 1)
 john.addOrderElement(johnsOrder, starbucksCappuccino, 5)
 john.addOrderElement(johnsOrder, starbucksAmericano, 1)
 john.addOrderElement(johnsOrder, starbucksCappuccino, 1)
+rafael.addOrderElement(rafaelOrder, federalSalmonSalad, 3)
 
 // Defining ingredients
 const federalCoffeeBean = new Ingredient(federal, 'Coffee Bean', 'Drink', 'gr')
@@ -92,10 +93,32 @@ sinancan.addIngredientToRecipe(federal, federalAmericano, federalCoffeeBean, 24)
 sinancan.addIngredientToRecipe(federal, federalCappuccino, federalCoffeeBean, 12)
 sinancan.addIngredientToRecipe(federal, federalCappuccino, federalMilk, 100) // 100 ml
 
-console.log(federalAmericano.Recipe)
-console.log(federalCappuccino.Recipe)
+// Input Stock Data
+sinancan.inputStockData(federal, federalCoffeeBean, 2022, 12, 100)
+sinancan.inputStockData(federal, federalCoffeeBean, 2023, 01, 150)
+sinancan.inputStockData(federal, federalCoffeeBean, 2023, 02, 125)
 
-console.log(federal.pendingOrders)
+//Input Sales Data
+sinancan.inputSalesData(federal, federalAmericano, 2023, 01, 80)
+sinancan.inputSalesData(federal, federalCappuccino, 2023, 01, 50)
+sinancan.inputSalesData(federal, federalAmericano, 2023, 02, 60)
+sinancan.inputSalesData(federal, federalCappuccino, 2023, 02, 90)
+
+// Input Purchase Data
+sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 01, 100)
+sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 02, 150)
+
+//console.log(federal.stockQty)
+console.log('=====================================================')
+console.log(federal.stockQty[0].year)
+//console.log(federal.stockQty[0].restaurant.city)
+
+// console.log(federalAmericano.Recipe)
+// console.log(federalCappuccino.Recipe)
+
+// console.log(federal.pendingOrders)
+
+// console.log(sinansOrder.orderDeatils)
 
 // console.log(federalAmericano.recipe[0].ingredient.name)
 
