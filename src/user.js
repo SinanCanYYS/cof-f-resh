@@ -20,8 +20,12 @@ class User {
 
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {
-      order.items.push(new OrderElement(item, quantity))
-      order.totalCost += order.restaurant.menu.find(menuItem => menuItem.name === item).price * quantity
+      if (order.items.map(orderItem => orderItem.name).includes(item.name)) {
+        order.items.find(orderItem => orderItem.name === item.name).quantity += quantity
+      } else {
+        order.items.push(new OrderElement(item, quantity))
+      }
+      order.totalCost += order.restaurant.menu.find(menuItem => menuItem.name === item.name).price * quantity
     } else {
       console.log('You are not the customer of this order')
     }
@@ -51,11 +55,11 @@ class User {
     }
   }
 
-  addMenuItem(restaurant, name, type, subType, price) {
+  addMenuItem(restaurant, item) {
     if (this.type === 'Owner' && this.name === restaurant.owner.name) {
-      restaurant.menu.map(menuItem => menuItem.name).includes(name)
+      restaurant.menu.map(menuItem => menuItem.name).includes(item.name)
         ? console.log('This menu item already exists')
-        : restaurant.menu.push(new MenuItem(name, type, subType, price))
+        : restaurant.menu.push(item)
     } else {
       console.log('You are not the owner of this restaurant')
     }
