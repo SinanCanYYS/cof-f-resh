@@ -1,3 +1,5 @@
+const { ToWords } = require('to-words')
+const toWords = new ToWords()
 class Order {
   status = 'pending'
   totalCost = 0
@@ -20,7 +22,7 @@ class Order {
     Restaurant        : ${this.restaurant.name}
     Order Type        : ${this.orderType}
     Status            : ${this.status}
-    Total Cost        : ${this.totalCost} €
+    Total Cost        : ${this.totalCost} € - ${toWords.convert(this.totalCost)} euros
     Order Date/Time   : ${this.date} / ${this.time}
     Target Date/Time  : ${this.targetDate} / ${this.targetTime}
     Notes             : ${this.notes}
