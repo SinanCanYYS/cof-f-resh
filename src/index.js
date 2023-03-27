@@ -99,7 +99,11 @@ sinancan.inputStockData(federal, federalCoffeeBean, 2023, 01, 150)
 sinancan.inputStockData(federal, federalCoffeeBean, 2023, 02, 125)
 
 //Input Sales Data
-sinancan.inputSalesData(federal, federalAmericano, 2023, 01, 80)
+try {
+  johnnyjean.inputSalesData(federal, federalAmericano, 2023, 01, 80)
+} catch (e) {
+  console.log(e)
+}
 sinancan.inputSalesData(federal, federalCappuccino, 2023, 01, 50)
 sinancan.inputSalesData(federal, federalAmericano, 2023, 02, 60)
 sinancan.inputSalesData(federal, federalCappuccino, 2023, 02, 90)
@@ -108,19 +112,18 @@ sinancan.inputSalesData(federal, federalCappuccino, 2023, 02, 90)
 sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 01, 100)
 sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 02, 150)
 
-//console.log(federal.stockQty)
+//console.log(sinansOrder)
+console.log(federal.stockQty[0])
 console.log('=====================================================')
-console.log(federal.stockQty[0].year)
+//console.log(federal.stockQty[0].year)
 //console.log(federal.stockQty[0].restaurant.city)
 
-// console.log(federalAmericano.Recipe)
-// console.log(federalCappuccino.Recipe)
+//console.log(federalAmericano.recipeDetails)
+//console.log(federalCappuccino.recipeDetails)
 
-// console.log(federal.pendingOrders)
+//console.log(sinansOrder.orderDeatils)
 
-// console.log(sinansOrder.orderDeatils)
-
-// console.log(federalAmericano.recipe[0].ingredient.name)
+//console.log(federalAmericano.recipe[0].ingredient.name)
 
 // console.log('FEDERAL INGREDIENTS')
 // console.log(federal.ingredients)
@@ -129,7 +132,7 @@ console.log(federal.stockQty[0].year)
 // console.log('=====================================================')
 
 // console.log('FEDERAL MENU')
-// console.log(federal.menu)
+//console.log(federal.menu)
 // console.log(federal.menu.map(item => item.name))
 // console.log('=====================================================')
 

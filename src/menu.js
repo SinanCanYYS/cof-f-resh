@@ -8,16 +8,12 @@ class MenuItem {
     this.price = price
   }
 
-  get Recipe() {
-    return (
-      `${this.name} recipe:` +
-      this.recipe
-        .map(line => {
-          return `
-          ${line.quantity} ${line.ingredient.unit} ${line.ingredient.name}`
-        })
-        .join('')
-    )
+  get recipeDetails() {
+    return `${this.name} recipe:
+      ${this.recipe.map(line => {
+        return `
+            ${line.quantity} ${line.ingredient.unit} ${line.ingredient.name}`
+      })}`
   }
 }
 

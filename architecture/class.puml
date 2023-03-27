@@ -1,6 +1,21 @@
-@startuml Person 
+@startuml Person
 class Person {
   name: string
   age: number
+
+  photos : [Photo]
+  construstor (name: string, age: number)
+  addPhoto(photo: Photo)
+  likePhoto(photo: Photo)
 }
+class Photo {
+filename : string
+
+likedBy  : [Person]
+constructor (fileName: string)
+}
+
+Person "1" o-----> "0..*" Photo : keeps, likes
+Photo -----> "0..*" Person : liked by
+
 @enduml
