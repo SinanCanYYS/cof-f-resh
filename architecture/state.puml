@@ -1,0 +1,26 @@
+@startuml
+'state "Create L0 Charachter" as State1
+
+' [*] -> Satte1
+' State1 -->L1: Experienced gained
+' L1-->L2: Experienced gained
+' L2-->L3: Experienced gained
+
+[*] -> State1 :Request
+State1 --> State2 :Succeded
+State1 --> [*] :Abort
+State2 --> Delivery :Succeded
+State2 --> [*] :Abort
+
+state Delivery{
+TestState : Just a Test
+[*] --> TestState
+TestState --> Deployement:tests passed
+}
+
+Delivery --> Delivery : Failed
+Delivery --> Production :Deployement succeded
+
+Production -right-> [*] :Succeded
+
+@enduml

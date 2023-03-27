@@ -80,14 +80,14 @@ class User {
     if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant') //console.log('You are not the owner of this restaurant')
 
     const newSalesData = new SalesData(restaurant, menuItem, year, month, quantity)
-    restaurant.sales.push({ newSalesData })
+    restaurant.sales.push(newSalesData)
   }
 
   inputStockData(restaurant, ingredient, year, month, quantity) {
     if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
     const newStockData = new StockData(restaurant, ingredient, year, month, quantity)
-    restaurant.stockQty.push({ newStockData })
+    restaurant.stockQty.push(newStockData)
   }
 
   inputPurchaseData(restaurant, ingredient, year, month, quantity) {
