@@ -1,2 +1,36 @@
 @startuml
+
+actor Customer
+participant "Order" as O
+participant "Restaurant" as R
+
+participant "Menu" as M
+actor Owner
+participant "Ingredient" as I
+
+Customer -> O : Create order
+activate O
+O->M : Get menu
+activate M
+M-->O : Menu selected
+deactivate M
+
+O -> R : Send order
+activate R
+R -> R : Confirm or Reject Order
+R --> O : Complete order
+deactivate R
+O-->Customer : "Sorry, no service!" or "Good appetite!"
+deactivate O
+
+Owner -> M : Create menu
+activate M
+
+Owner -> I : Create ingredient
+activate I
+
+
+
+
+
 @enduml

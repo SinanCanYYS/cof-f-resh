@@ -1,4 +1,7 @@
 @startuml cof-f-resh class diagram
+
+
+
 class User {
 name : String
 type : String
@@ -9,7 +12,15 @@ addIngredient (Ingredient)
 inputSalesStockData (Sales, Stock)
 }
 
-
+' class Customer {
+' name : String
+' type : String
+' createOrder (Order)
+' changeOrder (Order)
+' addMenuItem (MenuItem)
+' addIngredient (Ingredient)
+' inputSalesStockData (Sales, Stock)
+' }
 
 package Order {
 class Order {
