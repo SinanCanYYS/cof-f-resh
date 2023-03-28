@@ -1,4 +1,91 @@
-@startuml Person
+@startuml cof-f-resh class diagram
+class User {
+name : String
+type : String
+createOrder (Order)
+addOrderElement (OrderElement)
+cancelOrder (Order)
+confirmOrder (Order)
+rejectOrder (Order)
+completeOrder (Order)
+addMenuItem (MenuItem)
+addIngredient (Ingredient)
+addRecipe (Recipe)
+inputSalesData (Sales)
+inputPurchaseData (Purchase)
+inputStockData (Stock)
+}
+
+class Restaurant {
+  name : String
+  owner : User
+  city : String
+  district : String
+  menu : Array<MenuItem>
+  orderList : Array<Order>
+  ingredients : Array<Ingredient>
+  sales : Array<Sales>
+  stock : Array<Stock>
+  purchases : Array<Purchase>
+  pendingOrderList (Order)
+  completedOrderList (Order)
+}
+
+class Order {
+customer : User
+restaurant : Restaurant
+type : String
+satus : String
+date : Date
+time : Time
+targetDate : Date
+targetTime : Time
+notes : String
+items : Array<OrderElement>
+Details()
+}
+
+class OrderElement {
+name : MenuItem
+quantity : number
+
+}
+
+class MenuItem{
+name : String
+restaurant : Restaurant
+type : String
+subType : String
+price : number
+recipe :Array<Ingredients>
+Details()
+}
+
+class Ingredients {
+name : String
+restaurant : Restaurant
+unit : String
+type : String
+}
+
+User "1" o--> "0..*" Order : create, cancel, confirm, reject, complete
+User--> "0..*" MenuItem : add
+User--> "0..*" Ingredients : add
+Order "1" *-> "0..*" OrderElement
+Restaurant "1" *-> "0..*" Order
+Restaurant "1" *-> "0..*" MenuItem
+Restaurant "1" *-> "0..*" Ingredients
+
+@enduml
+
+
+
+
+
+
+
+
+
 class Person {
   name: string
   age: number
@@ -17,5 +104,3 @@ constructor (fileName: string)
 
 Person "1" o-----> "0..*" Photo : keeps, likes
 Photo -----> "0..*" Person : liked by
-
-@enduml
