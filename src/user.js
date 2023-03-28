@@ -1,9 +1,9 @@
 const Order = require('./order')
-const OrderElement = require('./orderelement')
+const OrderElement = require('./order-element')
 const MenuItem = require('./menu')
-const SalesData = require('./stockControl').SalesData
-const StockData = require('./stockControl').StockData
-const PurchaseData = require('./stockControl').PurchaseData
+const SalesData = require('./stock-control').SalesData
+const StockData = require('./stock-control').StockData
+const PurchaseData = require('./stock-control').PurchaseData
 
 class User {
   constructor(name, type) {
