@@ -3,44 +3,22 @@ class User {
 name : String
 type : String
 createOrder (Order)
-addOrderElement (OrderElement)
-cancelOrder (Order)
-confirmOrder (Order)
-rejectOrder (Order)
-completeOrder (Order)
+changeOrder (Order)
 addMenuItem (MenuItem)
 addIngredient (Ingredient)
-addRecipe (Recipe)
-inputSalesData (Sales)
-inputPurchaseData (Purchase)
-inputStockData (Stock)
+inputSalesStockData (Sales, Stock)
 }
 
-class Restaurant {
-  name : String
-  owner : User
-  city : String
-  district : String
-  menu : Array<MenuItem>
-  orderList : Array<Order>
-  ingredients : Array<Ingredient>
-  sales : Array<Sales>
-  stock : Array<Stock>
-  purchases : Array<Purchase>
-  pendingOrderList (Order)
-  completedOrderList (Order)
-}
 
+
+package Order {
 class Order {
 customer : User
 restaurant : Restaurant
 type : String
-satus : String
-date : Date
-time : Time
+status : String
 targetDate : Date
 targetTime : Time
-notes : String
 items : Array<OrderElement>
 Details()
 }
@@ -50,7 +28,18 @@ name : MenuItem
 quantity : number
 
 }
+}
 
+package Restaurant {
+class Restaurant {
+  name : String
+  owner : User
+  address : String
+  menu : Array<MenuItem>
+  orderList : Array<Order>
+  ingredients : Array<Ingredient>
+  salesStock Data : Array<Sales, Stock>
+}
 class MenuItem{
 name : String
 restaurant : Restaurant
@@ -67,14 +56,16 @@ restaurant : Restaurant
 unit : String
 type : String
 }
+}
 
+User - Restaurant
 User "1" o--> "0..*" Order : create, cancel, confirm, reject, complete
-User--> "0..*" MenuItem : add
-User--> "0..*" Ingredients : add
-Order "1" *-> "0..*" OrderElement
-Restaurant "1" *-> "0..*" Order
-Restaurant "1" *-> "0..*" MenuItem
-Restaurant "1" *-> "0..*" Ingredients
+Order "1" *- "0..*" OrderElement
+OrderElement "1" --- "1" MenuItem
+Restaurant "1" *- "0..*" Order
+Restaurant "1" *--- "0..*" MenuItem
+Restaurant "1" *-- "0..*" Ingredients
+MenuItem "1" - "0..*" Ingredients
 
 @enduml
 
