@@ -6,6 +6,7 @@ const StockData = require('./stock-control').StockData
 const PurchaseData = require('./stock-control').PurchaseData
 
 class User {
+  address = 'Waldachtal'
   constructor(name, type) {
     this.name = name
     this.type = type
@@ -18,6 +19,7 @@ class User {
     restaurant.orderList.push(newOrder)
     return newOrder
   }
+  u
 
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {
@@ -96,5 +98,14 @@ class User {
     const newPurchaseData = new PurchaseData(restaurant, ingredient, year, month, quantity)
     restaurant.purchases.push({ newPurchaseData })
   }
+
+  static create({ name, type }) {
+    console.log('Creating new user', name, type)
+    const newUser = new User(name, type)
+    User.list.push(newUser)
+    return newUser
+  }
+  static list = []
 }
+
 module.exports = User

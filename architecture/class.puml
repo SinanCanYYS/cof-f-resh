@@ -73,7 +73,7 @@ User - Restaurant
 User "1" o--> "0..*" Order : create, cancel, confirm, reject, complete
 Order "1" *- "0..*" OrderElement
 OrderElement "1" --- "1" MenuItem
-Restaurant "1" *- "0..*" Order
+Restaurant "1" o- "0..*" Order
 Restaurant "1" *--- "0..*" MenuItem
 Restaurant "1" *-- "0..*" Ingredients
 MenuItem "1" - "0..*" Ingredients

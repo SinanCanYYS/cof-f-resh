@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Restaurants List
+  p  Welcome to #{restaurant.name}
+
+  h2 Owners
+  ul#owners
+    each owner in owners
+      li.owner= owner.name

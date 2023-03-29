@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 User List
+  p  Welcome to #{user.name}
+
+  h2 Users
+  ul
+    each customer in customers
+      li.owner= customer.name
