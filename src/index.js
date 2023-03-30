@@ -42,9 +42,49 @@ async function main() {
     type: 'Customer',
   })
 
+  await axios.post('http://localhost:3000/users', {
+    name: 'Sinan Can',
+    type: 'Owner',
+  })
+
+  await axios.post('http://localhost:3000/users', {
+    name: 'Johnny Jean',
+    type: 'Owner',
+  })
+
+  await axios.post('http://localhost:3000/users', {
+    name: 'Rafael Nadal',
+    type: 'Owner',
+  })
+
   const allUsers = await axios.get('http://localhost:3000/users')
 
+  await axios.post('http://localhost:3000/restaurants', {
+    name: 'Federal Cafe',
+    owner: 'Sinan Can',
+    city: 'Istanbul',
+    district: 'Galata',
+  })
+
+  await axios.post('http://localhost:3000/restaurants', {
+    name: 'Starbucks',
+    owner: 'Johnny Jean',
+    city: 'Istanbul',
+    district: 'Taksim',
+  })
+
+  await axios.post('http://localhost:3000/restaurants', {
+    name: 'Big Chefs',
+    owner: 'Rafael Nadal',
+    city: 'Istanbul',
+    district: 'Taksim',
+  })
+
+  const allRestaurants = await axios.get('http://localhost:3000/restaurants')
+
   console.log(allUsers.data)
+  console.log(allRestaurants.data)
+
   // console.log(sinan.data)
   // console.log(johnny.data)
 }

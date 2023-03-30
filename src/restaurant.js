@@ -15,5 +15,13 @@ class Restaurant {
   get pendingOrders() {
     return this.orderList.filter(order => order.status === 'pending')
   }
+
+  static create({ name, owner, city, district }) {
+    const newRestaurant = new Restaurant(name, owner, city, district)
+    console.log('Creating new restaurant', name)
+    Restaurant.list.push(newRestaurant)
+    return newRestaurant
+  }
+  static list = []
 }
 module.exports = Restaurant

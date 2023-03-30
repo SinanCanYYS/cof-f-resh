@@ -6,7 +6,6 @@ const StockData = require('./stock-control').StockData
 const PurchaseData = require('./stock-control').PurchaseData
 
 class User {
-  address = 'Waldachtal'
   constructor(name, type) {
     this.name = name
     this.type = type
