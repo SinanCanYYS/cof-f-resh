@@ -1,7 +1,7 @@
-const User = require('./user')
-const Restaurant = require('./restaurant')
-const MenuItem = require('./menu')
-const Ingredient = require('./ingredient')
+// const User = require('./user')
+// const Restaurant = require('./restaurant')
+// const MenuItem = require('./menu')
+// const Ingredient = require('./ingredient')
 
 const axios = require('axios')
 
@@ -84,6 +84,9 @@ async function main() {
 
   console.log(allUsers.data)
   console.log(allRestaurants.data)
+
+  const sinan = await axios.get('http://localhost:3000/users/Sinan')
+  console.log(sinan.data)
 
   // console.log(sinan.data)
   // console.log(johnny.data)

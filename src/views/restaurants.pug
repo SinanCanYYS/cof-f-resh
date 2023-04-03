@@ -4,7 +4,13 @@ block content
   h1 Restaurants List
   p  Welcome to
 
-  h2 Owners
+  //- list all restaurants
+  ul#restaurants
+    each restaurant in restaurants
+      li.restaurant
+        a(href=`/restaurants/${restaurant.name}`) #{restaurant.name} - #{restaurant.owner}
+        //- a(href=`/restaurants/${restaurant.id}`) #{restaurant.owner}
+  //- h2 Owners
   //- ul#owners
   //-   each owner in owners
   //-     li.owner= owner.name

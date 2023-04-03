@@ -4,7 +4,8 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: green;
+  text-decoration: none
 }
 
 #owners {
@@ -16,4 +17,8 @@ a {
   margin: 20px 0;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
+}
+
+.restaurant {
+  color: red;
 }

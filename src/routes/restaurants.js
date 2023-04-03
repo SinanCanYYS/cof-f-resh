@@ -4,9 +4,17 @@ const Restaurant = require('../restaurant')
 
 console.log('Hello Restaurants')
 
-/* GET users listing. */
+/* GET restaurant listing. */
 router.get('/', function (req, res, next) {
-  res.send(Restaurant.list)
+  if (req.query.view === 'json') return res.send(Restaurant.list)
+  res.render('restaurants', { restaurants: Restaurant.list })
+})
+
+// Get a restaurant by name
+router.get('/:restaurantID', function (req, res, next) {
+  const restaurant = Restaurant.list.find(restaurant => restaurant.name === req.params.restaurantID)
+  if (req.query.view === 'json') return res.send(restaurant)
+  res.render('restaurant', { restaurant: restaurant })
 })
 
 // Create a new restaurant
