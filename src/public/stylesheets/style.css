@@ -22,3 +22,9 @@ a {
 .restaurant {
   color: red;
 }
+
+.user {
+  color: darkred;
+  font-style: italic;
+  font-size: larger;
+}

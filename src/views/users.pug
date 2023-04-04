@@ -2,9 +2,10 @@ extends layout
 
 block content
   h1 User List
-  p  Welcome to #{user.name}
+  p  Welcome to User List
 
   h2 Users
   ul
-    each customer in customers
-      li.owner= customer.name
+    each user in users
+      li.user
+        a(href=`/users/${user.name}`) #{user.name} - #{user.type}

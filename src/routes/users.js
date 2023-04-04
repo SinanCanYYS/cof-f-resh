@@ -6,7 +6,15 @@ console.log('Hello Users')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send(User.list)
+  if (req.query.view === 'json') return res.send(User.list)
+  res.render('users', { users: User.list })
+})
+
+/* GET users by name. */
+router.get('/:userID', function (req, res, next) {
+  const user = User.list.find(user => user.name === req.params.userID)
+  if (req.query.view === 'json') return res.send(user)
+  res.render('user', { user: user })
 })
 
 // Create a new user
