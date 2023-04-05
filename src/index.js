@@ -57,7 +57,7 @@ async function main() {
     type: 'Owner',
   })
 
-  const allUsers = await axios.get('http://localhost:3000/users')
+  //const allUsers = await axios.get('http://localhost:3000/users')
 
   await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
@@ -80,13 +80,13 @@ async function main() {
     district: 'Taksim',
   })
 
-  const allRestaurants = await axios.get('http://localhost:3000/restaurants')
+  //const allRestaurants = await axios.get('http://localhost:3000/restaurants')
 
-  console.log(allUsers.data)
-  console.log(allRestaurants.data)
+  //console.log(allUsers.data)
+  //console.log(allRestaurants.data)
 
-  const sinan = await axios.get('http://localhost:3000/users/Sinan')
-  console.log(sinan.data)
+  //const sinan = await axios.get('http://localhost:3000/users/Sinan')
+  //console.log(sinan.data)
 
   // console.log(sinan.data)
   // console.log(johnny.data)

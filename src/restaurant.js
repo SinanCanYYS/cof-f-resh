@@ -1,3 +1,20 @@
+const mongoose = require('mongoose')
+
+const restaurantSchema = new mongoose.Schema({
+  name: String,
+  owner: String,
+  city: String,
+  district: String,
+  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+  orderList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
+  sales: [],
+  stockQty: [],
+  purchases: [],
+})
+
+module.exports = mongoose.model('Restaurant', restaurantSchema)
+
 class Restaurant {
   menu = []
   ingredients = []
@@ -24,4 +41,4 @@ class Restaurant {
   }
   static list = []
 }
-module.exports = Restaurant
+// module.exports = Restaurant

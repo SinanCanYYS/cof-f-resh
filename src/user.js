@@ -5,6 +5,14 @@ const SalesData = require('./stock-control').SalesData
 const StockData = require('./stock-control').StockData
 const PurchaseData = require('./stock-control').PurchaseData
 
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  type: String,
+})
+
+module.exports = mongoose.model('User', userSchema)
 class User {
   constructor(name, type) {
     this.name = name
@@ -107,4 +115,4 @@ class User {
   static list = []
 }
 
-module.exports = User
+// module.exports = User
