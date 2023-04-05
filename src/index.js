@@ -61,7 +61,7 @@ async function main() {
 
   await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
-    owner: sinancan.data.name,
+    owner: 'Sinan Can',
     city: 'Istanbul',
     district: 'Galata',
   })
