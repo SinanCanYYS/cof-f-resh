@@ -12,12 +12,11 @@ const userSchema = new mongoose.Schema({
   type: String,
 })
 
-module.exports = mongoose.model('User', userSchema)
 class User {
-  constructor(name, type) {
-    this.name = name
-    this.type = type
-  }
+  // constructor(name, type) {
+  //   this.name = name
+  //   this.type = type
+  // }
 
   createOrder(restaurant, orderType, targetDate, targetTime, notes) {
     if (this.type !== 'Customer') throw new Error('You are not a customer')
@@ -106,13 +105,16 @@ class User {
     restaurant.purchases.push({ newPurchaseData })
   }
 
-  static create({ name, type }) {
-    console.log('Creating new user', name, type)
-    const newUser = new User(name, type)
-    User.list.push(newUser)
-    return newUser
-  }
-  static list = []
+  // static create({ name, type }) {
+  //   console.log('Creating new user', name, type)
+  //   const newUser = new User(name, type)
+  //   User.list.push(newUser)
+  //   return newUser
+  // }
+  // static list = []
 }
 
 // module.exports = User
+
+userSchema.loadClass(User)
+module.exports = mongoose.model('User', userSchema)

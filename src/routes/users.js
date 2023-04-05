@@ -5,9 +5,10 @@ const User = require('../user')
 console.log('Hello Users')
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  if (req.query.view === 'json') return res.send(User.list)
-  res.render('users', { users: User.list })
+router.get('/', async function (req, res, next) {
+  res.send(await User.find())
+  //if (req.query.view === 'json') return res.send(User.list)
+  //res.render('users', { users: User.list })
 })
 
 /* GET users by name. */

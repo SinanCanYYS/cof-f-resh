@@ -5,9 +5,10 @@ const Restaurant = require('../restaurant')
 console.log('Hello Restaurants')
 
 /* GET restaurant listing. */
-router.get('/', function (req, res, next) {
-  if (req.query.view === 'json') return res.send(Restaurant.list)
-  res.render('restaurants', { restaurants: Restaurant.list })
+router.get('/', async function (req, res, next) {
+  res.send(await Restaurant.find())
+  // if (req.query.view === 'json') return res.send(Restaurant.list)
+  // res.render('restaurants', { restaurants: Restaurant.list })
 })
 
 // Get a restaurant by name

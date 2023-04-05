@@ -57,8 +57,6 @@ async function main() {
     type: 'Owner',
   })
 
-  //const allUsers = await axios.get('http://localhost:3000/users')
-
   await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
     owner: 'Sinan Can',
@@ -80,10 +78,11 @@ async function main() {
     district: 'Taksim',
   })
 
-  //const allRestaurants = await axios.get('http://localhost:3000/restaurants')
+  const allUsers = await axios.get('http://localhost:3000/users')
+  const allRestaurants = await axios.get('http://localhost:3000/restaurants')
 
-  //console.log(allUsers.data)
-  //console.log(allRestaurants.data)
+  console.log(allUsers.data)
+  console.log(allRestaurants.data)
 
   //const sinan = await axios.get('http://localhost:3000/users/Sinan')
   //console.log(sinan.data)
@@ -92,7 +91,9 @@ async function main() {
   // console.log(johnny.data)
 }
 
-main()
+main().catch(error => {
+  console.log(error.message ? error.message : error)
+})
 
 // Defining Menu Items
 // const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
