@@ -4,4 +4,8 @@ block content
   h1 Restaurants by Name
   p  Welcome to #{restaurant.name}
 
-  p #{restaurant.owner} owns #{restaurant.name}
+  //testlink - #{user.name}
+
+  p
+    a(href=`/users/${user}`) #{restaurant.owner}
+    span  owns #{restaurant.name}

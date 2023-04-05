@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 router.get('/:restaurantID', function (req, res, next) {
   const restaurant = Restaurant.list.find(restaurant => restaurant.name === req.params.restaurantID)
   if (req.query.view === 'json') return res.send(restaurant)
-  res.render('restaurant', { restaurant: restaurant })
+  res.render('restaurant', { restaurant: restaurant, user: restaurant.owner })
 })
 
 // Create a new restaurant

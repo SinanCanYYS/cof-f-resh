@@ -42,7 +42,7 @@ async function main() {
     type: 'Customer',
   })
 
-  await axios.post('http://localhost:3000/users', {
+  const sinancan = await axios.post('http://localhost:3000/users', {
     name: 'Sinan Can',
     type: 'Owner',
   })
@@ -61,7 +61,7 @@ async function main() {
 
   await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
-    owner: 'Sinan Can',
+    owner: sinancan.data.name,
     city: 'Istanbul',
     district: 'Galata',
   })
@@ -93,24 +93,6 @@ async function main() {
 }
 
 main()
-
-// .then(response => {
-//   console.log(response.data)
-// })
-
-// defining users
-
-// const sinan = new User('Sinan', 'Customer')
-// const john = new User('John', 'Customer')
-// const rafael = new User('Rafael', 'Customer')
-// const sinancan = new User('Sinan Can', 'Owner')
-// const johnnyjean = new User('Johnny Jean', 'Owner')
-// const rafaelnadal = new User('Rafael Nadal', 'Owner')
-
-// Defining Restaurants
-// const federal = new Restaurant('Federal Cafe', sinancan, ' Istanbul', 'Galata')
-// const starbucks = new Restaurant('Starbucks', johnnyjean, 'Istanbul', 'Taksim')
-// const bigchefs = new Restaurant('Big Chefs', rafaelnadal, 'Istanbul', 'Taksim')
 
 // Defining Menu Items
 // const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
@@ -194,37 +176,3 @@ main()
 // Input Purchase Data
 // sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 01, 100)
 // sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 02, 150)
-
-// console.log(sinansOrder)
-// console.log(federal.stockQty)
-// console.log('=====================================================')
-// console.log(federal.stockQty[0].year)
-//console.log(federal.stockQty[0].restaurant.city)
-
-//console.log(federalAmericano.recipeDetails)
-//console.log(federalCappuccino.recipeDetails)
-
-//console.log(sinansOrder.orderDeatils)
-
-//console.log(federalAmericano.recipe[0].ingredient.name)
-
-// console.log('FEDERAL INGREDIENTS')
-// console.log(federal.ingredients)
-// console.log(federal.ingredients.map(item => item.name))
-
-// console.log('=====================================================')
-
-// console.log('FEDERAL MENU')
-//console.log(federal.menu)
-// console.log(federal.menu.map(item => item.name))
-// console.log('=====================================================')
-
-// console.log('STARBUCKS MENU')
-// console.log(starbucks.menu)
-// console.log(starbucks.menu.map(item => item.name))
-// console.log('=====================================================')
-
-// console.log('BIG CHEFS MENU')
-// console.log(bigchefs.menu)
-// console.log(bigchefs.menu.map(item => item.name))
-// console.log('=====================================================')
