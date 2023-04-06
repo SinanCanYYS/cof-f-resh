@@ -18,14 +18,13 @@ class User {
   //   this.type = type
   // }
 
-  createOrder(restaurant, orderType, targetDate, targetTime, notes) {
-    if (this.type !== 'Customer') throw new Error('You are not a customer')
+  // createOrder(restaurant, orderType, targetDate, targetTime, notes) {
+  //   if (this.type !== 'Customer') throw new Error('You are not a customer')
 
-    const newOrder = new Order(this.name, restaurant, orderType, targetDate, targetTime, notes)
-    restaurant.orderList.push(newOrder)
-    return newOrder
-  }
-  u
+  //   const newOrder = new Order(this.name, restaurant, orderType, targetDate, targetTime, notes)
+  //   restaurant.orderList.push(newOrder)
+  //   return newOrder
+  // }
 
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {

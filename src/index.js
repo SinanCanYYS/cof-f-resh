@@ -18,21 +18,15 @@ console.log('My first project Cof-f-resh')
 
 //====================================================================================================
 
-//fetching users with axios
-
-// axios.get('http://localhost:3000/users').then(response => {
-//   console.log(response.data)
-// })
-
 // creating users with axios
 
 async function main() {
-  await axios.post('http://localhost:3000/users', {
+  const sinan = await axios.post('http://localhost:3000/users', {
     name: 'Sinan',
     type: 'Customer',
   })
 
-  await axios.post('http://localhost:3000/users', {
+  const jhonny = await axios.post('http://localhost:3000/users', {
     name: 'Johnny',
     type: 'Customer',
   })
@@ -47,7 +41,7 @@ async function main() {
     type: 'Owner',
   })
 
-  await axios.post('http://localhost:3000/users', {
+  const jhonnyjean = await axios.post('http://localhost:3000/users', {
     name: 'Johnny Jean',
     type: 'Owner',
   })
@@ -57,16 +51,16 @@ async function main() {
     type: 'Owner',
   })
 
-  await axios.post('http://localhost:3000/restaurants', {
+  const federal = await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
-    owner: 'Sinan Can',
+    owner: sinancan.data._id,
     city: 'Istanbul',
     district: 'Galata',
   })
 
-  await axios.post('http://localhost:3000/restaurants', {
+  const starbucks = await axios.post('http://localhost:3000/restaurants', {
     name: 'Starbucks',
-    owner: 'Johnny Jean',
+    owner: jhonnyjean.data._id,
     city: 'Istanbul',
     district: 'Taksim',
   })
@@ -79,12 +73,40 @@ async function main() {
   })
 
   await axios.post('http://localhost:3000/menu-items', {
+    restaurant: federal.data._id,
     name: 'Americano',
     type: 'Drink',
-    category: 'Hot Drink',
+    subType: 'Hot Drink',
     price: 3,
-    restaurant: 'Federal Cafe',
   })
+
+  await axios.post('http://localhost:3000/menu-items', {
+    restaurant: starbucks._id,
+    name: 'Espresso',
+    type: 'Drink',
+    subType: 'Hot Drink',
+    price: 2,
+  })
+
+  // const response = {
+  //   data: {
+  //     _id: 'sfsdfsdfdsfdsfdsf',
+  //     name: 'Federal Cafe',
+  //     owner: 'Sinan Can',
+  //     city: 'Istanbul',
+  //     district: 'Galata',
+  //   },
+  //   headers: {
+  //     blabla: 'asdasda',
+  //     asda: 'asdasd'
+  //   },
+  //   ...
+  // }
+
+  // const { data: federal } = response
+  // const federal = response.data
+
+  // federal._id
 
   // Defining Menu Items
   // const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
@@ -96,6 +118,30 @@ async function main() {
   // const bigchefsAmericano = new MenuItem(bigchefs, 'Americano', 'Drink', 'Hot Drink', 5)
   // const bigchefsOmlette = new MenuItem(bigchefs, 'Omelette', 'Food', 'Breakfast', 9)
   // const bigchefsSalmonSalad = new MenuItem(bigchefs, 'Salmon Salad', 'Food', 'Lunch', 12)
+
+  const sinansOrder = await axios.post('http://localhost:3000/orders', {
+    customer: sinan.data._id,
+    restaurant: federal.data._id,
+    type: 'toEat',
+    targetDate: '05/01/2023',
+    time: '10:30',
+    note: 'Please extra milk',
+  })
+  console.log('sinans Order: ', sinansOrder.data)
+
+  await axios.post('http://localhost:3000/orders', {
+    restaurant: starbucks.data._id,
+    customer: jhonny.data._id,
+    type: 'toGo',
+    targetDate: '05/01/2023',
+    time: '12:30',
+    note: 'no sugar',
+  })
+
+  // Creating Orders
+  // const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
+  // const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
+  // const rafaelOrder = rafael.createOrder(federal, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
   const allUsers = await axios.get('http://localhost:3000/users')
   const allRestaurants = await axios.get('http://localhost:3000/restaurants')
@@ -124,11 +170,6 @@ main().catch(error => {
 // rafaelnadal.addMenuItem(bigchefs, bigchefsAmericano)
 // rafaelnadal.addMenuItem(bigchefs, bigchefsOmlette)
 // rafaelnadal.addMenuItem(bigchefs, bigchefsSalmonSalad)
-
-// Creating Orders
-// const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
-// const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
-// const rafaelOrder = rafael.createOrder(federal, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
 
 // Adding order elements to Orders
 // sinan.addOrderElement(sinansOrder, federalAmericano, 2)

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const restaurantSchema = new mongoose.Schema({
   name: String,
-  owner: String,
+  owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   city: String,
   district: String,
   menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],

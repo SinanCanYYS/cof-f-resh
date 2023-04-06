@@ -6,7 +6,10 @@ const menuItemSchema = new mongoose.Schema({
   type: String,
   subType: String,
   price: Number,
-  recipe: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+  recipe: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+    default: [],
+  },
 })
 
 class MenuItem {
