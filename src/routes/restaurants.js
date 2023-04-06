@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const Restaurant = require('../restaurant')
+const Restaurant = require('../models/restaurant')
 
 console.log('Hello Restaurants')
 

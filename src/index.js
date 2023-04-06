@@ -78,6 +78,25 @@ async function main() {
     district: 'Taksim',
   })
 
+  await axios.post('http://localhost:3000/menu-items', {
+    name: 'Americano',
+    type: 'Drink',
+    category: 'Hot Drink',
+    price: 3,
+    restaurant: 'Federal Cafe',
+  })
+
+  // Defining Menu Items
+  // const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
+  // const federalCappuccino = new MenuItem(federal, 'Cappuccino', 'Drink', 'Hot Drink', 4)
+  // const federalOmelette = new MenuItem(federal, 'Omelette', 'Food', 'Breakfast', 6)
+  // const federalSalmonSalad = new MenuItem(federal, 'Salmon Salad', 'Food', 'Lunch', 8)
+  // const starbucksAmericano = new MenuItem(starbucks, 'Americano', 'Drink', 'Hot Drink', 4)
+  // const starbucksCappuccino = new MenuItem(starbucks, 'Cappuccino', 'Drink', 'Hot Drink', 5)
+  // const bigchefsAmericano = new MenuItem(bigchefs, 'Americano', 'Drink', 'Hot Drink', 5)
+  // const bigchefsOmlette = new MenuItem(bigchefs, 'Omelette', 'Food', 'Breakfast', 9)
+  // const bigchefsSalmonSalad = new MenuItem(bigchefs, 'Salmon Salad', 'Food', 'Lunch', 12)
+
   const allUsers = await axios.get('http://localhost:3000/users')
   const allRestaurants = await axios.get('http://localhost:3000/restaurants')
 
@@ -94,17 +113,6 @@ async function main() {
 main().catch(error => {
   console.log(error.message ? error.message : error)
 })
-
-// Defining Menu Items
-// const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
-// const federalCappuccino = new MenuItem(federal, 'Cappuccino', 'Drink', 'Hot Drink', 4)
-// const federalOmelette = new MenuItem(federal, 'Omelette', 'Food', 'Breakfast', 6)
-// const federalSalmonSalad = new MenuItem(federal, 'Salmon Salad', 'Food', 'Lunch', 8)
-// const starbucksAmericano = new MenuItem(starbucks, 'Americano', 'Drink', 'Hot Drink', 4)
-// const starbucksCappuccino = new MenuItem(starbucks, 'Cappuccino', 'Drink', 'Hot Drink', 5)
-// const bigchefsAmericano = new MenuItem(bigchefs, 'Americano', 'Drink', 'Hot Drink', 5)
-// const bigchefsOmlette = new MenuItem(bigchefs, 'Omelette', 'Food', 'Breakfast', 9)
-// const bigchefsSalmonSalad = new MenuItem(bigchefs, 'Salmon Salad', 'Food', 'Lunch', 12)
 
 // Adding Menu Items to the Restaurant's Menu
 // sinancan.addMenuItem(federal, federalAmericano)
