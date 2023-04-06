@@ -4,6 +4,7 @@ const MenuItem = require('./menu')
 const SalesData = require('./stock-control').SalesData
 const StockData = require('./stock-control').StockData
 const PurchaseData = require('./stock-control').PurchaseData
+const Restaurant = require('./restaurant')
 
 const mongoose = require('mongoose')
 
@@ -25,6 +26,20 @@ class User {
   //   restaurant.orderList.push(newOrder)
   //   return newOrder
   // }
+
+  async createMenuItem(restaurantID, name, type, subType, price) {
+    const restaurant = await Restaurant.findById(restaurantID)
+    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    const newMenuItem = await MenuItem.create({ name, type, subType, price })
+    console.log('New menu item created: ', newMenuItem)
+    console.log('Restaurant: ', restaurant)
+    console.log('Restaurant menu1: ', restaurant.menu)
+    restaurant.menu.push(newMenuItem)
+    console.log('Restaurant menu2: ', restaurant.menu)
+    await restaurant.save()
+    console.log('Restaurant menu3: ', restaurant.menu)
+    return newMenuItem
+  }
 
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {

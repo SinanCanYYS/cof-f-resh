@@ -1,5 +1,7 @@
 var express = require('express')
 var router = express.Router()
+var User = require('../models/user')
+var Restaurant = require('../models/restaurant')
 const MenuItem = require('../models/menu')
 // const Restaurant = require('../restaurant')
 
@@ -21,13 +23,14 @@ router.get('/:restaurantID', function (req, res, next) {
 
 // Create a new Menu Item
 router.post('/', async function (req, res, next) {
-  const newMenuItem = await MenuItem.create({
-    restaurant: req.body.restaurant,
-    name: req.body.name,
-    type: req.body.type,
-    subType: req.body.subType,
-    price: req.body.price,
-  })
+  const user = await User.findById(req.body.user)
+  const newMenuItem = await user.createMenuItem(
+    req.body.restaurant,
+    req.body.name,
+    req.body.type,
+    req.body.subType,
+    req.body.price
+  )
   res.send(newMenuItem)
 })
 module.exports = router

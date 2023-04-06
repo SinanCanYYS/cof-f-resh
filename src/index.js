@@ -31,11 +31,6 @@ async function main() {
     type: 'Customer',
   })
 
-  await axios.post('http://localhost:3000/users', {
-    name: 'Rafael',
-    type: 'Customer',
-  })
-
   const sinancan = await axios.post('http://localhost:3000/users', {
     name: 'Sinan Can',
     type: 'Owner',
@@ -46,11 +41,7 @@ async function main() {
     type: 'Owner',
   })
 
-  await axios.post('http://localhost:3000/users', {
-    name: 'Rafael Nadal',
-    type: 'Owner',
-  })
-
+  // creating restaurants with axios
   const federal = await axios.post('http://localhost:3000/restaurants', {
     name: 'Federal Cafe',
     owner: sinancan.data._id,
@@ -72,7 +63,9 @@ async function main() {
     district: 'Taksim',
   })
 
+  // creating menu items with axios
   await axios.post('http://localhost:3000/menu-items', {
+    user: sinancan.data._id,
     restaurant: federal.data._id,
     name: 'Americano',
     type: 'Drink',
@@ -81,7 +74,17 @@ async function main() {
   })
 
   await axios.post('http://localhost:3000/menu-items', {
-    restaurant: starbucks._id,
+    user: sinancan.data._id,
+    restaurant: federal.data._id,
+    name: 'Capuccino',
+    type: 'Drink',
+    subType: 'Hot Drink',
+    price: 5,
+  })
+
+  await axios.post('http://localhost:3000/menu-items', {
+    user: jhonnyjean.data._id,
+    restaurant: starbucks.data._id,
     name: 'Espresso',
     type: 'Drink',
     subType: 'Hot Drink',
@@ -119,6 +122,7 @@ async function main() {
   // const bigchefsOmlette = new MenuItem(bigchefs, 'Omelette', 'Food', 'Breakfast', 9)
   // const bigchefsSalmonSalad = new MenuItem(bigchefs, 'Salmon Salad', 'Food', 'Lunch', 12)
 
+  // creting Orders with axios
   const sinansOrder = await axios.post('http://localhost:3000/orders', {
     customer: sinan.data._id,
     restaurant: federal.data._id,

@@ -5,9 +5,18 @@ const restaurantSchema = new mongoose.Schema({
   owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   city: String,
   district: String,
-  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
-  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
-  orderList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
+  menu: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+    default: [],
+  },
+  ingredients: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+    default: [],
+  },
+  orderList: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
+    default: [],
+  },
   sales: [],
   stockQty: [],
   purchases: [],
