@@ -127,18 +127,18 @@ async function main() {
     customer: sinan.data._id,
     restaurant: federal.data._id,
     type: 'toEat',
-    targetDate: '05/01/2023',
-    time: '10:30',
-    note: 'Please extra milk',
+    targetDate: '07/07/2023',
+    //time: '10:30',
+    notes: 'Please extra milk',
   })
   console.log('sinans Order: ', sinansOrder.data)
 
   await axios.post('http://localhost:3000/orders', {
-    restaurant: starbucks.data._id,
     customer: jhonny.data._id,
+    restaurant: starbucks.data._id,
     type: 'toGo',
-    targetDate: '05/01/2023',
-    time: '12:30',
+    targetDate: '06/06/2023',
+    //time: '12:30',
     note: 'no sugar',
   })
 

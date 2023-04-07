@@ -7,6 +7,7 @@ const PurchaseData = require('./stock-control').PurchaseData
 const Restaurant = require('./restaurant')
 
 const mongoose = require('mongoose')
+const order = require('./order')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -19,25 +20,35 @@ class User {
   //   this.type = type
   // }
 
-  // createOrder(restaurant, orderType, targetDate, targetTime, notes) {
-  //   if (this.type !== 'Customer') throw new Error('You are not a customer')
-
-  //   const newOrder = new Order(this.name, restaurant, orderType, targetDate, targetTime, notes)
-  //   restaurant.orderList.push(newOrder)
-  //   return newOrder
-  // }
+  async createOrder(restaurantID, orderType, targetDate, notes) {
+    const restaurant = await Restaurant.findById(restaurantID)
+    console.log('rest in user.js: ', restaurant)
+    // const customer = this
+    //if (this.type !== 'Customer') throw new Error('You are not a customer')
+    const newOrder = await Order.create({
+      customer: this._id,
+      restaurant: restaurant,
+      orderType: orderType,
+      targetDate: targetDate,
+      notes: notes,
+    })
+    restaurant.orderList.push(newOrder)
+    await restaurant.save()
+    return newOrder
+  }
 
   async createMenuItem(restaurantID, name, type, subType, price) {
     const restaurant = await Restaurant.findById(restaurantID)
+    console.log('rest owner: ', restaurant.owner)
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
-    console.log('New menu item created: ', newMenuItem)
-    console.log('Restaurant: ', restaurant)
-    console.log('Restaurant menu1: ', restaurant.menu)
+    // console.log('New menu item created: ', newMenuItem)
+    // console.log('Restaurant: ', restaurant)
+    // console.log('Restaurant menu1: ', restaurant.menu)
     restaurant.menu.push(newMenuItem)
-    console.log('Restaurant menu2: ', restaurant.menu)
+    // console.log('Restaurant menu2: ', restaurant.menu)
     await restaurant.save()
-    console.log('Restaurant menu3: ', restaurant.menu)
+    // console.log('Restaurant menu3: ', restaurant.menu)
     return newMenuItem
   }
 

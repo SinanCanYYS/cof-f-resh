@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const Order = require('../models/order')
+const User = require('../models/user')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -8,8 +9,9 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/', async function (req, res, next) {
-  const newOrder = await Order.create({
-    customer: req.body.customer,
+  const user = await User.findById(req.body.customer)
+  console.log('user in orders post: ', user)
+  const newOrder = await user.createOrder({
     restaurant: req.body.restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,
