@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users')
 const ordersRouter = require('./routes/orders')
 const restaurantsRouter = require('./routes/restaurants')
 const menuItemsRouter = require('./routes/menu-items')
+const ingredientsRouter = require('./routes/ingredients')
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use('/users', usersRouter)
 app.use('/orders', ordersRouter)
 app.use('/restaurants', restaurantsRouter)
 app.use('/menu-items', menuItemsRouter)
+app.use('/ingredients', ingredientsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -5,9 +5,9 @@ const SalesData = require('./stock-control').SalesData
 const StockData = require('./stock-control').StockData
 const PurchaseData = require('./stock-control').PurchaseData
 const Restaurant = require('./restaurant')
+const Ingredient = require('./ingredient')
 
 const mongoose = require('mongoose')
-const order = require('./order')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -52,6 +52,15 @@ class User {
     return newMenuItem
   }
 
+  async createIngredient(restaurantID, name, type, unit) {
+    const restaurant = await Restaurant.findById(restaurantID)
+    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    const newIngredient = await Ingredient.create({ name, type, unit })
+    restaurant.ingredients.push(newIngredient)
+    await restaurant.save()
+    return newIngredient
+  }
+
   addOrderElement(order, item, quantity) {
     if (this.type === 'Customer' && this.name === order.name) {
       if (order.items.map(orderItem => orderItem.name).includes(item.name)) {
@@ -89,13 +98,13 @@ class User {
     order.status = 'cancelled'
   }
 
-  addMenuItem(restaurant, item) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+  // addMenuItem(restaurant, item) {
+  //   if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
-    restaurant.menu.map(menuItem => menuItem.name).includes(item.name)
-      ? console.log('This menu item already exists')
-      : restaurant.menu.push(item)
-  }
+  //   restaurant.menu.map(menuItem => menuItem.name).includes(item.name)
+  //     ? console.log('This menu item already exists')
+  //     : restaurant.menu.push(item)
+  // }
 
   addIngredient(restaurant, ingredient) {
     if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')

@@ -19,6 +19,6 @@ router.post('/', async function (req, res, next) {
     // totalCost: req.body.price,
     notes: req.body.notes,
   })
-  res.send(newOrder)
+  res.send(newOrder.orderDetails)
 })
 module.exports = router
