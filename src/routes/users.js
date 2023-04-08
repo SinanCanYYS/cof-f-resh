@@ -1,13 +1,14 @@
 var express = require('express')
 var router = express.Router()
-const User = require('../user')
+const User = require('../models/user')
 
 console.log('Hello Users')
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  if (req.query.view === 'json') return res.send(User.list)
-  res.render('users', { users: User.list })
+router.get('/', async function (req, res, next) {
+  res.send(await User.find())
+  //if (req.query.view === 'json') return res.send(User.list)
+  //res.render('users', { users: User.list })
 })
 
 /* GET users by name. */
@@ -18,8 +19,8 @@ router.get('/:userID', function (req, res, next) {
 })
 
 // Create a new user
-router.post('/', function (req, res, next) {
-  const user = User.create({ name: req.body.name, type: req.body.type })
+router.post('/', async function (req, res, next) {
+  const user = await User.create({ name: req.body.name, type: req.body.type })
   res.send(user)
 })
 
