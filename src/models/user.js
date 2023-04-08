@@ -41,13 +41,8 @@ class User {
     console.log('rest owner: ', restaurant.owner)
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
-    // console.log('New menu item created: ', newMenuItem)
-    // console.log('Restaurant: ', restaurant)
-    // console.log('Restaurant menu1: ', restaurant.menu)
     restaurant.menu.push(newMenuItem)
-    // console.log('Restaurant menu2: ', restaurant.menu)
     await restaurant.save()
-    // console.log('Restaurant menu3: ', restaurant.menu)
     return newMenuItem
   }
 

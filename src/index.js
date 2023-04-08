@@ -67,6 +67,13 @@ async function main() {
   })
 
   // creating menu items with axios
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
+    user: sinancan.data._id,
+    name: 'Long Black',
+    type: 'Drink',
+    subType: 'Hot Drink',
+    price: 44,
+  })
   await axios.post('http://localhost:3000/menu-items', {
     user: sinancan.data._id,
     restaurant: federal.data._id,
