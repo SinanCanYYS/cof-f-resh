@@ -16,7 +16,6 @@ console.log('My first project Cof-f-resh')
 // Customer can specify the target time for the order
 // Restaurant can confirm, reject or complete the order
 
-// creating users with axios
 async function main() {
   // await User.deleteMany()
   // await Restaurant.deleteMany()
@@ -24,6 +23,7 @@ async function main() {
   // await Order.deleteMany()
   // await Ingredient.deleteMany()
 
+  // creating users with axios
   const sinan = await axios.post('http://localhost:3000/users', {
     name: 'Sinan',
     type: 'Customer',
@@ -88,10 +88,19 @@ async function main() {
   await axios.post('http://localhost:3000/menu-items', {
     user: jhonnyjean.data._id,
     restaurant: starbucks.data._id,
-    name: 'Espresso',
-    type: 'Drink',
-    subType: 'Hot Drink',
-    price: 2,
+    name: 'Cortado',
+    type: 'Getränk',
+    subType: 'Heißgetränk',
+    price: 4,
+  })
+
+  await axios.post('http://localhost:3000/menu-items', {
+    user: jhonnyjean.data._id,
+    restaurant: starbucks.data._id,
+    name: 'Aussie Cappuccino',
+    type: 'Getränk',
+    subType: 'Heißgetränk',
+    price: 8,
   })
 
   // creating ingredients with axios
@@ -112,33 +121,44 @@ async function main() {
   })
 
   await axios.post('http://localhost:3000/ingredients', {
-    user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
-    name: 'Coffee',
-    type: 'Hot Drink',
+    user: sinancan.data._id,
+    restaurant: federal.data._id,
+    name: 'Syrup',
+    type: 'Drink',
+    unit: 'ml',
+  })
+
+  await axios.post('http://localhost:3000/ingredients', {
+    user: sinancan.data._id,
+    restaurant: federal.data._id,
+    name: 'Powder',
+    type: 'Drink',
     unit: 'gr',
   })
-  // Defining ingredients
-  // const federalCoffeeBean = new Ingredient(federal, 'Coffee Bean', 'Drink', 'gr')
-  // const federalMilk = new Ingredient(federal, 'Milk', 'Drink', 'ml')
-  // const federalEgg = new Ingredient(federal, 'Egg', 'Food', 'pcs')
-  // const federalSalmon = new Ingredient(federal, 'Salmon', 'Food', 'gr')
-  // const starbucksCoffeeBean = new Ingredient(starbucks, 'Coffee Bean', 'Drink', 'gr')
-  // const starbucksMilk = new Ingredient(starbucks, 'Milk', 'Drink', 'ml')
-  // const bigchefsCoffeeBean = new Ingredient(bigchefs, 'Coffee Bean', 'Drink', 'gr')
-  // const bigchefsEgg = new Ingredient(bigchefs, 'Egg', 'Food', 'pcs')
-  // const bigchefsSalmon = new Ingredient(bigchefs, 'Salmon', 'Food', 'gr')
 
-  // Adding ingredients to Restaurant's ingredient list
-  // sinancan.addIngredient(federal, federalCoffeeBean)
-  // sinancan.addIngredient(federal, federalMilk)
-  // sinancan.addIngredient(federal, federalEgg)
-  // sinancan.addIngredient(federal, federalSalmon)
-  // johnnyjean.addIngredient(starbucks, starbucksCoffeeBean)
-  // johnnyjean.addIngredient(starbucks, starbucksMilk)
-  // rafaelnadal.addIngredient(bigchefs, bigchefsCoffeeBean)
-  // rafaelnadal.addIngredient(bigchefs, bigchefsEgg)
-  // rafaelnadal.addIngredient(bigchefs, bigchefsSalmon)
+  await axios.post('http://localhost:3000/ingredients', {
+    user: jhonnyjean.data._id,
+    restaurant: starbucks.data._id,
+    name: 'Kaffeebohnen',
+    type: 'Kaffee',
+    unit: 'gr',
+  })
+
+  await axios.post('http://localhost:3000/ingredients', {
+    user: jhonnyjean.data._id,
+    restaurant: starbucks.data._id,
+    name: 'Milch',
+    type: 'Kaffee',
+    unit: 'ml',
+  })
+
+  await axios.post('http://localhost:3000/ingredients', {
+    user: jhonnyjean.data._id,
+    restaurant: starbucks.data._id,
+    name: 'Sirup',
+    type: 'Kaffee',
+    unit: 'ml',
+  })
 
   // const response = {
   //   data: {
@@ -160,37 +180,15 @@ async function main() {
 
   // federal._id
 
-  // Defining Menu Items
-  // const federalAmericano = new MenuItem(federal, 'Americano', 'Drink', 'Hot Drink', 3)
-  // const federalCappuccino = new MenuItem(federal, 'Cappuccino', 'Drink', 'Hot Drink', 4)
-  // const federalOmelette = new MenuItem(federal, 'Omelette', 'Food', 'Breakfast', 6)
-  // const federalSalmonSalad = new MenuItem(federal, 'Salmon Salad', 'Food', 'Lunch', 8)
-  // const starbucksAmericano = new MenuItem(starbucks, 'Americano', 'Drink', 'Hot Drink', 4)
-  // const starbucksCappuccino = new MenuItem(starbucks, 'Cappuccino', 'Drink', 'Hot Drink', 5)
-  // const bigchefsAmericano = new MenuItem(bigchefs, 'Americano', 'Drink', 'Hot Drink', 5)
-  // const bigchefsOmlette = new MenuItem(bigchefs, 'Omelette', 'Food', 'Breakfast', 9)
-  // const bigchefsSalmonSalad = new MenuItem(bigchefs, 'Salmon Salad', 'Food', 'Lunch', 12)
-
-  // Adding Menu Items to the Restaurant's Menu
-  // sinancan.addMenuItem(federal, federalAmericano)
-  // sinancan.addMenuItem(federal, federalCappuccino)
-  // sinancan.addMenuItem(federal, federalOmelette)
-  // sinancan.addMenuItem(federal, federalSalmonSalad)
-  // johnnyjean.addMenuItem(starbucks, starbucksAmericano)
-  // johnnyjean.addMenuItem(starbucks, starbucksCappuccino)
-  // rafaelnadal.addMenuItem(bigchefs, bigchefsAmericano)
-  // rafaelnadal.addMenuItem(bigchefs, bigchefsOmlette)
-  // rafaelnadal.addMenuItem(bigchefs, bigchefsSalmonSalad)
-
   const allUsers = await axios.get('http://localhost:3000/users')
   const allRestaurants = await axios.get('http://localhost:3000/restaurants')
   const allMenuItems = await axios.get('http://localhost:3000/menu-items')
   const allIngredients = await axios.get('http://localhost:3000/ingredients')
 
-  console.log(allUsers.data)
-  console.log(allRestaurants.data)
-  console.log(allMenuItems.data)
-  console.log(allIngredients.data)
+  // console.log(allUsers.data)
+  // console.log(allRestaurants.data)
+  // console.log(allMenuItems.data)
+  // console.log(allIngredients.data)
 
   // creting Orders with axios
   const sinansOrder = await axios.post('http://localhost:3000/orders', {
@@ -203,14 +201,31 @@ async function main() {
   })
   console.log('sinans Order: ', sinansOrder.data)
 
-  // await axios.post('http://localhost:3000/orders', {
-  //   customer: jhonny.data._id,
-  //   restaurant: starbucks.data._id,
-  //   type: 'toGo',
-  //   targetDate: '06/06/2023',
-  //   //time: '12:30',
-  //   note: 'no sugar',
-  // })
+  await axios.post('http://localhost:3000/orders', {
+    customer: jhonny.data._id,
+    restaurant: starbucks.data._id,
+    type: 'toGo',
+    targetDate: '06/06/2023',
+    //time: '12:30',
+    notes: 'no sugar',
+  })
+  await axios.post('http://localhost:3000/orders', {
+    customer: sinancan.data._id,
+    restaurant: starbucks.data._id,
+    type: 'toGo',
+    targetDate: '09/09/2023',
+    //time: '12:30',
+    notes: 'yes sugar',
+  })
+
+  await axios.post('http://localhost:3000/orders', {
+    customer: sinan.data._id,
+    restaurant: starbucks.data._id,
+    type: 'toGo',
+    targetDate: '10/10/2023',
+    //time: '12:30',
+    notes: 'bol bol sugar',
+  })
 
   // Creating Orders
   // const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
@@ -237,28 +252,6 @@ main().catch(error => {
 // john.addOrderElement(johnsOrder, starbucksAmericano, 1)
 // john.addOrderElement(johnsOrder, starbucksCappuccino, 1)
 // rafael.addOrderElement(rafaelOrder, federalSalmonSalad, 3)
-
-// Defining ingredients
-// const federalCoffeeBean = new Ingredient(federal, 'Coffee Bean', 'Drink', 'gr')
-// const federalMilk = new Ingredient(federal, 'Milk', 'Drink', 'ml')
-// const federalEgg = new Ingredient(federal, 'Egg', 'Food', 'pcs')
-// const federalSalmon = new Ingredient(federal, 'Salmon', 'Food', 'gr')
-// const starbucksCoffeeBean = new Ingredient(starbucks, 'Coffee Bean', 'Drink', 'gr')
-// const starbucksMilk = new Ingredient(starbucks, 'Milk', 'Drink', 'ml')
-// const bigchefsCoffeeBean = new Ingredient(bigchefs, 'Coffee Bean', 'Drink', 'gr')
-// const bigchefsEgg = new Ingredient(bigchefs, 'Egg', 'Food', 'pcs')
-// const bigchefsSalmon = new Ingredient(bigchefs, 'Salmon', 'Food', 'gr')
-
-// Adding ingredients to Restaurant's ingredient list
-// sinancan.addIngredient(federal, federalCoffeeBean)
-// sinancan.addIngredient(federal, federalMilk)
-// sinancan.addIngredient(federal, federalEgg)
-// sinancan.addIngredient(federal, federalSalmon)
-// johnnyjean.addIngredient(starbucks, starbucksCoffeeBean)
-// johnnyjean.addIngredient(starbucks, starbucksMilk)
-// rafaelnadal.addIngredient(bigchefs, bigchefsCoffeeBean)
-// rafaelnadal.addIngredient(bigchefs, bigchefsEgg)
-// rafaelnadal.addIngredient(bigchefs, bigchefsSalmon)
 
 // Adding ingredients to Menu Item's recipes
 // sinancan.addIngredientToRecipe(federal, federalAmericano, federalCoffeeBean, 24)

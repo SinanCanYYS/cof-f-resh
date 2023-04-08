@@ -22,7 +22,6 @@ class User {
 
   async createOrder({ restaurantID, orderType, targetDate, notes }) {
     const restaurant = await Restaurant.findById(restaurantID)
-    console.log('rest in user.js: ', restaurant)
     // const customer = this
     //if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
@@ -106,16 +105,18 @@ class User {
   //     : restaurant.menu.push(item)
   // }
 
-  addIngredient(restaurant, ingredient) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+  // addIngredient(restaurant, ingredient) {
+  //   if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
-    restaurant.ingredients.push(ingredient)
-  }
+  //   restaurant.ingredients.push(ingredient)
+  // }
 
-  addIngredientToRecipe(restaurant, menuItem, ingredient, quantity) {
+  async createRecipe(menuItem, ingredient, quantity) {
+    //addIngredientToRecipe(restaurant, menuItem, ingredient, quantity) {
     if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
     restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
+    await restaurant.save()
   }
 
   inputSalesData(restaurant, menuItem, year, month, quantity) {

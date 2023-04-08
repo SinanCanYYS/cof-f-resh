@@ -8,6 +8,7 @@ router.get('/', function (req, res, next) {
   res.send([{ order: 'Americano' }, { order: 'Cappuccino' }, { order: 'Espresso' }])
 })
 
+/* create a new order */
 router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.customer)
   console.log('user in orders post: ', user)
@@ -16,8 +17,6 @@ router.post('/', async function (req, res, next) {
     restaurantID: req.body.restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,
-    // menuItems: req.body.menuItems,
-    // totalCost: req.body.price,
     notes: req.body.notes,
   })
   res.send(newOrder.orderDetails)
