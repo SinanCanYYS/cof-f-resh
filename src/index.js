@@ -1,4 +1,8 @@
-// const User = require('./user')
+const User = require('./models/user')
+const Restaurant = require('./models/restaurant')
+const MenuItem = require('./models/menu')
+const Order = require('./models/order')
+const Ingredient = require('./models/ingredient')
 
 const axios = require('axios')
 
@@ -14,6 +18,12 @@ console.log('My first project Cof-f-resh')
 
 // creating users with axios
 async function main() {
+  // await User.deleteMany()
+  // await Restaurant.deleteMany()
+  // await MenuItem.deleteMany()
+  // await Order.deleteMany()
+  // await Ingredient.deleteMany()
+
   const sinan = await axios.post('http://localhost:3000/users', {
     name: 'Sinan',
     type: 'Customer',
@@ -193,14 +203,14 @@ async function main() {
   })
   console.log('sinans Order: ', sinansOrder.data)
 
-  await axios.post('http://localhost:3000/orders', {
-    customer: jhonny.data._id,
-    restaurant: starbucks.data._id,
-    type: 'toGo',
-    targetDate: '06/06/2023',
-    //time: '12:30',
-    note: 'no sugar',
-  })
+  // await axios.post('http://localhost:3000/orders', {
+  //   customer: jhonny.data._id,
+  //   restaurant: starbucks.data._id,
+  //   type: 'toGo',
+  //   targetDate: '06/06/2023',
+  //   //time: '12:30',
+  //   note: 'no sugar',
+  // })
 
   // Creating Orders
   // const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')

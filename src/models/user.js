@@ -20,7 +20,7 @@ class User {
   //   this.type = type
   // }
 
-  async createOrder(restaurantID, orderType, targetDate, notes) {
+  async createOrder({ restaurantID, orderType, targetDate, notes }) {
     const restaurant = await Restaurant.findById(restaurantID)
     console.log('rest in user.js: ', restaurant)
     // const customer = this

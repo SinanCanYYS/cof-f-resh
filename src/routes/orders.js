@@ -11,8 +11,9 @@ router.get('/', function (req, res, next) {
 router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.customer)
   console.log('user in orders post: ', user)
+  console.log('req.body in rest post: ', req.body.restaurant)
   const newOrder = await user.createOrder({
-    restaurant: req.body.restaurant,
+    restaurantID: req.body.restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,
     // menuItems: req.body.menuItems,
