@@ -11,7 +11,6 @@ const mongoose = require('mongoose')
 const orderElementSchema = new mongoose.Schema({
   name: String, // menuItem: { type: ObjectId, ref: 'MenuItem' }
   quantity: Number,
-  price: Number,
 })
 
 module.exports = orderElementSchema

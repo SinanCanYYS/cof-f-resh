@@ -30,6 +30,7 @@ router.post('/', async function (req, res, next) {
   })
   res.send(restaurant)
 })
+
 // Creting a menu item for a restaurant
 router.post('/:restaurantID/menu-items', async function (req, res, next) {
   const user = await User.findById(req.body.user)
@@ -41,5 +42,17 @@ router.post('/:restaurantID/menu-items', async function (req, res, next) {
     req.body.price
   )
   res.send(newMenuItem)
+})
+
+// Create a new ingredient for a restaurant
+router.post('/:restaurantID/ingredients', async function (req, res, next) {
+  const user = await User.findById(req.body.user)
+  const newIngredient = await user.createIngredient(
+    req.params.restaurantID,
+    req.body.name,
+    req.body.type,
+    req.body.unit
+  )
+  res.send(newIngredient)
 })
 module.exports = router

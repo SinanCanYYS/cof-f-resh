@@ -67,12 +67,12 @@ async function main() {
   })
 
   // creating menu items with axios
-  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
+  const federalLongBlack = await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
     user: sinancan.data._id,
     name: 'Long Black',
     type: 'Drink',
     subType: 'Hot Drink',
-    price: 44,
+    price: 4,
   })
   await axios.post('http://localhost:3000/menu-items', {
     user: sinancan.data._id,
@@ -83,27 +83,24 @@ async function main() {
     price: 3,
   })
 
-  await axios.post('http://localhost:3000/menu-items', {
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
     user: sinancan.data._id,
-    restaurant: federal.data._id,
     name: 'Capuccino',
     type: 'Drink',
     subType: 'Hot Drink',
     price: 5,
   })
 
-  await axios.post('http://localhost:3000/menu-items', {
+  await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/menu-items`, {
     user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
     name: 'Cortado',
     type: 'Getränk',
     subType: 'Heißgetränk',
     price: 4,
   })
 
-  await axios.post('http://localhost:3000/menu-items', {
+  await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/menu-items`, {
     user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
     name: 'Aussie Cappuccino',
     type: 'Getränk',
     subType: 'Heißgetränk',
@@ -111,31 +108,28 @@ async function main() {
   })
 
   // creating ingredients with axios
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
-    restaurant: federal.data._id,
     name: 'Milk',
     type: 'Drink',
     unit: 'ml',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
-    restaurant: federal.data._id,
     name: 'Coffee Beans',
     type: 'Drink',
     unit: 'gr',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
-    restaurant: federal.data._id,
     name: 'Syrup',
     type: 'Drink',
     unit: 'ml',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
     restaurant: federal.data._id,
     name: 'Powder',
@@ -144,24 +138,37 @@ async function main() {
   })
 
   await axios.post('http://localhost:3000/ingredients', {
+    user: sinancan.data._id,
+    restaurant: federal.data._id,
+    name: 'Syrup2',
+    type: 'Drink',
+    unit: 'ml',
+  })
+
+  await axios.post('http://localhost:3000/ingredients', {
+    user: sinancan.data._id,
+    restaurant: federal.data._id,
+    name: 'Powder2',
+    type: 'Drink',
+    unit: 'gr',
+  })
+
+  await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/ingredients`, {
     user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
     name: 'Kaffeebohnen',
     type: 'Kaffee',
     unit: 'gr',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/ingredients`, {
     user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
     name: 'Milch',
     type: 'Kaffee',
     unit: 'ml',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
+  await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/ingredients`, {
     user: jhonnyjean.data._id,
-    restaurant: starbucks.data._id,
     name: 'Sirup',
     type: 'Kaffee',
     unit: 'ml',
@@ -206,9 +213,9 @@ async function main() {
     //time: '10:30',
     notes: 'Please extra milk',
   })
-  console.log('sinans Order: ', sinansOrder.data)
+  console.log('sinans Order: ', sinansOrder.data._id)
 
-  await axios.post('http://localhost:3000/orders', {
+  const jhonnysOrder = await axios.post('http://localhost:3000/orders', {
     customer: jhonny.data._id,
     restaurant: starbucks.data._id,
     type: 'toGo',
@@ -232,6 +239,13 @@ async function main() {
     targetDate: '10/10/2023',
     //time: '12:30',
     notes: 'bol bol sugar',
+  })
+
+  // adding order elements to orders
+  await axios.post(`http://localhost:3000/orders/${sinansOrder.data._id}/order-elements`, {
+    customer: sinan.data._id,
+    menuItem: federalLongBlack.data._id,
+    quantity: 2,
   })
 
   // Creating Orders

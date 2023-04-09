@@ -55,17 +55,22 @@ class User {
     return newIngredient
   }
 
-  addOrderElement(order, item, quantity) {
-    if (this.type === 'Customer' && this.name === order.name) {
-      if (order.items.map(orderItem => orderItem.name).includes(item.name)) {
-        order.items.find(orderItem => orderItem.name === item.name).quantity += quantity
-      } else {
-        order.items.push(new OrderElement(item, quantity))
-      }
-      order.totalCost += order.restaurant.menu.find(menuItem => menuItem.name === item.name).price * quantity
+  async addOrderElement(orderID, menuItemID, quantity) {
+    console.log('kontrol2', orderID, menuItemID, quantity)
+    const order = await Order.findById(orderID)
+    console.log('kontrol3')
+    const menuItem = await MenuItem.findById(menuItemID)
+    console.log('kontrol4')
+    if (this.name !== order.name) throw new Error('You are not the customer of this order')
+
+    if (order.items.map(orderItem => orderItem.name).includes(menuItem.name)) {
+      order.items.find(orderItem => orderItem.name === menuItem.name).quantity += quantity
     } else {
-      console.log('You are not the customer of this order')
+      order.items.push(new OrderElement(menuItem, quantity))
     }
+    order.totalCost += order.restaurant.menu.find(item => item.name === menuItem.name).price * quantity
+    await order.save()
+    return order
   }
 
   confirmOrder(order) {
