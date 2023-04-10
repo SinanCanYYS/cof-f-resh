@@ -61,35 +61,43 @@ class User {
     console.log('kontrol3')
     const menuItem = await MenuItem.findById(menuItemID)
     console.log('kontrol4')
-    if (this.name !== order.name) throw new Error('You are not the customer of this order')
+    //if (this.name !== order.name) throw new Error('You are not the customer of this order')
 
     if (order.items.map(orderItem => orderItem.name).includes(menuItem.name)) {
       order.items.find(orderItem => orderItem.name === menuItem.name).quantity += quantity
     } else {
-      order.items.push(new OrderElement(menuItem, quantity))
+      newOrderElement = await OrderElement.create({ menuItem, quantity })
+      order.items.push(newOrderElement)
     }
     order.totalCost += order.restaurant.menu.find(item => item.name === menuItem.name).price * quantity
     await order.save()
     return order
   }
 
-  confirmOrder(order) {
-    if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-    order.status = 'confirmed'
+  async changeStatus(order, status) {
+    // if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    order.status = status
+    await order.save()
+    return order
   }
 
-  rejectOrder(order) {
-    if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+  // confirmOrder(order) {
+  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
-    order.status = 'rejected'
-  }
+  //   order.status = 'confirmed'
+  // }
 
-  completeOrder(order) {
-    if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+  // rejectOrder(order) {
+  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
 
-    order.status = 'completed'
-  }
+  //   order.status = 'rejected'
+  // }
+
+  // completeOrder(order) {
+  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+
+  //   order.status = 'completed'
+  // }
 
   cancelOrder(order) {
     if (this.name !== order.name) throw new Error('You are not the customer of this order')

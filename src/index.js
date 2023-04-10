@@ -213,7 +213,7 @@ async function main() {
     //time: '10:30',
     notes: 'Please extra milk',
   })
-  console.log('sinans Order: ', sinansOrder.data._id)
+  console.log('sinans Order: ', sinansOrder.data)
 
   const jhonnysOrder = await axios.post('http://localhost:3000/orders', {
     customer: jhonny.data._id,
@@ -242,10 +242,17 @@ async function main() {
   })
 
   // adding order elements to orders
-  await axios.post(`http://localhost:3000/orders/${sinansOrder.data._id}/order-elements`, {
-    customer: sinan.data._id,
-    menuItem: federalLongBlack.data._id,
-    quantity: 2,
+  // await axios.post(`http://localhost:3000/orders/${sinansOrder.data}/order-elements`, {
+  //   customer: sinan.data._id,
+  //   menuItem: federalLongBlack.data._id,
+  //   quantity: 2,
+  // })
+
+  // changing the status of an order
+  console.log('kontrol 0', sinansOrder.data)
+  await axios.patch(`http://localhost:3000/orders/${sinansOrder.data}`, {
+    user: sinancan.data._id,
+    status: 'confirmed',
   })
 
   // Creating Orders

@@ -19,6 +19,7 @@ const orderSchema = new mongoose.Schema(
     },
     items: {
       type: [orderElementSchema],
+      //type: [{type:mongoose.Schema.Types.ObjectId, ref: 'OrderElement'}],
       default: [],
     },
     // date: new Date().toLocaleDateString('en-gb'),
