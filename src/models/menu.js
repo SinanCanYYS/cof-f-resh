@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const menuItemSchema = new mongoose.Schema({
   name: String,
@@ -6,7 +7,12 @@ const menuItemSchema = new mongoose.Schema({
   subType: String,
   price: Number,
   recipe: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient', quantity: Number }],
+    type: [
+      {
+        ingredient: { type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient', autopopulate: { maxDepth: 1 } },
+        quantity: Number,
+      },
+    ],
     default: [],
   },
 })
@@ -32,4 +38,5 @@ class MenuItem {
 
 // module.exports = MenuItem
 menuItemSchema.loadClass(MenuItem)
+menuItemSchema.plugin(autopopulate)
 module.exports = mongoose.model('MenuItem', menuItemSchema)

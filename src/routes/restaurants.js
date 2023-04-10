@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 const User = require('../models/user')
 const Restaurant = require('../models/restaurant')
+const MenuItem = require('../models/menu')
+const Ingredient = require('../models/ingredient')
 
 console.log('Hello Restaurants')
 
@@ -34,8 +36,9 @@ router.post('/', async function (req, res, next) {
 // Creting a menu item for a restaurant
 router.post('/:restaurantID/menu-items', async function (req, res, next) {
   const user = await User.findById(req.body.user)
+  const restaurant = await Restaurant.findById(req.params.restaurantID)
   const newMenuItem = await user.createMenuItem(
-    req.params.restaurantID,
+    restaurant,
     req.body.name,
     req.body.type,
     req.body.subType,
@@ -47,24 +50,19 @@ router.post('/:restaurantID/menu-items', async function (req, res, next) {
 // Create a new ingredient for a restaurant
 router.post('/:restaurantID/ingredients', async function (req, res, next) {
   const user = await User.findById(req.body.user)
-  const newIngredient = await user.createIngredient(
-    req.params.restaurantID,
-    req.body.name,
-    req.body.type,
-    req.body.unit
-  )
+  const restaurant = await Restaurant.findById(req.params.restaurantID)
+  const newIngredient = await user.createIngredient(restaurant, req.body.name, req.body.type, req.body.unit)
   res.send(newIngredient)
 })
 
 // creating a recipe for a Menu Item
 router.post('/:restaurantID/menu-items/:menuItemID/recipes', async function (req, res, next) {
   const user = await User.findById(req.body.user)
-  const newRecipe = await user.createRecipe(
-    req.params.restaurantID,
-    req.params.menuItemID,
-    req.body.ingredient,
-    req.body.quantity
-  )
+  const restaurant = await Restaurant.findById(req.params.restaurantID)
+  const menuItem = await MenuItem.findById(req.params.menuItemID)
+  const ingredient = await Ingredient.findById(req.body.ingredient)
+
+  const newRecipe = await user.createRecipe(restaurant, menuItem, ingredient, req.body.quantity)
   res.send(newRecipe)
 })
 

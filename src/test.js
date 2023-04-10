@@ -59,12 +59,12 @@ async function main() {
     district: 'Taksim',
   })
 
-  await axios.post('http://localhost:3000/restaurants', {
-    name: 'Big Chefs',
-    owner: 'Rafael Nadal',
-    city: 'Istanbul',
-    district: 'Taksim',
-  })
+  // await axios.post('http://localhost:3000/restaurants', {
+  //   name: 'Big Chefs',
+  //   owner: 'Rafael Nadal',
+  //   city: 'Istanbul',
+  //   district: 'Taksim',
+  // })
 
   // creating menu items with axios
   const federalLongBlack = await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
@@ -74,18 +74,18 @@ async function main() {
     subType: 'Hot Drink',
     price: 4,
   })
-  await axios.post('http://localhost:3000/menu-items', {
-    user: sinancan.data._id,
-    restaurant: federal.data._id,
-    name: 'Americano',
-    type: 'Drink',
-    subType: 'Hot Drink',
-    price: 3,
-  })
+  // await axios.post('http://localhost:3000/menu-items', {
+  //   user: sinancan.data._id,
+  //   restaurant: federal.data._id,
+  //   name: 'Americano',
+  //   type: 'Drink',
+  //   subType: 'Hot Drink',
+  //   price: 3,
+  // })
 
-  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
+  const federalCappuccino = await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/menu-items`, {
     user: sinancan.data._id,
-    name: 'Capuccino',
+    name: 'Cappuccino',
     type: 'Drink',
     subType: 'Hot Drink',
     price: 5,
@@ -137,21 +137,21 @@ async function main() {
     unit: 'gr',
   })
 
-  await axios.post('http://localhost:3000/ingredients', {
-    user: sinancan.data._id,
-    restaurant: federal.data._id,
-    name: 'Syrup2',
-    type: 'Drink',
-    unit: 'ml',
-  })
+  // await axios.post('http://localhost:3000/ingredients', {
+  //   user: sinancan.data._id,
+  //   restaurant: federal.data._id,
+  //   name: 'Syrup2',
+  //   type: 'Drink',
+  //   unit: 'ml',
+  // })
 
-  await axios.post('http://localhost:3000/ingredients', {
-    user: sinancan.data._id,
-    restaurant: federal.data._id,
-    name: 'Powder2',
-    type: 'Drink',
-    unit: 'gr',
-  })
+  // await axios.post('http://localhost:3000/ingredients', {
+  //   user: sinancan.data._id,
+  //   restaurant: federal.data._id,
+  //   name: 'Powder2',
+  //   type: 'Drink',
+  //   unit: 'gr',
+  // })
 
   await axios.post(`http://localhost:3000/restaurants/${starbucks.data._id}/ingredients`, {
     user: jhonnyjean.data._id,
@@ -213,7 +213,7 @@ async function main() {
     //time: '10:30',
     notes: 'Please extra milk',
   })
-  console.log('sinans Order: ', sinansOrder.data)
+  // console.log('sinans Order: ', sinansOrder)
 
   const jhonnysOrder = await axios.post('http://localhost:3000/orders', {
     customer: jhonny.data._id,
@@ -223,40 +223,45 @@ async function main() {
     //time: '12:30',
     notes: 'no sugar',
   })
-  await axios.post('http://localhost:3000/orders', {
-    customer: sinancan.data._id,
-    restaurant: starbucks.data._id,
-    type: 'toGo',
-    targetDate: '09/09/2023',
-    //time: '12:30',
-    notes: 'yes sugar',
-  })
-
-  await axios.post('http://localhost:3000/orders', {
-    customer: sinan.data._id,
-    restaurant: starbucks.data._id,
-    type: 'toGo',
-    targetDate: '10/10/2023',
-    //time: '12:30',
-    notes: 'bol bol sugar',
-  })
-
-  // adding order elements to orders
-  // await axios.post(`http://localhost:3000/orders/${sinansOrder.data}/order-elements`, {
-  //   customer: sinan.data._id,
-  //   menuItem: federalLongBlack.data._id,
-  //   quantity: 2,
+  // await axios.post('http://localhost:3000/orders', {
+  //   customer: sinancan.data._id,
+  //   restaurant: starbucks.data._id,
+  //   type: 'toGo',
+  //   targetDate: '09/09/2023',
+  //   //time: '12:30',
+  //   notes: 'yes sugar',
   // })
 
+  // await axios.post('http://localhost:3000/orders', {
+  //   customer: sinan.data._id,
+  //   restaurant: starbucks.data._id,
+  //   type: 'toGo',
+  //   targetDate: '10/10/2023',
+  //   //time: '12:30',
+  //   notes: 'bol bol sugar',
+  // })
+
+  // adding order elements to orders
+  await axios.post(`http://localhost:3000/orders/${sinansOrder.data._id}/order-elements`, {
+    customer: sinan.data._id,
+    menuItem: federalLongBlack.data._id,
+    quantity: 2,
+  })
+
+  await axios.post(`http://localhost:3000/orders/${sinansOrder.data._id}/order-elements`, {
+    customer: sinan.data._id,
+    menuItem: federalCappuccino.data._id,
+    quantity: 3,
+  })
+
   // changing the status of an order by restaurant
-  console.log('kontrol 0', sinansOrder.data)
-  await axios.patch(`http://localhost:3000/orders/${sinansOrder.data}`, {
+  await axios.patch(`http://localhost:3000/orders/${sinansOrder.data._id}`, {
     user: sinancan.data._id,
     status: 'confirmed',
   })
 
   // cancelling an order by customer
-  await axios.patch(`http://localhost:3000/orders/${jhonnysOrder.data}`, {
+  await axios.patch(`http://localhost:3000/orders/${jhonnysOrder.data._id}`, {
     user: jhonny.data._id,
     status: 'cancelled',
   })

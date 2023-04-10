@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 const Order = require('../models/order')
 const User = require('../models/user')
+const Restaurant = require('../models/restaurant')
+const MenuItem = require('../models/menu')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -11,21 +13,22 @@ router.get('/', function (req, res, next) {
 /* create a new order */
 router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.customer)
+  const restaurant = await Restaurant.findById(req.body.restaurant)
   const newOrder = await user.createOrder({
-    restaurantID: req.body.restaurant,
+    restaurant: restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,
     notes: req.body.notes,
   })
-  console.log('newOrder: ', newOrder._id)
-  res.send(newOrder._id)
+  res.send(newOrder)
 })
 
 /* add a menu item to an order */
 router.post('/:orderID/order-elements', async function (req, res, next) {
   const user = await User.findById(req.body.customer)
-  //const order = await Order.findById(req.params.orderID)
-  const newOrderElement = await user.addOrderElement(req.params.orderID, req.body.menuItem, req.body.quantity)
+  const order = await Order.findById(req.params.orderID)
+  const menuItem = await MenuItem.findById(req.body.menuItem)
+  const newOrderElement = await user.addOrderElement(order, menuItem, req.body.quantity)
   res.send(newOrderElement)
 })
 

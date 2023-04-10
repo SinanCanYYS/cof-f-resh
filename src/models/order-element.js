@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const orderElementSchema = new mongoose.Schema({
-  menuItem: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+  menuItem: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 1 } }],
   quantity: Number,
 })
 class OrderElement {
@@ -13,5 +14,6 @@ class OrderElement {
 //}
 
 orderElementSchema.loadClass(OrderElement)
-module.exports = orderElementSchema
-//module.exports = mongoose.model('OrderElement', orderElementSchema)
+orderElementSchema.plugin(autopopulate)
+//module.exports = orderElementSchema
+module.exports = mongoose.model('OrderElement', orderElementSchema)

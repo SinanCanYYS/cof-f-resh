@@ -1,20 +1,21 @@
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const restaurantSchema = new mongoose.Schema({
   name: String,
-  owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } }],
   city: String,
   district: String,
   menu: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 1 } }],
     default: [],
   },
   ingredients: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient', autopopulate: { maxDepth: 1 } }],
     default: [],
   },
   orderList: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order', autopopulate: { maxDepth: 1 } }],
     default: [],
   },
   sales: [],
@@ -51,4 +52,5 @@ class Restaurant {
 // module.exports = Restaurant
 
 restaurantSchema.loadClass(Restaurant)
+restaurantSchema.plugin(autopopulate)
 module.exports = mongoose.model('Restaurant', restaurantSchema)

@@ -1,12 +1,13 @@
 const { ToWords } = require('to-words')
 const toWords = new ToWords()
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 const orderElementSchema = require('./order-element')
 
 const orderSchema = new mongoose.Schema(
   {
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
+    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } },
+    restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', autopopulate: { maxDepth: 1 } },
     //restaurant: String,
     orderType: String,
     status: {
@@ -18,8 +19,8 @@ const orderSchema = new mongoose.Schema(
       default: 0,
     },
     items: {
-      type: [orderElementSchema],
-      //type: [{type:mongoose.Schema.Types.ObjectId, ref: 'OrderElement'}],
+      //type: [orderElementSchema],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderElement' }],
       default: [],
     },
     // date: new Date().toLocaleDateString('en-gb'),
@@ -74,4 +75,5 @@ class Order {
 
 // module.exports = Order
 orderSchema.loadClass(Order)
+orderSchema.plugin(autopopulate)
 module.exports = mongoose.model('Order', orderSchema)

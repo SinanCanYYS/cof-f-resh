@@ -20,9 +20,7 @@ class User {
   //   this.type = type
   // }
 
-  async createOrder({ restaurantID, orderType, targetDate, notes }) {
-    const restaurant = await Restaurant.findById(restaurantID)
-    // const customer = this
+  async createOrder({ restaurant, orderType, targetDate, notes }) {
     //if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
@@ -36,8 +34,7 @@ class User {
     return newOrder
   }
 
-  async createMenuItem(restaurantID, name, type, subType, price) {
-    const restaurant = await Restaurant.findById(restaurantID)
+  async createMenuItem(restaurant, name, type, subType, price) {
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
     restaurant.menu.push(newMenuItem)
@@ -45,8 +42,7 @@ class User {
     return newMenuItem
   }
 
-  async createIngredient(restaurantID, name, type, unit) {
-    const restaurant = await Restaurant.findById(restaurantID)
+  async createIngredient(restaurant, name, type, unit) {
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     const newIngredient = await Ingredient.create({ name, type, unit })
     restaurant.ingredients.push(newIngredient)
@@ -54,21 +50,15 @@ class User {
     return newIngredient
   }
 
-  async addOrderElement(orderID, menuItemID, quantity) {
-    console.log('kontrol2', orderID, menuItemID, quantity)
-    const order = await Order.findById(orderID)
-    console.log('kontrol3')
-    const menuItem = await MenuItem.findById(menuItemID)
-    console.log('kontrol4')
+  async addOrderElement(order, menuItem, quantity) {
     //if (this.name !== order.name) throw new Error('You are not the customer of this order')
-
     if (order.items.map(orderItem => orderItem.name).includes(menuItem.name)) {
       order.items.find(orderItem => orderItem.name === menuItem.name).quantity += quantity
     } else {
-      newOrderElement = await OrderElement.create({ menuItem, quantity })
+      const newOrderElement = await OrderElement.create({ menuItem, quantity })
       order.items.push(newOrderElement)
     }
-    order.totalCost += order.restaurant.menu.find(item => item.name === menuItem.name).price * quantity
+    order.totalCost += menuItem.price * quantity
     await order.save()
     return order
   }
@@ -102,16 +92,12 @@ class User {
   //   restaurant.ingredients.push(ingredient)
   // }
 
-  async createRecipe(restaurantID, menuItemID, ingredientID, quantity) {
-    const restaurant = await Restaurant.findById(restaurantID)
-    const menuItem = await MenuItem.findById(menuItemID)
-    const ingredient = await Ingredient.findById(ingredientID)
-    //addIngredientToRecipe(restaurant, menuItem, ingredient, quantity) {
+  async createRecipe(restaurant, menuItem, ingredient, quantity) {
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
-    console.log('restaurant', restaurant)
-    console.log('menuItem', menuItem)
     restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
     await restaurant.save()
+    await menuItem.save()
+    return menuItem
   }
 
   inputSalesData(restaurant, menuItem, year, month, quantity) {
