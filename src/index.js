@@ -115,7 +115,7 @@ async function main() {
     unit: 'ml',
   })
 
-  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
+  const federalCoffeeBean = await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
     name: 'Coffee Beans',
     type: 'Drink',
@@ -248,23 +248,28 @@ async function main() {
   //   quantity: 2,
   // })
 
-  // changing the status of an order
+  // changing the status of an order by restaurant
   console.log('kontrol 0', sinansOrder.data)
   await axios.patch(`http://localhost:3000/orders/${sinansOrder.data}`, {
     user: sinancan.data._id,
     status: 'confirmed',
   })
 
-  // Creating Orders
-  // const sinansOrder = sinan.createOrder(federal, 'toEat', '05/01/2023', '10:30', 'Please extra milk')
-  // const johnsOrder = john.createOrder(starbucks, 'toGo', '05/01/2023', '12:30', 'no sugar')
-  // const rafaelOrder = rafael.createOrder(federal, 'toEat', '05/01/2023', '12:00', '12:30', 'no sugar')
+  // cancelling an order by customer
+  await axios.patch(`http://localhost:3000/orders/${jhonnysOrder.data}`, {
+    user: jhonny.data._id,
+    status: 'cancelled',
+  })
 
-  //const sinan = await axios.get('http://localhost:3000/users/Sinan')
-  //console.log(sinan.data)
-
-  // console.log(sinan.data)
-  // console.log(johnny.data)
+  //creating recipe for menu item
+  await axios.post(
+    `http://localhost:3000/restaurants/${federal.data._id}/menu-items/${federalLongBlack.data._id}/recipes`,
+    {
+      user: sinancan.data._id,
+      ingredient: federalCoffeeBean.data._id,
+      quantity: 22,
+    }
+  )
 }
 
 main().catch(error => {

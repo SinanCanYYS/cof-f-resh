@@ -10,10 +10,7 @@ router.get('/', function (req, res, next) {
 
 /* create a new order */
 router.post('/', async function (req, res, next) {
-  console.log('req.body in orders post: ', req.body)
   const user = await User.findById(req.body.customer)
-  // console.log('user in orders post: ', user)
-  // console.log('req.body in rest post: ', req.body.restaurant)
   const newOrder = await user.createOrder({
     restaurantID: req.body.restaurant,
     orderType: req.body.type,
@@ -34,7 +31,6 @@ router.post('/:orderID/order-elements', async function (req, res, next) {
 
 /* change the status of an order */
 router.patch('/:orderID', async function (req, res, next) {
-  console.log('kontrol1: ', req.params.orderID)
   const user = await User.findById(req.body.user)
   const order = await Order.findById(req.params.orderID)
   const updatedOrder = await user.changeStatus(order, req.body.status)

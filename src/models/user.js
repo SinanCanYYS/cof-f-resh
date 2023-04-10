@@ -38,7 +38,6 @@ class User {
 
   async createMenuItem(restaurantID, name, type, subType, price) {
     const restaurant = await Restaurant.findById(restaurantID)
-    console.log('rest owner: ', restaurant.owner)
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
     restaurant.menu.push(newMenuItem)
@@ -75,34 +74,18 @@ class User {
   }
 
   async changeStatus(order, status) {
+    switch (this.type) {
+      case 'Customer':
+        //if (this.name !== order.name) throw new Error('You are not the customer of this order')
+        break
+      case 'Owner':
+        //if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+        break
+    }
     // if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
     order.status = status
     await order.save()
     return order
-  }
-
-  // confirmOrder(order) {
-  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-  //   order.status = 'confirmed'
-  // }
-
-  // rejectOrder(order) {
-  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-  //   order.status = 'rejected'
-  // }
-
-  // completeOrder(order) {
-  //   if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-  //   order.status = 'completed'
-  // }
-
-  cancelOrder(order) {
-    if (this.name !== order.name) throw new Error('You are not the customer of this order')
-
-    order.status = 'cancelled'
   }
 
   // addMenuItem(restaurant, item) {
@@ -119,10 +102,14 @@ class User {
   //   restaurant.ingredients.push(ingredient)
   // }
 
-  async createRecipe(menuItem, ingredient, quantity) {
+  async createRecipe(restaurantID, menuItemID, ingredientID, quantity) {
+    const restaurant = await Restaurant.findById(restaurantID)
+    const menuItem = await MenuItem.findById(menuItemID)
+    const ingredient = await Ingredient.findById(ingredientID)
     //addIngredientToRecipe(restaurant, menuItem, ingredient, quantity) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
+    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    console.log('restaurant', restaurant)
+    console.log('menuItem', menuItem)
     restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
     await restaurant.save()
   }

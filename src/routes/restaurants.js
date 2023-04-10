@@ -55,4 +55,17 @@ router.post('/:restaurantID/ingredients', async function (req, res, next) {
   )
   res.send(newIngredient)
 })
+
+// creating a recipe for a Menu Item
+router.post('/:restaurantID/menu-items/:menuItemID/recipes', async function (req, res, next) {
+  const user = await User.findById(req.body.user)
+  const newRecipe = await user.createRecipe(
+    req.params.restaurantID,
+    req.params.menuItemID,
+    req.body.ingredient,
+    req.body.quantity
+  )
+  res.send(newRecipe)
+})
+
 module.exports = router
