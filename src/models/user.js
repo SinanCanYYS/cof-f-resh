@@ -8,6 +8,7 @@ const Restaurant = require('./restaurant')
 const Ingredient = require('./ingredient')
 
 const mongoose = require('mongoose')
+// const autopopulate = require('mongoose-autopopulate')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -35,7 +36,9 @@ class User {
   }
 
   async createMenuItem(restaurant, name, type, subType, price) {
-    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    console.log('this', this)
+    console.log('restaurant owner', restaurant.owner)
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
     restaurant.menu.push(newMenuItem)
     await restaurant.save()
@@ -94,8 +97,9 @@ class User {
 
   async createRecipe(restaurant, menuItem, ingredient, quantity) {
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
-    restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
-    await restaurant.save()
+    // restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
+    menuItem.recipe.push({ ingredient, quantity })
+    // await restaurant.save()
     await menuItem.save()
     return menuItem
   }
@@ -133,4 +137,5 @@ class User {
 // module.exports = User
 
 userSchema.loadClass(User)
+// userSchema.plugin(autopopulate)
 module.exports = mongoose.model('User', userSchema)

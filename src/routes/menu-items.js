@@ -23,7 +23,7 @@ router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.user)
   const restaurant = await Restaurant.findById(req.body.restaurant)
   const newMenuItem = await user.createMenuItem(
-    req.body.restaurant,
+    restaurant,
     req.body.name,
     req.body.type,
     req.body.subType,

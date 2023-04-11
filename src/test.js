@@ -6,6 +6,9 @@ const Ingredient = require('./models/ingredient')
 
 const axios = require('axios')
 
+require('dotenv').config()
+require('./database-connection')
+
 console.log('My first project Cof-f-resh')
 
 // I need 5 main objects, User, Restaurant, Menu Item, Order, Ingredient
@@ -17,11 +20,11 @@ console.log('My first project Cof-f-resh')
 // Restaurant can confirm, reject or complete the order
 
 async function main() {
-  // await User.deleteMany()
-  // await Restaurant.deleteMany()
-  // await MenuItem.deleteMany()
-  // await Order.deleteMany()
-  // await Ingredient.deleteMany()
+  await User.deleteMany()
+  await Restaurant.deleteMany()
+  await MenuItem.deleteMany()
+  await Order.deleteMany()
+  await Ingredient.deleteMany()
 
   // creating users with axios
   const sinan = await axios.post('http://localhost:3000/users', {

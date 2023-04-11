@@ -3,7 +3,7 @@ const autopopulate = require('mongoose-autopopulate')
 
 const restaurantSchema = new mongoose.Schema({
   name: String,
-  owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } }],
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } },
   city: String,
   district: String,
   menu: {
