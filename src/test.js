@@ -111,7 +111,7 @@ async function main() {
   })
 
   // creating ingredients with axios
-  await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
+  const federalMilk = await axios.post(`http://localhost:3000/restaurants/${federal.data._id}/ingredients`, {
     user: sinancan.data._id,
     name: 'Milk',
     type: 'Drink',
@@ -276,6 +276,23 @@ async function main() {
       user: sinancan.data._id,
       ingredient: federalCoffeeBean.data._id,
       quantity: 22,
+    }
+  )
+
+  await axios.post(
+    `http://localhost:3000/restaurants/${federal.data._id}/menu-items/${federalCappuccino.data._id}/recipes`,
+    {
+      user: sinancan.data._id,
+      ingredient: federalCoffeeBean.data._id,
+      quantity: 12,
+    }
+  )
+  await axios.post(
+    `http://localhost:3000/restaurants/${federal.data._id}/menu-items/${federalCappuccino.data._id}/recipes`,
+    {
+      user: sinancan.data._id,
+      ingredient: federalMilk.data._id,
+      quantity: 100,
     }
   )
 }

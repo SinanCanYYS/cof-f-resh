@@ -22,7 +22,8 @@ class User {
   // }
 
   async createOrder({ restaurant, orderType, targetDate, notes }) {
-    //if (this.type !== 'Customer') throw new Error('You are not a customer')
+    console.log('this.type', this.type)
+    //if (!this.type.equals('Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
       restaurant: restaurant,
@@ -36,8 +37,6 @@ class User {
   }
 
   async createMenuItem(restaurant, name, type, subType, price) {
-    console.log('this', this)
-    console.log('restaurant owner', restaurant.owner)
     if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     const newMenuItem = await MenuItem.create({ name, type, subType, price })
     restaurant.menu.push(newMenuItem)
@@ -46,7 +45,7 @@ class User {
   }
 
   async createIngredient(restaurant, name, type, unit) {
-    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     const newIngredient = await Ingredient.create({ name, type, unit })
     restaurant.ingredients.push(newIngredient)
     await restaurant.save()
@@ -72,7 +71,7 @@ class User {
         //if (this.name !== order.name) throw new Error('You are not the customer of this order')
         break
       case 'Owner':
-        //if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
+        if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
         break
     }
     // if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
@@ -96,7 +95,7 @@ class User {
   // }
 
   async addRecipeItem(menuItem, ingredient, quantity) {
-    //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     // restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
     menuItem.recipe.push({ ingredient: ingredient, quantity: quantity })
     // await restaurant.save()
@@ -105,21 +104,21 @@ class User {
   }
 
   inputSalesData(restaurant, menuItem, year, month, quantity) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant') //console.log('You are not the owner of this restaurant')
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant') //console.log('You are not the owner of this restaurant')
 
     const newSalesData = new SalesData(restaurant, menuItem, year, month, quantity)
     restaurant.sales.push(newSalesData)
   }
 
   inputStockData(restaurant, ingredient, year, month, quantity) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
 
     const newStockData = new StockData(restaurant, ingredient, year, month, quantity)
     restaurant.stockQty.push(newStockData)
   }
 
   inputPurchaseData(restaurant, ingredient, year, month, quantity) {
-    if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
+    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
 
     const newPurchaseData = new PurchaseData(restaurant, ingredient, year, month, quantity)
     restaurant.purchases.push({ newPurchaseData })
