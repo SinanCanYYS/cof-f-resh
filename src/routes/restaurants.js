@@ -55,15 +55,14 @@ router.post('/:restaurantID/ingredients', async function (req, res, next) {
   res.send(newIngredient)
 })
 
-// creating a recipe for a Menu Item
+// addind an Ingredient to recipe of a  Menu item
 router.post('/:restaurantID/menu-items/:menuItemID/recipes', async function (req, res, next) {
   const user = await User.findById(req.body.user)
-  const restaurant = await Restaurant.findById(req.params.restaurantID)
   const menuItem = await MenuItem.findById(req.params.menuItemID)
   const ingredient = await Ingredient.findById(req.body.ingredient)
 
-  const newRecipe = await user.createRecipe(restaurant, menuItem, ingredient, req.body.quantity)
-  res.send(newRecipe)
+  const newRecipeItem = await user.addRecipeItem(menuItem, ingredient, req.body.quantity)
+  res.send(newRecipeItem)
 })
 
 module.exports = router

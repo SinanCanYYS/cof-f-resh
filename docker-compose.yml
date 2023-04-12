@@ -12,7 +12,7 @@ services:
       - ./src:/app/src
     environment:
       # - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
-      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017/coffresh
+      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/coffresh
 
   mongodb:
     image: mongo
@@ -21,8 +21,10 @@ services:
     volumes:
       - ./data:/data/db
 
-  #test:
-  #  image: coffresh-test
-  #  build: .
-  #  volumes:
-  #    - ./src:/app/src/test.js
+  tests:
+    image: node:14
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: node src/test.js

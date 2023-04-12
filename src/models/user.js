@@ -95,10 +95,10 @@ class User {
   //   restaurant.ingredients.push(ingredient)
   // }
 
-  async createRecipe(restaurant, menuItem, ingredient, quantity) {
+  async addRecipeItem(menuItem, ingredient, quantity) {
     //if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
     // restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
-    menuItem.recipe.push({ ingredient, quantity })
+    menuItem.recipe.push({ ingredient: ingredient, quantity: quantity })
     // await restaurant.save()
     await menuItem.save()
     return menuItem

@@ -20,11 +20,11 @@ console.log('My first project Cof-f-resh')
 // Restaurant can confirm, reject or complete the order
 
 async function main() {
-  await User.deleteMany()
-  await Restaurant.deleteMany()
-  await MenuItem.deleteMany()
-  await Order.deleteMany()
-  await Ingredient.deleteMany()
+  // await User.deleteMany()
+  // await Restaurant.deleteMany()
+  // await MenuItem.deleteMany()
+  // await Order.deleteMany()
+  // await Ingredient.deleteMany()
 
   // creating users with axios
   const sinan = await axios.post('http://localhost:3000/users', {
@@ -269,7 +269,7 @@ async function main() {
     status: 'cancelled',
   })
 
-  //creating recipe for menu item
+  //addind an Ingredient to recipe of a  Menu item
   await axios.post(
     `http://localhost:3000/restaurants/${federal.data._id}/menu-items/${federalLongBlack.data._id}/recipes`,
     {
