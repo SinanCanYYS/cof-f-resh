@@ -1,0 +1,28 @@
+services:
+  api:
+    image: coffresh-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/app/src
+    environment:
+      # - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017/coffresh
+
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+
+  #test:
+  #  image: coffresh-test
+  #  build: .
+  #  volumes:
+  #    - ./src:/app/src/test.js
