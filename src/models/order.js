@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema(
     },
     items: {
       //type: [orderElementSchema],
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderElement' }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderElement', autopopulate: { maxDepth: 1 } }],
       default: [],
     },
     // date: new Date().toLocaleDateString('en-gb'),

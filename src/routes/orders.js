@@ -5,9 +5,10 @@ const User = require('../models/user')
 const Restaurant = require('../models/restaurant')
 const MenuItem = require('../models/menu')
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send([{ order: 'Americano' }, { order: 'Cappuccino' }, { order: 'Espresso' }])
+/* GET Order details. */
+router.get('/:orderID', async function (req, res, next) {
+  const order = await Order.findById(req.params.orderID)
+  res.render('order', { title: 'Order Details', order: order })
 })
 
 /* create a new order */

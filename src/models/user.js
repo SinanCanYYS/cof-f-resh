@@ -23,7 +23,7 @@ class User {
 
   async createOrder({ restaurant, orderType, targetDate, notes }) {
     console.log('this.type', this.type)
-    //if (!this.type.equals('Customer') throw new Error('You are not a customer')
+    if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
       restaurant: restaurant,
@@ -53,7 +53,7 @@ class User {
   }
 
   async addOrderElement(order, menuItem, quantity) {
-    //if (this.name !== order.name) throw new Error('You are not the customer of this order')
+    if (this.name !== order.customer.name) throw new Error('You are not the customer of this order')
     if (order.items.map(orderItem => orderItem.name).includes(menuItem.name)) {
       order.items.find(orderItem => orderItem.name === menuItem.name).quantity += quantity
     } else {
@@ -68,34 +68,19 @@ class User {
   async changeStatus(order, status) {
     switch (this.type) {
       case 'Customer':
-        //if (this.name !== order.name) throw new Error('You are not the customer of this order')
+        if (this.name !== order.customer.name) throw new Error('You are not the customer of this order')
         break
       case 'Owner':
-        //if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
+        if (!this._id.equals(order.restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
         break
     }
-    // if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
     order.status = status
     await order.save()
     return order
   }
 
-  // addMenuItem(restaurant, item) {
-  //   if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-  //   restaurant.menu.map(menuItem => menuItem.name).includes(item.name)
-  //     ? console.log('This menu item already exists')
-  //     : restaurant.menu.push(item)
-  // }
-
-  // addIngredient(restaurant, ingredient) {
-  //   if (this !== restaurant.owner) throw new Error('You are not the owner of this restaurant')
-
-  //   restaurant.ingredients.push(ingredient)
-  // }
-
   async addRecipeItem(menuItem, ingredient, quantity) {
-    // if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
+    //if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     // restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
     menuItem.recipe.push({ ingredient: ingredient, quantity: quantity })
     // await restaurant.save()

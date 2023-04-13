@@ -78,14 +78,6 @@ async function main() {
     subType: 'Hot Drink',
     price: 4,
   })
-  // await axios.post('/menu-items', {
-  //   user: sinancan.data._id,
-  //   restaurant: federal.data._id,
-  //   name: 'Americano',
-  //   type: 'Drink',
-  //   subType: 'Hot Drink',
-  //   price: 3,
-  // })
 
   const federalCappuccino = await axios.post(`/restaurants/${federal.data._id}/menu-items`, {
     user: sinancan.data._id,
@@ -140,22 +132,6 @@ async function main() {
     type: 'Drink',
     unit: 'gr',
   })
-
-  // await axios.post('/ingredients', {
-  //   user: sinancan.data._id,
-  //   restaurant: federal.data._id,
-  //   name: 'Syrup2',
-  //   type: 'Drink',
-  //   unit: 'ml',
-  // })
-
-  // await axios.post('/ingredients', {
-  //   user: sinancan.data._id,
-  //   restaurant: federal.data._id,
-  //   name: 'Powder2',
-  //   type: 'Drink',
-  //   unit: 'gr',
-  // })
 
   await axios.post(`/restaurants/${starbucks.data._id}/ingredients`, {
     user: jhonnyjean.data._id,
@@ -217,7 +193,6 @@ async function main() {
     //time: '10:30',
     notes: 'Please extra milk',
   })
-  // console.log('sinans Order: ', sinansOrder)
 
   const jhonnysOrder = await axios.post('/orders', {
     customer: jhonny.data._id,
@@ -292,21 +267,6 @@ async function main() {
 main().catch(error => {
   console.log(error.message ? error.message : error)
 })
-
-// Adding order elements to Orders
-// sinan.addOrderElement(sinansOrder, federalAmericano, 2)
-// sinan.addOrderElement(sinansOrder, federalCappuccino, 4)
-// sinan.addOrderElement(sinansOrder, federalOmelette, 1)
-// sinan.addOrderElement(sinansOrder, federalAmericano, 1)
-// john.addOrderElement(johnsOrder, starbucksCappuccino, 5)
-// john.addOrderElement(johnsOrder, starbucksAmericano, 1)
-// john.addOrderElement(johnsOrder, starbucksCappuccino, 1)
-// rafael.addOrderElement(rafaelOrder, federalSalmonSalad, 3)
-
-// Adding ingredients to Menu Item's recipes
-// sinancan.addIngredientToRecipe(federal, federalAmericano, federalCoffeeBean, 24)
-// sinancan.addIngredientToRecipe(federal, federalCappuccino, federalCoffeeBean, 12)
-// sinancan.addIngredientToRecipe(federal, federalCappuccino, federalMilk, 100) // 100 ml
 
 // Input Stock Data
 // sinancan.inputStockData(federal, federalCoffeeBean, 2022, 12, 100)

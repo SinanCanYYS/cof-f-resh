@@ -25,6 +25,7 @@ services:
     image: coffresh-api
     depends_on:
       - api
+      # - mongodb
     volumes:
       - ./src/test.js:/app/src/test.js
     #environment:
