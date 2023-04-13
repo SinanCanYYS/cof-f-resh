@@ -6,14 +6,15 @@ console.log('Hello Users')
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-  res.send(await User.find())
-  //if (req.query.view === 'json') return res.send(User.list)
-  //res.render('users', { users: User.list })
+  //res.send(await User.find())
+  const users = await User.find()
+  if (req.query.view === 'json') return res.send(User.list)
+  res.render('users', { users })
 })
 
 /* GET users by name. */
-router.get('/:userID', function (req, res, next) {
-  const user = User.list.find(user => user.name === req.params.userID)
+router.get('/:userID', async function (req, res, next) {
+  const user = await User.findById(req.params.userID)
   if (req.query.view === 'json') return res.send(user)
   res.render('user', { user: user })
 })
