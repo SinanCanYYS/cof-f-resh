@@ -71,7 +71,7 @@ class User {
         //if (this.name !== order.name) throw new Error('You are not the customer of this order')
         break
       case 'Owner':
-        if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
+        //if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
         break
     }
     // if (this !== order.restaurant.owner) throw new Error('You are not the owner of this restaurant')
@@ -95,7 +95,7 @@ class User {
   // }
 
   async addRecipeItem(menuItem, ingredient, quantity) {
-    if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
+    // if (!this._id.equals(restaurant.owner._id)) throw new Error('You are not the owner of this restaurant')
     // restaurant.menu.find(item => item.name === menuItem.name).recipe.push({ ingredient, quantity })
     menuItem.recipe.push({ ingredient: ingredient, quantity: quantity })
     // await restaurant.save()

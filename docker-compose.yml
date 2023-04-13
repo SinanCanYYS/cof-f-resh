@@ -23,16 +23,14 @@ services:
 
   tests:
     image: coffresh-api
-    build: .
     depends_on:
-      - mongodb
       - api
     volumes:
-      - ./src:/app/src
-    environment:
-      # - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
-      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/coffresh
-      - NODE_ENV=test
+      - ./src/test.js:/app/src/test.js
+    #environment:
+    # - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+    # - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/coffresh
+    # - NODE_ENV=test
 
-    working_dir: /app
+    # working_dir: /app
     command: node ./src/test.js
