@@ -8,7 +8,7 @@ block content
   ul#restaurants
     each restaurant in restaurants
       li.restaurant
-        a(href=`/restaurants/${restaurant.name}`) #{restaurant.name} - #{restaurant.owner}
+        a(href=`/restaurants/${restaurant._id}`) #{restaurant.name} - #{restaurant.owner.name}
         //- a(href=`/restaurants/${restaurant.id}`) #{restaurant.owner}
   //- h2 Owners
   //- ul#owners

@@ -7,5 +7,5 @@ block content
   //testlink - #{user.name}
 
   p
-    a(href=`/users/${user}`) #{restaurant.owner}
+    a(href=`/users/${restaurant.owner._id}`) #{restaurant.owner.name}
     span  owns #{restaurant.name}
