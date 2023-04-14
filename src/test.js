@@ -1,3 +1,6 @@
+// require('dotenv').config()
+// require('./database-connection')
+
 // const User = require('./models/user')
 // const Restaurant = require('./models/restaurant')
 // const MenuItem = require('./models/menu')
@@ -6,9 +9,6 @@
 
 const axios = require('axios')
 axios.defaults.baseURL = 'http://api:3000'
-
-require('dotenv').config()
-// require('./database-connection')
 
 console.log('My first project Cof-f-resh')
 
@@ -26,6 +26,8 @@ async function main() {
   // await MenuItem.deleteMany()
   // await Order.deleteMany()
   // await Ingredient.deleteMany()
+
+  await axios.get('/delete')
 
   // creating users with axios
   const sinan = await axios.post('/users', {
@@ -264,9 +266,13 @@ async function main() {
   })
 }
 
-main().catch(error => {
-  console.log(error.message ? error.message : error)
-})
+setTimeout(() => {
+  console.log('starting')
+  main().catch(error => {
+    console.log(error.message ? error.message : error)
+  })
+  console.log('ending')
+}, 3000)
 
 // Input Stock Data
 // sinancan.inputStockData(federal, federalCoffeeBean, 2022, 12, 100)

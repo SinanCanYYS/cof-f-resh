@@ -13,6 +13,12 @@ const restaurantsRouter = require('./routes/restaurants')
 const menuItemsRouter = require('./routes/menu-items')
 const ingredientsRouter = require('./routes/ingredients')
 
+const User = require('./models/user')
+const Restaurant = require('./models/restaurant')
+const MenuItem = require('./models/menu')
+const Order = require('./models/order')
+const Ingredient = require('./models/ingredient')
+
 const app = express()
 
 // view engine setup
@@ -31,6 +37,14 @@ app.use('/orders', ordersRouter)
 app.use('/restaurants', restaurantsRouter)
 app.use('/menu-items', menuItemsRouter)
 app.use('/ingredients', ingredientsRouter)
+app.get('/delete', async (req, res) => {
+  await User.deleteMany()
+  await Restaurant.deleteMany()
+  await MenuItem.deleteMany()
+  await Order.deleteMany()
+  await Ingredient.deleteMany()
+  res.send('Deleted')
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
