@@ -35,6 +35,7 @@
     "morgan": "^1.10.0",
     "pluralize": "^8.0.0",
     "pug": "^3.0.2",
+    "supertest": "^6.3.3",
     "to-words": "^3.5.0"
   }
 }
