@@ -15,6 +15,17 @@ block content
     br
     | Order items:
 
-    ul
-      each item in order.items
-        li #{item.menuItem.name} - #{item.quantity} -  #{item.menuItem.price}
+    table(cellpadding='4' border='1')
+      thead
+        tr(align='left')
+          th Name
+          th Quantity
+          th Price
+          th Total
+      tbody
+        each item in order.items
+          tr(align='left')
+            td #{item.menuItem.name}
+            td #{item.quantity} pcs
+            td #{item.menuItem.price} €
+            td #{item.menuItem.price * item.quantity} €
