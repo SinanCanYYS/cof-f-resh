@@ -4,10 +4,13 @@ const Order = require('../models/order')
 const User = require('../models/user')
 const Restaurant = require('../models/restaurant')
 const MenuItem = require('../models/menu')
+const OrderElement = require('../models/order-element')
 
 /* GET Order details. */
 router.get('/:orderID', async function (req, res, next) {
   const order = await Order.findById(req.params.orderID)
+  // await MenuItem.find()
+  // await OrderElement.find()
   res.render('order', { title: 'Order Details', order: order })
 })
 

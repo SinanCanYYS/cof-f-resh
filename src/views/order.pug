@@ -14,6 +14,8 @@ block content
     | Order status: #{order.status}
     br
     | Order items:
+    br
+    | items: #{order.items}
     ul
       each item in order.items
-        li #{item.menuItem} - #{item.quantity} -  #{item.menuItem.price}
+        li #{item.menuItem.name} - #{item.quantity} -  #{item.menuItem.price}

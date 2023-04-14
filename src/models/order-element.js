@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
 const orderElementSchema = new mongoose.Schema({
-  menuItem: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 1 } }],
+  menuItem: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 2 } },
   quantity: Number,
 })
 class OrderElement {
