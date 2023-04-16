@@ -44,4 +44,11 @@ router.patch('/:orderID', async function (req, res, next) {
   res.send(updatedOrder)
 })
 
+/* change the quantity of an order element */
+router.patch('/:orderID/order-elements/:orderElementID', async function (req, res, next) {
+  console.log('Changing quantity of order element')
+  await OrderElement.findByIdAndUpdate(req.params.orderElementID, { quantity: req.body.quantity })
+  res.send('OK')
+})
+
 module.exports = router

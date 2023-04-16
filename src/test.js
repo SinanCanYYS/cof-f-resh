@@ -89,6 +89,14 @@ async function main() {
     price: 5,
   })
 
+  const federalLatte = await axios.post(`/restaurants/${federal.data._id}/menu-items`, {
+    user: sinancan.data._id,
+    name: 'Latte',
+    type: 'Drink',
+    subType: 'Hot Drink',
+    price: 7,
+  })
+
   await axios.post(`/restaurants/${starbucks.data._id}/menu-items`, {
     user: jhonnyjean.data._id,
     name: 'Cortado',
@@ -233,6 +241,18 @@ async function main() {
     customer: sinan.data._id,
     menuItem: federalCappuccino.data._id,
     quantity: 3,
+  })
+
+  await axios.post(`/orders/${sinansOrder.data._id}/order-elements`, {
+    customer: sinan.data._id,
+    menuItem: federalLatte.data._id,
+    quantity: 6,
+  })
+
+  await axios.post(`/orders/${sinansOrder.data._id}/order-elements`, {
+    customer: sinan.data._id,
+    menuItem: federalCappuccino.data._id,
+    quantity: 13,
   })
 
   // changing the status of an order by restaurant

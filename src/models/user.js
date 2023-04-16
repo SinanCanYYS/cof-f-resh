@@ -8,6 +8,7 @@ const Restaurant = require('./restaurant')
 const Ingredient = require('./ingredient')
 
 const mongoose = require('mongoose')
+const { default: axios } = require('axios')
 // const autopopulate = require('mongoose-autopopulate')
 
 const userSchema = new mongoose.Schema({
@@ -22,7 +23,6 @@ class User {
   // }
 
   async createOrder({ restaurant, orderType, targetDate, notes }) {
-    console.log('this.type', this.type)
     if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
@@ -54,14 +54,23 @@ class User {
 
   async addOrderElement(order, menuItem, quantity) {
     if (this.name !== order.customer.name) throw new Error('You are not the customer of this order')
-    if (order.items.map(orderItem => orderItem.name).includes(menuItem.name)) {
-      order.items.find(orderItem => orderItem.name === menuItem.name).quantity += quantity
+    // console.log(order.items.map(orderItem => orderItem.menuItem.name))
+    // console.log(menuItem.name)
+    if (order.items.map(orderItem => orderItem.menuItem.name).includes(menuItem.name)) {
+      order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity += quantity
+      // const newQuantity = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity + quantity
+      // const orderElementID = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name)._id
+      // console.log(`orderId : ${order._id}, orderElementID : ${orderElementID}, new Quantity :  ${newQuantity}`)
+      // await axios.patch(`/orders/${order._id}/order-elements/${orderElementID}`, {
+      //   newQuantity,
+      // })
     } else {
       const newOrderElement = await OrderElement.create({ menuItem, quantity })
       order.items.push(newOrderElement)
     }
     order.totalCost += menuItem.price * quantity
     await order.save()
+    console.log('order :', order)
     return order
   }
 
