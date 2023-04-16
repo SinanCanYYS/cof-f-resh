@@ -8,7 +8,7 @@
 // const Ingredient = require('./models/ingredient')
 
 const axios = require('axios')
-axios.defaults.baseURL = 'http://api:3000'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 console.log('My first project Cof-f-resh')
 
