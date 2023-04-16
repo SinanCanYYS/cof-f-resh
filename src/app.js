@@ -18,6 +18,7 @@ const Restaurant = require('./models/restaurant')
 const MenuItem = require('./models/menu')
 const Order = require('./models/order')
 const Ingredient = require('./models/ingredient')
+const OrderElement = require('./models/order-element')
 
 const app = express()
 
@@ -43,6 +44,7 @@ app.get('/delete', async (req, res) => {
   await MenuItem.deleteMany()
   await Order.deleteMany()
   await Ingredient.deleteMany()
+  await OrderElement.deleteMany()
   res.send('Deleted')
 })
 
