@@ -9,6 +9,7 @@ const Ingredient = require('./ingredient')
 
 const mongoose = require('mongoose')
 const { default: axios } = require('axios')
+const orderElement = require('./order-element')
 // const autopopulate = require('mongoose-autopopulate')
 
 const userSchema = new mongoose.Schema({
@@ -60,10 +61,10 @@ class User {
       order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity += quantity
       // const newQuantity = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity + quantity
       // const orderElementID = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name)._id
-      // console.log(`orderId : ${order._id}, orderElementID : ${orderElementID}, new Quantity :  ${newQuantity}`)
       // await axios.patch(`/orders/${order._id}/order-elements/${orderElementID}`, {
       //   newQuantity,
       // })
+      // await orderElement.save()
     } else {
       const newOrderElement = await OrderElement.create({ menuItem, quantity })
       order.items.push(newOrderElement)
