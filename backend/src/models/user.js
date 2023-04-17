@@ -57,14 +57,10 @@ class User {
     if (this.name !== order.customer.name) throw new Error('You are not the customer of this order')
     // console.log(order.items.map(orderItem => orderItem.menuItem.name))
     // console.log(menuItem.name)
-    if (order.items.map(orderItem => orderItem.menuItem.name).includes(menuItem.name)) {
-      order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity += quantity
-      // const newQuantity = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name).quantity + quantity
-      // const orderElementID = order.items.find(orderItem => orderItem.menuItem.name === menuItem.name)._id
-      // await axios.patch(`/orders/${order._id}/order-elements/${orderElementID}`, {
-      //   newQuantity,
-      // })
-      // await orderElement.save()
+    const existingItem = order.items.find((orderItem) => orderItem.menuItem.name === menuItem.name)
+    if (existingItem) {
+      existingItem.quantity += quantity
+      await existingItem.save()
     } else {
       const newOrderElement = await OrderElement.create({ menuItem, quantity })
       order.items.push(newOrderElement)
