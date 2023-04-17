@@ -40,11 +40,11 @@ services:
       - api
       # - mongodb
     volumes:
-      - ./backend/src/test.js:/app/src/test.js
+      - ./backend/src/test.js:/app/backend/src/test.js
     #environment:
     # - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
     # - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/coffresh
     # - NODE_ENV=test
 
     # working_dir: /app
-    command: node ./src/test.js
+    command: node ./backend/src/test.js
