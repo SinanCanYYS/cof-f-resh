@@ -7,7 +7,7 @@ const orderElementSchema = require('./order-element')
 const orderSchema = new mongoose.Schema(
   {
     customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } },
-    restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', autopopulate: { maxDepth: 1 } },
+    restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', autopopulate: { maxDepth: 2 } },
     //restaurant: String,
     orderType: String,
     status: {
@@ -64,7 +64,7 @@ class Order {
     Order details     :
     ` +
       this.items
-        .map(line => {
+        .map((line) => {
           return `
       ${line.quantity} pcs ${line.name}`
         })

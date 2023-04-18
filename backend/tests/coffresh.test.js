@@ -1,6 +1,7 @@
 const request = require('supertest')
 const User = require('../src/models/user')
 const Restaurant = require('../src/models/restaurant')
+//const Order = require('../src/models/order')
 
 const app = require('../src/app')
 
@@ -140,6 +141,54 @@ describe('Coffresh', () => {
     const actualOutput = await request(app)
       .post(`/restaurants/${restaurant.body._id}/ingredients`)
       .send({ user: user.body._id, name: ingredientName, type: ingredientType, unit })
+
+    expect(actualOutput.body).toMatchObject(expectedOutput)
+
+    expect(actualOutput.body._id).toBeDefined()
+  })
+
+  it('can create a new Order', async () => {
+    const ownerName = 'Dries Mertens'
+    const ownerType = 'Owner'
+
+    const user = await request(app).post('/users').send({ name: ownerName, type: ownerType })
+
+    const customerName = 'Juan Mata'
+    const customerType = 'Customer'
+
+    const customer = await request(app).post('/users').send({ name: customerName, type: customerType })
+
+    const restaurantName = 'Big Mammas'
+    const city = 'Tekirdag'
+    const district = 'Merkez'
+
+    const restaurant = await request(app)
+      .post('/restaurants')
+      .send({ name: restaurantName, owner: user.body._id, city, district })
+
+    const orderType = 'Take Away'
+    const status = 'pending'
+    const targetDate = '09.09.2023'
+    const notes = 'please hurry up'
+
+    const expectedOutput = {
+      customer: customer.body,
+      restaurant: restaurant.body,
+      orderType,
+      status,
+      totalCost: 0,
+      items: [],
+      targetDate,
+      notes,
+    }
+
+    const actualOutput = await request(app).post('/orders').send({
+      customer: customer.body._id,
+      restaurant: restaurant.body._id,
+      type: orderType,
+      targetDate,
+      notes,
+    })
 
     expect(actualOutput.body).toMatchObject(expectedOutput)
 
