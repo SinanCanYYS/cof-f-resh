@@ -8,7 +8,7 @@
 // const Ingredient = require('./models/ingredient')
 
 const axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://api:3000'
 
 console.log('My first project Cof-f-resh')
 
@@ -288,7 +288,7 @@ async function main() {
 
 setTimeout(() => {
   console.log('starting')
-  main().catch(error => {
+  main().catch((error) => {
     console.log(error.message ? error.message : error)
   })
   console.log('ending')

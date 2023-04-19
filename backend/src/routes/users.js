@@ -8,7 +8,7 @@ console.log('Hello Users')
 router.get('/', async function (req, res, next) {
   //res.send(await User.find())
   const users = await User.find()
-  if (req.query.view === 'json') return res.send(User.list)
+  if (req.query.view === 'json') return res.send(users)
   res.render('users', { users })
 })
 
@@ -27,7 +27,7 @@ router.post('/', async function (req, res, next) {
 
 // Get a user by name
 router.get('/:name', function (req, res, next) {
-  const user = User.list.find(user => user.name === req.params.name)
+  const user = User.list.find((user) => user.name === req.params.name)
   res.send(user)
 })
 
