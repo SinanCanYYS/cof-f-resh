@@ -15,8 +15,9 @@ router.get('/', async function (req, res, next) {
 /* GET users by name. */
 router.get('/:userID', async function (req, res, next) {
   const user = await User.findById(req.params.userID)
-  if (req.query.view === 'json') return res.send(user)
-  res.render('user', { user: user })
+  // if (req.query.view === 'json') return res.send(user)
+  // res.render('user', { user: user })
+  res.send(user)
 })
 
 // Create a new user

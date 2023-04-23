@@ -1,4 +1,7 @@
 <script>
+import { useCounterStore } from '../stores/counterC'
+// import { mapState, mapActions } from 'pinia'
+
 export default {
   name: 'Counter',
   props: {
@@ -7,18 +10,9 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      count: 0
-    }
-  },
-  methods: {
-    increment() {
-      this.count++
-    },
-    decrement() {
-      this.count--
-    }
+  setup(props) {
+    const counterStore = useCounterStore()
+    return { counterStore }
   }
 }
 </script>
@@ -26,7 +20,7 @@ export default {
 <template lang="pug">
 div
   h1 {{ name }}
-  p Count: {{ count }}
-  button(@click='increment') +
-  button(@click='decrement') -
+  p Count: {{ counterStore.count }}
+  button(@click='counterStore.increment') +
+  button(@click='counterStore.decrement') -
 </template>

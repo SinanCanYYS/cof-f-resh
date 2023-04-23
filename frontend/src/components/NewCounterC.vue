@@ -1,15 +1,19 @@
 <script setup>
 import { ref } from 'vue'
+
 defineProps({
   name: {
     type: String,
     required: true
   }
 })
+
 const count = ref(0)
+
 const increment = () => {
   count.value++
 }
+
 const decrement = () => {
   count.value--
 }

@@ -1,8 +1,12 @@
 <script>
 import axios from 'axios'
+import NewCounterO from '@/components/NewCounterO.vue'
 
 export default {
   name: 'UserDetailsViewuser',
+  components: {
+    NewCounterO
+  },
   data() {
     return {
       user: null
@@ -16,6 +20,8 @@ export default {
 </script>
 <template lang="pug">
 h1 User List
+NewCounterO(name = 'NewCounterO')
+NewCounterO(name = 'NewCounter1')
 p  Welcome to {{user.name}}
 
 h2 User details
