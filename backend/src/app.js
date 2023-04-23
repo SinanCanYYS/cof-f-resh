@@ -18,8 +18,18 @@ const ordersRouter = require('./routes/orders')
 const restaurantsRouter = require('./routes/restaurants')
 const menuItemsRouter = require('./routes/menu-items')
 const ingredientsRouter = require('./routes/ingredients')
+const accountRouter = require('./routes/accounts')
 
 const User = require('./models/user')
+const passport = require('passport')
+
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy())
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 const Restaurant = require('./models/restaurant')
 const MenuItem = require('./models/menu')
 const Order = require('./models/order')
@@ -49,6 +59,8 @@ app.use(
   })
 )
 
+app.use(passport.session())
+
 app.use((req, res, next) => {
   const numberOfVisits = req.session.numberOfVisits || 0
   req.session.numberOfVisits = numberOfVisits + 1
@@ -72,6 +84,7 @@ app.use('/orders', ordersRouter)
 app.use('/restaurants', restaurantsRouter)
 app.use('/menu-items', menuItemsRouter)
 app.use('/ingredients', ingredientsRouter)
+app.use('/accounts', accountRouter)
 app.get('/delete', async (req, res) => {
   await User.deleteMany()
   await Restaurant.deleteMany()

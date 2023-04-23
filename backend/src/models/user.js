@@ -10,12 +10,16 @@ const Ingredient = require('./ingredient')
 const mongoose = require('mongoose')
 const { default: axios } = require('axios')
 const orderElement = require('./order-element')
-// const autopopulate = require('mongoose-autopopulate')
+const autopopulate = require('mongoose-autopopulate')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
   name: String,
   type: String,
 })
+
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
+userSchema.plugin(autopopulate)
 
 class User {
   // constructor(name, type) {

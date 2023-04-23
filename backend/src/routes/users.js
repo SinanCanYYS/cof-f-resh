@@ -37,6 +37,15 @@ router.post('/', async function (req, res, next) {
   res.send(user)
 })
 
+// /* Create a new user with password. */
+// router.post('/', async function (req, res, next) {
+//   const { name, email, password } = req.body
+
+//   const user = await User.register({ name, email }, password)
+
+//   res.send(user)
+// })
+
 // Get a user by name
 router.get('/:name', function (req, res, next) {
   const user = User.list.find((user) => user.name === req.params.name)
