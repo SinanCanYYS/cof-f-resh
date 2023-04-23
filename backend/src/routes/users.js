@@ -7,9 +7,20 @@ console.log('Hello Users')
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
   //res.send(await User.find())
+  // const numberOfVisits = req.session.numberOfVisits || 0
+
+  // console.log('fetching users', numberOfVisits)
+  // console.log('req :', req.session.numberOfVisits)
+
+  // req.session.numberOfVisits = numberOfVisits + 1
+
+  // console.log('fetching users2', numberOfVisits)
+  // console.log('req2 :', req.session.numberOfVisits)
+
   const users = await User.find()
   if (req.query.view === 'json') return res.send(users)
   res.render('users', { users })
+  //res.send(users)
 })
 
 /* GET users by name. */
