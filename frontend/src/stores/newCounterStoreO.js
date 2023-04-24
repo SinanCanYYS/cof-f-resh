@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia' // for stores
 import { computed } from 'vue' // for getters
 
-export const useNewCounterStoreO = defineStore({
-  id: 'newCounterO', // unique id
+export const useNewCounterStoreO = defineStore('newCounterO', {
+  // id: 'newCounterO', // unique id
   state: () => ({
     // reactive state
     count: 0 // default value

@@ -38,7 +38,12 @@ const OrderElement = require('./models/order-element')
 
 const app = express()
 
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -68,7 +73,7 @@ app.use((req, res, next) => {
   req.session.history.push({ url: req.url })
   req.session.ip = req.ip
 
-  console.log('session :', req.session)
+  //console.log('session :', req.session)
   next()
 })
 
