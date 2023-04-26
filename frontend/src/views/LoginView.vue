@@ -18,7 +18,7 @@ export default {
       this.$router.push('/users')
     }
     // async login() {
-    //   const response = await axios.post('http://localhost:3000/accounts/session', {
+    //   const response = await axios.post('/accounts/session', {
     //     email: this.email,
     //     password: this.password
     //   })

@@ -291,10 +291,10 @@ async function main() {
     type: 'customer',
   })
 
-  const loggedInSinan = await axios.post('/accounts/session', {
-    email: 'sinan@coyotiv.com',
-    password: '123456!',
-  })
+  // const loggedInSinan = await axios.post('/accounts/session', {
+  //   email: 'sinan@coyotiv.com',
+  //   password: '123456!',
+  // })
 
   console.log('Sinan', loggedInSinan.data)
 }

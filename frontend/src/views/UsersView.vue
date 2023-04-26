@@ -3,12 +3,12 @@ import axios from 'axios'
 
 import { RouterLink } from 'vue-router'
 
-import NewCounterC from '../components/NewCounterC.vue'
-import NewCounterO from '../components/NewCounterO.vue'
-import NewCounterFromStoreOC from '../components/NewCounterFromStoreOC.vue'
-import NewCounterFromStoreCC from '../components/NewCounterFromStoreCC.vue'
-import NewCounterFromStoreOO from '../components/NewCounterFromStoreOO.vue'
-import NewCounterFromStoreCO from '../components/NewCounterFromStoreCO.vue'
+// import NewCounterC from '../components/NewCounterC.vue'
+// import NewCounterO from '../components/NewCounterO.vue'
+// import NewCounterFromStoreOC from '../components/NewCounterFromStoreOC.vue'
+// import NewCounterFromStoreCC from '../components/NewCounterFromStoreCC.vue'
+// import NewCounterFromStoreOO from '../components/NewCounterFromStoreOO.vue'
+// import NewCounterFromStoreCO from '../components/NewCounterFromStoreCO.vue'
 // import Counter from '../components/Counter.vue'
 // import CounterOptionsApi from '../components/CounterOptionsApi.vue'
 
