@@ -8,7 +8,7 @@ import SupportIcon from './icons/IconSupport.vue'
 
 import axios from 'axios'
 
-const { data: users } = await axios.get('http://localhost:3000/users?view=json')
+const { data: users } = await axios.get('/users?view=json')
 </script>
 
 <template>

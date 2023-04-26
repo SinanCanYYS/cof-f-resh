@@ -13,7 +13,7 @@ export default {
     }
   },
   async created() {
-    const { data: user } = await axios.get(`http://localhost:3000/users/${this.$route.params.id}`)
+    const { data: user } = await axios.get(`/users/${this.$route.params.id}`)
     this.user = user
   }
 }

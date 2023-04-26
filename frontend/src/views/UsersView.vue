@@ -12,9 +12,9 @@ import NewCounterFromStoreCO from '../components/NewCounterFromStoreCO.vue'
 // import Counter from '../components/Counter.vue'
 // import CounterOptionsApi from '../components/CounterOptionsApi.vue'
 
-// const { data: users } = await axios.get('http://localhost:3000/users?view=json')
+// const { data: users } = await axios.get('/users?view=json')
 
-const usersResponse = await axios.get('http://localhost:3000/users?view=json')
+const usersResponse = await axios.get('/users?view=json')
 
 const users = usersResponse.data
 </script>
