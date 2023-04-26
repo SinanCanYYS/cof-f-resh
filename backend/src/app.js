@@ -65,6 +65,8 @@ app.use(
   })
 )
 
+console.log('session store created')
+
 app.use(passport.session())
 
 app.use((req, res, next) => {
