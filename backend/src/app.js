@@ -53,13 +53,13 @@ const clientPromise = mongoose.connection.asPromise().then((connection) => (conn
 
 app.use(
   session({
-    secret: 'waldIst7135!',
+    // secret: 'waldIst7135!',
     resave: false,
     saveUninitialized: true,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
-      sameSite: 'none',
+      sameSite: 'lax',
     },
     store: MongoStore.create({ clientPromise: clientPromise, stringify: false }),
   })
