@@ -59,9 +59,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      // secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
-      sameSite: 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     },
     store: MongoStore.create({ clientPromise: clientPromise, stringify: false }),
   })
@@ -69,6 +69,7 @@ app.use(
 
 console.log('session store created')
 
+app.use(passport.initialize())
 app.use(passport.session())
 
 app.use((req, res, next) => {
