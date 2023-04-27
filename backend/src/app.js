@@ -53,7 +53,7 @@ const clientPromise = mongoose.connection.asPromise().then((connection) => (conn
 
 app.use(
   session({
-    // secret: 'waldIst7135!',
+    secret: 'waldIst7135!',
     resave: false,
     saveUninitialized: true,
     cookie: {
