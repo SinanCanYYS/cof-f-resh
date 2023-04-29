@@ -11,6 +11,7 @@ const users = usersResponse.data
 <template>
   <div class="users">
     <h1>Owner Home</h1>
+    <button @click="$router.push('/addrestaurant')">Add Restaurant</button>
 
     <!-- <ul>
       <li v-for="user in users" :key="user._id">
