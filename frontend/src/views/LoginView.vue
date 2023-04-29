@@ -14,17 +14,12 @@ export default {
   methods: {
     ...mapActions(useAccountStore, ['login']),
     async doLogin() {
-      await this.login(this.email, this.password)
-      this.$router.push('/users')
+      const user = await this.login(this.email, this.password)
+      console.log('login successful', user)
+      user.type === 'Customer'
+        ? this.$router.push('/customerhome')
+        : this.$router.push('/ownerhome')
     }
-    // async login() {
-    //   const response = await axios.post('/accounts/session', {
-    //     email: this.email,
-    //     password: this.password
-    //   })
-
-    //   const user = response.data
-    // }
   }
 }
 </script>
@@ -32,7 +27,6 @@ export default {
 <template lang="pug">
 h2 Log-in to cof~f~resh
 
-//- p(v-if="user") You are logged in as {{ user?.name }}
 
 form(@submit.prevent="doLogin")
   div

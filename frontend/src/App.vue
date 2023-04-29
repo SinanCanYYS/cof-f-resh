@@ -4,6 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
 import { useSocketStore } from './stores/socket'
 import { mapActions, mapState } from 'pinia'
+// import { defineComponent } from 'vue'
 
 export default {
   name: 'App',
@@ -29,10 +30,6 @@ export default {
 
 <template>
   <header>
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" /> -->
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -49,6 +46,8 @@ export default {
   <h2>Logged in as: {{ user?.name }}</h2>
   <br />
   <h2>Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
+  <br />
+  <p>{{ currentTime }}</p>
   <Suspense>
     <RouterView />
   </Suspense>

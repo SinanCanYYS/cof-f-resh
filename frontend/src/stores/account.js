@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import axios from 'axios'
-axios.defaults.withCredentials = true
 
+axios.defaults.withCredentials = true
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export const useAccountStore = defineStore('Account', {
@@ -21,6 +21,7 @@ export const useAccountStore = defineStore('Account', {
           password: password
         })
       ).data
+      return this.user
     },
     async logout() {
       await axios.delete('/accounts/session')
