@@ -10,16 +10,18 @@ console.log('Hello Restaurants')
 /* GET restaurant listing. */
 router.get('/', async function (req, res, next) {
   const restaurants = await Restaurant.find()
-  if (req.query.view === 'json') return res.send(restaurants)
+  // if (req.query.view === 'json') return res.send(restaurants)
   // if (req.query.view === 'json') return res.send(Restaurant.list)
-  res.render('restaurants', { restaurants })
+  // res.render('restaurants', { restaurants })
+  res.send(restaurants)
 })
 
 // Get a restaurant by ID
 router.get('/:restaurantID', async function (req, res, next) {
   const restaurant = await Restaurant.findById(req.params.restaurantID)
-  if (req.query.view === 'json') return res.send(restaurant)
-  res.render('restaurant', { restaurant: restaurant, user: restaurant.owner })
+  // if (req.query.view === 'json') return res.send(restaurant)
+  // res.render('restaurant', { restaurant: restaurant, user: restaurant.owner })
+  res.send(restaurant)
 })
 
 // Create a new restaurant
