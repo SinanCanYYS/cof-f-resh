@@ -21,7 +21,7 @@ export default {
     async doAddRestaurant() {
       const owner = useAccountStore().user._id
       await this.addRestaurant(this.name, owner, this.city, this.district)
-      this.$router.push('/restaurants')
+      this.$router.push('/ownerhome')
     }
   }
 }
