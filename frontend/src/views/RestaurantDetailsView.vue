@@ -1,11 +1,11 @@
 <script>
-import axios from 'axios'
-import { useAccountStore } from '../stores/account'
+// import axios from 'axios'
+// import { useAccountStore } from '../stores/account'
 import { mapActions, mapState } from 'pinia'
 import { useRestaurantStore } from '../stores/restaurant'
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = import.meta.env.VITE_API_URL
+// axios.defaults.withCredentials = true
+// axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export default {
   name: 'RestaurantDetailsView',
@@ -15,19 +15,19 @@ export default {
       restaurant: {}
     }
   },
-  created() {
-    this.id = this.$route.params.id
-  },
-  async mounted() {
+  // created() {
+  //   this.id = this.$route.params.id
+  // },
+  async created() {
     await this.calledRestaurant()
   },
-  computed: {
-    ...mapState(useAccountStore, ['user'])
-  },
+  // computed: {
+  //   ...mapState(useAccountStore, ['user'])
+  // },
   methods: {
     ...mapActions(useRestaurantStore, ['fetchRestaurant']),
     async calledRestaurant() {
-      const restaurant = await this.fetchRestaurant(this.id)
+      const restaurant = await this.fetchRestaurant(this.$route.params.id)
       this.restaurant = { ...restaurant }
     }
   }
@@ -41,7 +41,6 @@ br
 h3 {{ restaurant.city }} - {{ restaurant.district }}
 br
 button(@click="$router.push('/orders')") Orders
-button(@click="$router.push(`/restaurants/${this.id}/menu`)") Menu
-
-button(@click="$router.push(`/restaurants/${this.id}/ingredients`)") Ingredients
+button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu`)") Menu
+button(@click="$router.push(`/restaurants/${this.$route.params.id}/ingredients`)") Ingredients
 </template>

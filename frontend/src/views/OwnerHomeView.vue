@@ -55,7 +55,7 @@ table(cellpadding='0' border='1')
 //-   RouterLink(:to="`/restaurants/${restaurant._id}`") {{ restaurant.name }} - {{ restaurant.city }} - {{ restaurant.district }}
 br
 RouterLink(to="/restaurants/:id") Restaurant Details
-button(@click="$router.push('/addrestaurant')") Add Restaurant
-RouterLink(to="/addrestaurant") Add new Restaurant
+button(@click="$router.push('/newrestaurant')") Add Restaurant
+RouterLink(to="/newrestaurant") Add new Restaurant
 
 </template>
