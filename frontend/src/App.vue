@@ -1,17 +1,19 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
 import { useSocketStore } from './stores/socket'
 import { mapActions, mapState } from 'pinia'
-// import { defineComponent } from 'vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     RouterLink,
     RouterView
+  },
+  data() {
+    return {
+      currentTime: new Date().toLocaleString()
+    }
   },
   async mounted() {
     await this.fetchUser()
@@ -43,11 +45,14 @@ export default {
   <br />
   <h1>Cof~f~resh</h1>
   <br />
-  <h2>Logged in as: {{ user?.name }}</h2>
+  <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
+    Logged in as: {{ user?.name }}
+  </RouterLink>
+  <!-- <h2 class="info">Logged in as: {{ user?.name }}</h2> -->
   <br />
-  <h2>Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
+  <h2 class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
   <br />
-  <p>{{ currentTime }}</p>
+  <p class="info">{{ currentTime }}</p>
   <Suspense>
     <RouterView />
   </Suspense>
@@ -57,6 +62,14 @@ export default {
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+.info {
+  font-size: 16px;
+  font-weight: bold;
+  color: #c90808;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .logo {
