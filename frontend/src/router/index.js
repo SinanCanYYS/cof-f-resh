@@ -33,9 +33,9 @@ const router = createRouter({
       component: () => import('../views/UserDetailsView.vue')
     },
     {
-      path: '/addrestaurant',
+      path: '/newrestaurant',
       name: 'add restaurant',
-      component: () => import('../views/AddRestaurantsView.vue')
+      component: () => import('../views/NewRestaurantView.vue')
     },
     {
       path: '/restaurants',
@@ -46,6 +46,21 @@ const router = createRouter({
       path: '/restaurants/:id',
       name: 'restaurants details',
       component: () => import('../views/RestaurantDetailsView.vue')
+    },
+    {
+      path: '/restaurants/:id/menu',
+      name: 'restaurants menu',
+      component: () => import('../views/MenuView.vue')
+    },
+    {
+      path: '/restaurants/:id/ingredients',
+      name: 'restaurants ingredients',
+      component: () => import('../views/IngredientView.vue')
+    },
+    {
+      path: '/restaurants/:id/menu/newmenuitem',
+      name: 'new menu item',
+      component: () => import('../views/NewMenuItemView.vue')
     },
     // {
     //   path: '/orders',
