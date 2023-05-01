@@ -7,13 +7,9 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export const useUserStore = defineStore('User', {
   state: () => ({
-    // reactive state
-    user: null // default value
+    user: null
   }),
   actions: {
-    // async fetchUser() {
-    //   this.user = (await axios.get('/accounts/session')).data
-    // },
     async signup(username, email, password, type) {
       this.user = axios.post('/users', {
         name: username,
@@ -22,10 +18,5 @@ export const useUserStore = defineStore('User', {
         type: type
       }).data
     }
-
-    // async logout() {
-    //   await axios.delete('/accounts/session')
-    //   this.user = null
-    // }
   }
 })
