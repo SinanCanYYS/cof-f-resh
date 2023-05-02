@@ -39,6 +39,15 @@ export const useRestaurantStore = defineStore('Restaurant', {
       })
       return menuItem.data
     },
+    async addIngredient(userId, restaurantId, name, type, unit) {
+      const newIngredient = await axios.post(`/restaurants/${restaurantId}/ingredients`, {
+        user: userId,
+        name: name,
+        type: type,
+        unit: unit
+      })
+      return newIngredient.data
+    },
     async addRestaurant(name, owner, city, district) {
       this.restaurant = axios.post('/restaurants', {
         name: name,
