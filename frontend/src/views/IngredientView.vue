@@ -1,50 +1,41 @@
 <script>
-// import axios from 'axios'
-// import { useAccountStore } from '../stores/account'
-import { mapActions, mapState } from 'pinia'
+import { mapActions } from 'pinia'
 import { useRestaurantStore } from '../stores/restaurant'
-
-// axios.defaults.withCredentials = true
-// axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export default {
   name: 'IngredientView',
   data() {
     return {
-      id: null,
-      restaurant: {},
-      menu: []
+      restaurant: {}
     }
   },
-  // created() {
-  //   this.id = this.$route.params.id
-  // },
+
   async created() {
-    await this.calledRestaurant()
+    this.restaurant = await this.fetchRestaurant(this.$route.params.id)
   },
-  computed: {
-    // ...mapState(useAccountStore, ['user']),
-    // ...mapState(useRestaurantStore, ['restaurant'])
-  },
+
   methods: {
-    ...mapActions(useRestaurantStore, ['fetchRestaurant']),
-    async calledRestaurant() {
-      this.restaurant = await this.fetchRestaurant(this.$route.params.id)
-      // this.menu.push(...restaurantMenu)
-    }
+    ...mapActions(useRestaurantStore, ['fetchRestaurant'])
   }
 }
 </script>
 <template lang="pug">
 h1 Ingredients of {{ restaurant.name }}
 br
-div
-  div(v-for="item in restaurant.menu" :key="item._id")
-    h3 {{ item.name }}
-    p {{ item.type  }}
-    p {{ item.price }}
+table(align="center",border="2")
+  thead
+    tr
+      th Name
+      th Type
+      th Unit
+  tbody(align="left")
+    tr(v-for="item in restaurant.ingredients" :key="item._id")
+      td {{ item.name }}
+      td {{ item.type }}
+      td {{ item.unit }}
 
-  button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu/newMenuItem`)") Add Menu Item
-  button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu/${item._id}`)") Edit
-  button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu/${item._id}`)") Delete
+
+button(@click="$router.push(`/restaurants/${this.$route.params.id}/ingredients/newingredient`)") Add Ingredient
+button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu/${item._id}`)") Edit
+button(@click="$router.push(`/restaurants/${this.$route.params.id}/menu/${item._id}`)") Delete
 </template>

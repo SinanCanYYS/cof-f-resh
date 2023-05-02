@@ -1,35 +1,21 @@
 <script>
-// import axios from 'axios'
-// import { useAccountStore } from '../stores/account'
-import { mapActions, mapState } from 'pinia'
+import { mapActions } from 'pinia'
 import { useRestaurantStore } from '../stores/restaurant'
-
-// axios.defaults.withCredentials = true
-// axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export default {
   name: 'RestaurantDetailsView',
   data() {
     return {
-      id: null,
       restaurant: {}
     }
   },
-  // created() {
-  //   this.id = this.$route.params.id
-  // },
+
   async created() {
-    await this.calledRestaurant()
+    this.restaurant = await this.fetchRestaurant(this.$route.params.id)
   },
-  // computed: {
-  //   ...mapState(useAccountStore, ['user'])
-  // },
+
   methods: {
-    ...mapActions(useRestaurantStore, ['fetchRestaurant']),
-    async calledRestaurant() {
-      const restaurant = await this.fetchRestaurant(this.$route.params.id)
-      this.restaurant = { ...restaurant }
-    }
+    ...mapActions(useRestaurantStore, ['fetchRestaurant'])
   }
 }
 </script>

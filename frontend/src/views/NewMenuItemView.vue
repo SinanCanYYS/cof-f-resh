@@ -1,5 +1,4 @@
 <script>
-// import axios from 'axios'
 import { useRestaurantStore } from '../stores/restaurant'
 import { useAccountStore } from '../stores/account'
 import { mapState, mapActions } from 'pinia'
