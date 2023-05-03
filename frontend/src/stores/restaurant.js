@@ -14,9 +14,12 @@ export const useRestaurantStore = defineStore('Restaurant', {
       const allRestaurants = await axios.get('/restaurants')
       return allRestaurants.data
     },
-    async fetchRestaurants() {
-      const ownersRestaurnats = await axios.get('/restaurants')
-      return ownersRestaurnats.data
+    async fetchRestaurants(owner) {
+      const allRestaurants = await axios.get('/restaurants')
+      const ownersRestaurants = allRestaurants.data.filter(
+        (restaurant) => restaurant.owner._id === owner._id
+      )
+      return ownersRestaurants
     },
     async fetchRestaurant(id) {
       const restaurant = await axios.get(`/restaurants/${id}`)

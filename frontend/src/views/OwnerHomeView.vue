@@ -16,7 +16,7 @@ export default {
     }
   },
   async mounted() {
-    this.ownersRestaurants = await this.fetchRestaurants()
+    this.ownersRestaurants = await this.fetchRestaurants(this.user)
   },
   computed: {
     ...mapState(useAccountStore, ['user'])
