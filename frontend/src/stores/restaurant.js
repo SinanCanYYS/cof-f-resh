@@ -10,13 +10,13 @@ export const useRestaurantStore = defineStore('Restaurant', {
     restaurant: []
   }),
   actions: {
-    async fetchRestaurants(owner) {
+    async fetchRestaurantLists() {
       const allRestaurants = await axios.get('/restaurants')
-      const ownersRestaurants = allRestaurants.data.filter(
-        (restaurant) => restaurant.owner._id === owner._id
-      )
-      // this.restaurant = ownersRestaurants
-      return ownersRestaurants
+      return allRestaurants.data
+    },
+    async fetchRestaurants() {
+      const ownersRestaurnats = await axios.get('/restaurants')
+      return ownersRestaurnats.data
     },
     async fetchRestaurant(id) {
       const restaurant = await axios.get(`/restaurants/${id}`)

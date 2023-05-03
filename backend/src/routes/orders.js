@@ -14,11 +14,17 @@ router.get('/:orderID', async function (req, res, next) {
   res.render('order', { title: 'Order Details', order: order })
 })
 
+/* GET Order List. */
+router.get('/', async function (req, res, next) {
+  const orders = await Order.find({ customer: req.user })
+  res.send(orders)
+})
+
 /* create a new order */
 router.post('/', async function (req, res, next) {
-  const user = await User.findById(req.body.customer)
+  // const user = await User.findById(req.body.customer)
   const restaurant = await Restaurant.findById(req.body.restaurant)
-  const newOrder = await user.createOrder({
+  const newOrder = await req.user.createOrder({
     restaurant: restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,

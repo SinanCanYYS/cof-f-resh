@@ -9,7 +9,7 @@ console.log('Hello Restaurants')
 
 /* GET restaurant listing. */
 router.get('/', async function (req, res, next) {
-  const restaurants = await Restaurant.find()
+  const restaurants = await Restaurant.find({ owner: req.user })
   // if (req.query.view === 'json') return res.send(restaurants)
   // if (req.query.view === 'json') return res.send(Restaurant.list)
   // res.render('restaurants', { restaurants })
