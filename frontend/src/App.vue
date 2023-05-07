@@ -32,33 +32,57 @@ export default {
 
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
-        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
-        <a v-if="user" @click="logout">Log out</a>
-      </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <RouterLink class="navbar-brand" to="/">Hidden brand</RouterLink>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- <RouterLink to="/">Home</RouterLink> -->
+            <li class="nav-item">
+              <RouterLink class="nav-link active" to="/about">About</RouterLink>
+            </li>
+            <li class="nav-item" v-if="!user">
+              <RouterLink class="nav-link" to="/login">Log in</RouterLink>
+            </li>
+            <li class="nav-item" v-if="!user">
+              <RouterLink class="nav-link" to="/signup">Sign up</RouterLink>
+            </li>
+            <li class="nav-item" v-if="user">
+              <a class="nav-link" @click="logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
-  <br />
-  <h1>Cof~f~resh</h1>
-  <br />
-  <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
-    Logged in as: {{ user?.name }}
-  </RouterLink>
-  <!-- <h2 class="info">Logged in as: {{ user?.name }}</h2> -->
-  <br />
-  <h2 class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
-  <br />
-  <p class="info">{{ currentTime }}</p>
-  <Suspense>
-    <RouterView />
-  </Suspense>
+  <div class="container">
+    <h1 class="my-3">Cof~f~resh</h1>
+    <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
+      Logged in as: {{ user?.name }}
+    </RouterLink>
+    <!-- <h2 class="info">Logged in as: {{ user?.name }}</h2> -->
+    <br />
+    <h2 class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
+    <br />
+    <p class="info">{{ currentTime }}</p>
+    <Suspense>
+      <RouterView />
+    </Suspense>
+  </div>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -128,4 +152,4 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-</style>
+</style> -->

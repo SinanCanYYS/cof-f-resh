@@ -42,23 +42,23 @@ export default {
 h1 New Order
 //- h2 {{ restaurantList }}
 form(@submit.prevent="doNewOrder")
-  div
-    label(for="restaurant") Restaurant
-    select#restaurant(v-model="restaurant")
+  div.mb-3
+    label.form-label(for="restaurant") Restaurant
+    select.form-select#restaurant(v-model="restaurant")
       option(v-for="restaurant in restaurantList" :key="restaurant._id" :value="restaurant._id") {{ restaurant.name }}
     //- input#restaurant(v-model="restaurant")
-  div
-    label(for="orderType") Order Type
-    select#orderType(v-model="orderType")
+  div.mb-3
+    label.form-label(for="orderType") Order Type
+    select.form-select#orderType(v-model="orderType")
       option(value="toGo") toGo
       option(value="toEat") toEat
+  div.mb-3
+    label.form-label(for="targetDate") Target Date
+    input.form-control#targetDate(v-model="targetDate")
+  div.mb-3
+    label.form-label(for="notes") Notes
+    input.form-control#notes(v-model="notes")
   div
-    label(for="targetDate") Target Date
-    input#targetDate(v-model="targetDate")
-  div
-    label(for="notes") Notes
-    input#notes(v-model="notes")
-  div
-    button(type="submit") Create Order
+    button.btn.btn-primary(type="submit") Create Order
 
 </template>
