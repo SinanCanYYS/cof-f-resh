@@ -12,7 +12,7 @@ export const useOrderStore = defineStore('Order', {
   }),
   actions: {
     async createOrder(customer, restaurantId, orderType, targetDate, notes) {
-      this.order = axios.post('/orders', {
+      this.order = await axios.post('/orders', {
         customer: customer,
         restaurant: restaurantId,
         type: orderType,
@@ -20,25 +20,30 @@ export const useOrderStore = defineStore('Order', {
         notes: notes
       }).data
     },
-    async addOrderElement(orderId, customerId, menuItem, quantity) {
-      axios.post(`/orders/${orderId}/order-elements`, {
-        customer: customerId,
+    async addOrderElement(orderId, menuItem, quantity) {
+      await axios.post(`/orders/${orderId}/order-elements`, {
         menuItem: menuItem,
         quantity: quantity
       })
     },
     async changeStatus(orderId, customerId, status) {
-      axios.patch(`/orders/${orderId}`, {
+      await axios.patch(`/orders/${orderId}`, {
         user: customerId,
         status: status
       })
     },
     async fetchOrder(orderId) {
-      this.order = axios.get(`/orders/${orderId}`).data
+      return (await axios.get(`/orders/${orderId}`)).data
     },
     async fetchOrders() {
       this.orders = (await axios.get(`/orders`)).data
       return this.orders
+    },
+    async fetchMenu(restaurantId) {
+      return (await axios.get(`/restaurants/${restaurantId}/menu`)).data
     }
+    // async fetchOrderElements(orderId) {
+    //   return (await axios.get(`/orders/${orderId}/order-elements`)).data
+    // }
   }
 })

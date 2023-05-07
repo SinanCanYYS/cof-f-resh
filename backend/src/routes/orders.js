@@ -11,7 +11,7 @@ router.get('/:orderID', async function (req, res, next) {
   const order = await Order.findById(req.params.orderID)
   // await MenuItem.find()
   // await OrderElement.find()
-  res.render('order', { title: 'Order Details', order: order })
+  res.send(order)
 })
 
 /* GET Order List. */
@@ -35,7 +35,7 @@ router.post('/', async function (req, res, next) {
 
 /* add a menu item to an order */
 router.post('/:orderID/order-elements', async function (req, res, next) {
-  const user = await User.findById(req.body.customer)
+  const user = req.user
   const order = await Order.findById(req.params.orderID)
   const menuItem = await MenuItem.findById(req.body.menuItem)
   const newOrderElement = await user.addOrderElement(order, menuItem, req.body.quantity)
