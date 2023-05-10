@@ -1,0 +1,16 @@
+{
+  "name": "sw302",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/sw302/index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sinan Can <sinan@can.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
