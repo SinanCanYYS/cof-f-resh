@@ -59,8 +59,6 @@ class User {
 
   async addOrderElement(order, menuItem, quantity) {
     if (this.name !== order.customer.name) throw new Error('You are not the customer of this order')
-    // console.log(order.items.map(orderItem => orderItem.menuItem.name))
-    // console.log(menuItem.name)
     const existingItem = order.items.find((orderItem) => orderItem.menuItem.name === menuItem.name)
     if (existingItem) {
       existingItem.quantity += quantity
