@@ -16,9 +16,8 @@ const decrement = () => {
 </script>
 
 <template lang="pug">
-div
-  h1 {{ name }}
-  p Count: {{ count }}
-  button(@click='increment') Increment
-  button(@click='decrement') Decrement
+div(style="display: flex; flex-wrap: wrap;")
+  button(@click='decrement') -
+  p Qty: {{ count }}
+  button(@click='increment') +
 </template>
