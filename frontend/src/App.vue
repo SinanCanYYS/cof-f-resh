@@ -46,7 +46,7 @@ export default {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <RouterLink class="navbar-brand" to="/">Hidden brand</RouterLink>
+          <RouterLink class="navbar-brand" to="/">Cof~f~resh</RouterLink>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <!-- <RouterLink to="/">Home</RouterLink> -->
             <li class="nav-item">
@@ -67,20 +67,27 @@ export default {
     </nav>
   </header>
   <div class="container">
-    <h1 class="my-3">Cof~f~resh</h1>
     <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
       Logged in as: {{ user?.name }}
     </RouterLink>
     <!-- <h2 class="info">Logged in as: {{ user?.name }}</h2> -->
     <br />
-    <h2 class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</h2>
+    <p class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</p>
     <br />
-    <p class="info">{{ currentTime }}</p>
+    <!-- <p class="info">{{ currentTime }}</p> -->
     <Suspense>
       <RouterView />
     </Suspense>
   </div>
 </template>
+
+<style scoped>
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+</style>
 
 <!-- <style scoped>
 header {
