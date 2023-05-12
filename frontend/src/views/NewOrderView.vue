@@ -12,7 +12,8 @@ export default {
       orderType: '',
       targetDate: '',
       notes: '',
-      restaurantList: []
+      restaurantList: [],
+      sepet: []
     }
   },
   async mounted() {
@@ -24,6 +25,9 @@ export default {
   methods: {
     ...mapActions(useRestaurantStore, ['fetchRestaurantLists']),
     ...mapActions(useOrderStore, ['createOrder']),
+    doAddItemSepet(item) {
+      this.items.push(item)
+    },
     async doNewOrder() {
       // const restaurant = useRestaurantStore().restaurant._id
       await this.createOrder(
@@ -31,7 +35,8 @@ export default {
         this.restaurant,
         this.orderType,
         this.targetDate,
-        this.notes
+        this.notes,
+        this.items
       )
       this.$router.push(`/customerhome`)
     }

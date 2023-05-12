@@ -11,14 +11,17 @@ export const useOrderStore = defineStore('Order', {
     orders: []
   }),
   actions: {
-    async createOrder(customer, restaurantId, orderType, targetDate, notes) {
-      this.order = await axios.post('/orders', {
-        customer: customer,
-        restaurant: restaurantId,
-        type: orderType,
-        targetDate: targetDate,
-        notes: notes
-      }).data
+    async createOrder(customer, restaurantId, orderType, targetDate, notes, cart) {
+      this.order = (
+        await axios.post('/orders', {
+          customer: customer,
+          restaurant: restaurantId,
+          type: orderType,
+          targetDate: targetDate,
+          notes: notes,
+          items: cart
+        })
+      ).data
     },
     async addOrderElement(orderId, menuItem, quantity) {
       await axios.post(`/orders/${orderId}/order-elements`, {

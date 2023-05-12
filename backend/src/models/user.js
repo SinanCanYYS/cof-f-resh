@@ -12,6 +12,7 @@ const { default: axios } = require('axios')
 const orderElement = require('./order-element')
 const autopopulate = require('mongoose-autopopulate')
 const passportLocalMongoose = require('passport-local-mongoose')
+const order = require('./order')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -27,7 +28,7 @@ class User {
   //   this.type = type
   // }
 
-  async createOrder({ restaurant, orderType, targetDate, notes }) {
+  async createOrder({ restaurant, orderType, targetDate, notes, items }) {
     if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
@@ -36,6 +37,9 @@ class User {
       targetDate: targetDate,
       notes: notes,
     })
+    newOrder.items.push(...items)
+    newOrder.totalCost += newOrder.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    await newOrder.save()
     restaurant.orderList.push(newOrder)
     await restaurant.save()
     return newOrder

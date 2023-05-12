@@ -29,6 +29,7 @@ router.post('/', async function (req, res, next) {
     orderType: req.body.type,
     targetDate: req.body.targetDate,
     notes: req.body.notes,
+    items: req.body.items,
   })
   res.send(newOrder)
 })

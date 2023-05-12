@@ -2,7 +2,7 @@ const { ToWords } = require('to-words')
 const toWords = new ToWords()
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
-const orderElementSchema = require('./order-element')
+// const orderElementSchema = require('./order-element')
 
 const orderSchema = new mongoose.Schema(
   {
@@ -18,11 +18,19 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    items: {
-      //type: [orderElementSchema],
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderElement', autopopulate: { maxDepth: 2 } }],
-      default: [],
-    },
+    // items: {
+    //   //type: [orderElementSchema],
+    //   type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 2 } }],
+    //   // type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'OrderElement', autopopulate: { maxDepth: 2 } }],
+    //   default: [],
+    // },
+    items: [
+      // {
+      //   item: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', autopopulate: { maxDepth: 2 } },
+      //   quantity: Number,
+      // },
+    ],
+
     // date: new Date().toLocaleDateString('en-gb'),
     // time: String,
     targetDate: String,
@@ -31,6 +39,8 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 )
 
@@ -47,6 +57,12 @@ class Order {
   //   this.targetDate = new Date(targetDate).toLocaleDateString('en-gb')
   //   this.targetTime = targetTime
   //   this.notes = notes
+  // }
+
+  // get totalCost() {
+  //   return this.items.reduce((acc, item) => {
+  //     return acc + item.price * item.quantity
+  //   }, 0)
   // }
 
   get orderDeatils() {

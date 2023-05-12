@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-import NewCounterO from '@/components/NewCounterO.vue'
+import NewCounterO from '@/components/countertests/NewCounterO.vue'
 
 export default {
   name: 'UserDetailsViewuser',

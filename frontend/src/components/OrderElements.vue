@@ -1,49 +1,58 @@
 <script>
+import { mapActions } from 'pinia'
 import { useOrderStore } from '../stores/order'
+import Counter from './Counter.vue'
 
 export default {
   name: 'OrderElements',
+  components: {
+    Counter
+  },
   props: {
-    orderID: {
-      type: String,
+    order: {
+      type: Object,
       required: true
     }
   },
   data() {
     return {
-      orderElements: []
+      menuItemId: 'Select a menu item',
+      quantity: null
     }
   },
-  async created() {
-    await this.fetchOrderElements()
-  },
+  // async created() {
+  //   this.order = await this.fetchOrder(this.orderID)
+  // },
   methods: {
-    async fetchOrderElements() {
-      this.orderElements = await useOrderStore().fetchOrderElements(this.orderID)
-    },
-    doCreateOrderElement() {
-      this.$router.push(`/orders/${this.order._id}/newOrderElement`)
-    },
-    fetchMenuLists() {
-      return useOrderStore().fetchMenuLists()
+    ...mapActions(useOrderStore, ['addOrderElement']),
+    async doAddOrderElement() {
+      if (this.menuItemId === 'Select a menu item') {
+        alert('Please select a menu item')
+        return
+      }
+      // const menuItemId = prompt('Enter the ID of the menu item:')
+      // const quantity = parseInt(prompt('Enter the quantity:'))
+      await this.addOrderElement(this.order._id, this.menuItemId, this.quantity)
     }
   }
 }
 </script>
 <template lang="pug">
-h5 here will come "Order Element Component"
-//- form(@submit.prevent="doNewOrder")
-//-   div.mb-1
-//-     label.form-label(for="restaurant") Menu Item
-//-     select.form-select#restaurant(v-model="restaurant")
-//-       option(v-for="menuItem in menuList" :key="menuItem._id" :value="restaurant._id") {{ restaurant.name }}
-//-     //- input#restaurant(v-model="restaurant")
 
-//-   div.mb-1
-//-     label.form-label(for="targetDate") Quantity
-//-     input.form-control#targetDate(v-model="targetDate")
-
-//-   div
-//-     button.btn.btn-primary(type="submit") Create Order
-
+form(@submit.prevent="doAddOrderElement")
+  div.mb-3(style="display: flex; flex-wrap: wrap;")
+    div(style="margin-right:10px").mb-3
+      //- label(for="menuItemId") Menu Item ID
+      select.form-select#menuItemId(v-model="menuItemId")
+        //- option(value="Select a menu item" selected disabled) Select a menu item
+        option.selected Select a menu item
+        option(v-for="menuItem in order.restaurant.menu" :key="menuItem._id" :value="menuItem._id") {{ menuItem.name }} - {{ menuItem.price }} €
+    div
+      //- label.form-label(for="quantity") Quantity
+      //- input.form-control#quantity(v-model="quantity")
+      input.form-control#quantity(type="number", placeholder="Quantity", aria-label="Quantity", v-model="quantity")
+    div
+      input(type="submit", value="Add Order Element")
+    //- div
+    //-   Counter
 </template>
