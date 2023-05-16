@@ -29,9 +29,8 @@ export const useOrderStore = defineStore('Order', {
         quantity: quantity
       })
     },
-    async changeStatus(orderId, customerId, status) {
+    async changeStatus(orderId, status) {
       await axios.patch(`/orders/${orderId}`, {
-        user: customerId,
         status: status
       })
     },

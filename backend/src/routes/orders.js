@@ -45,7 +45,7 @@ router.post('/:orderID/order-elements', async function (req, res, next) {
 
 /* change the status of an order */
 router.patch('/:orderID', async function (req, res, next) {
-  const user = await User.findById(req.body.user)
+  const user = req.user
   const order = await Order.findById(req.params.orderID)
   const updatedOrder = await user.changeStatus(order, req.body.status)
   res.send(updatedOrder)

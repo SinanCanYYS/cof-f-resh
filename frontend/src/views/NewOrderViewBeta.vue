@@ -99,7 +99,12 @@ div.container-cart
               option(value="toEat") toEat
           div.col
             label.form-label(for="targetDate") Target Date
-            input.form-control#targetDate(v-model="targetDate")
+            //- b-form-datepicker#targetDate(v-model="targetDate" :no-close-butoon="true")
+            input.form-control#targetDate(type="date" v-model="targetDate")
+            //- input.form-control#targetDate(v-model="targetDate")
+          div.col
+            label.form-label(for="targetTime") Target Time
+            input.form-control#targetTime(type="time" v-model="targetTime")
         div.row
           div.col-12
             label.form-label(for="notes") Notes
