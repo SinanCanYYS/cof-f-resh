@@ -8,16 +8,28 @@ export default {
   data() {
     return {
       restaurant: {},
-      error: null
+      error: null,
+      sortBy: 'createdAt',
+      sortType: 'Ascending'
     }
   },
 
   computed: {
-    sortOrderByDate() {
+    sortedOrder() {
       return this.restaurant.orderList.sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt)
+        if (this.sortType === 'Ascending') {
+          return new Date(a[this.sortBy]) - new Date(b[this.sortBy])
+        } else {
+          return new Date(b[this.sortBy]) - new Date(a[this.sortBy])
+        }
       })
     }
+
+    //   sortOrderByDate() {
+    //     return this.restaurant.orderList.sort((a, b) => {
+    //       return new Date(b.createdAt) - new Date(a.createdAt)
+    //     })
+    //   }
   },
 
   async created() {
@@ -38,7 +50,7 @@ export default {
         // this.$set(this.restaurant.orderList)
         // this.$forceUpdate()
       } catch (error) {
-        this.error = error.response.data.message
+        this.error = error.response.data
       }
     }
   },
@@ -63,17 +75,31 @@ div
     div.row
       div.col
         table.table.table-striped
-          thead
+          thead(style="vertical-align: middle;")
             tr.table-dark
-              th Date
+              th
+                div
+                  button(@click="sortBy = 'createdAt'; sortType = 'Ascending'") a
+                  | Date
+                  button(@click="sortBy = 'createdAt'; sortType = 'Descending'") d
               th Time
               th Order Type
-              th Target Date
+              th
+                div
+                  button(@click="sortBy = 'targetDate'; sortType = 'Ascending'") a
+                  | Target Date
+                  button(@click="sortBy = 'targetDate'; sortType = 'Descending'") d
               th Notes
-              th Total
+              th
+                div
+                  button(@click="sortBy = 'totalCost'; sortType = 'Ascending'") a
+                  | Total
+                  button(@click="sortBy = 'totalCost'; sortType = 'Descending'") d
+
               th Status
+              th Action
           tbody
-            tr(v-for="order in sortOrderByDate" :key="order._id")
+            tr(v-for="order in sortedOrder" :key="order._id" style="vertical-align: middle;")
               td {{ (new Date(order.createdAt)).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '.') }}
               td {{ (new Date(order.createdAt)).toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric' }) }}
               td {{ order.orderType }}
@@ -82,8 +108,8 @@ div
               td {{ order.totalCost }} €
               td {{ order.status }}
               td
-                button.btn.btn-info(v-if="(order.status === 'pending')" @click="doChangeStatus(order._id, 'confirmed')") Confirm
-                button.btn.btn-danger(v-if="(order.status === 'pending')" @click="doChangeStatus(order._id, 'rejected')") Reject
-                button.btn.btn-success(v-if="(order.status === 'confirmed')" @click="doChangeStatus(order._id, 'completed')") Complete
+                button.btn.btn-info.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'confirmed')") Confirm
+                button.btn.btn-danger.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'rejected')") Reject
+                button.btn.btn-success.btn-sm.me-2(v-if="(order.status === 'confirmed')" style="width:80px" @click="doChangeStatus(order._id, 'completed')") Complete
 div(v-if="error") {{ error }}
 </template>
