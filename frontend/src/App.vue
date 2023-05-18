@@ -47,7 +47,7 @@ export default {
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <RouterLink class="navbar-brand" to="/">Cof~f~resh</RouterLink>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- <RouterLink to="/">Home</RouterLink> -->
             <li class="nav-item">
               <RouterLink class="nav-link active" to="/about">About</RouterLink>
@@ -74,6 +74,14 @@ export default {
     <br />
     <p class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</p>
     <br />
+    <div style="margin: auto; text-align: center">
+      <img
+        src="../public/coffresh.png"
+        alt="A description of your image"
+        width="100"
+        height="100"
+      />
+    </div>
     <!-- <p class="info">{{ currentTime }}</p> -->
     <Suspense>
       <RouterView />

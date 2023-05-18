@@ -58,7 +58,7 @@ div.row
           th( align="center") Order Notes
           th( align="center") Order Status
       tbody(align="left")
-        tr(v-for="order in sortOrderByDate" :key="order._id")
+        tr(v-for="order in sortOrderByDate" :key="order._id" style="vertical-align: middle;")
           td( align="center")
             RouterLink(:to="`/orders/${order._id}`") {{ (new Date(order.createdAt)).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '.') }}
           td( align="center")
@@ -74,7 +74,7 @@ div.row
           td( align="center")
             RouterLink(:to="`/orders/${order._id}`") {{ order.status }}
           td
-            button.btn.btn-info(v-if="(order.status === 'pending')" @click="doChangeStatus(order._id, 'cancelled')") Cancel
+            button.btn.btn-info.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'cancelled')") Cancel
 
     button(@click="$router.push('/neworder')") Add Order
     button(@click="$router.push('/neworderBeta')") Add Order Beta
