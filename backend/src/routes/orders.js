@@ -47,8 +47,14 @@ router.post('/:orderID/order-elements', async function (req, res, next) {
 router.patch('/:orderID', async function (req, res, next) {
   const user = req.user
   const order = await Order.findById(req.params.orderID)
-  const updatedOrder = await user.changeStatus(order, req.body.status)
-  res.send(updatedOrder)
+  try {
+    const updatedOrder = await user.changeStatus(order, req.body.status)
+    res.send(updatedOrder)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+  // const updatedOrder = await user.changeStatus(order, req.body.status)
+  // res.send(updatedOrder)
 })
 
 /* change the quantity of an order element */
