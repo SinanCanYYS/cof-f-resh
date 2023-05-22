@@ -34,6 +34,9 @@ export default {
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
+        <a v-show="this.$route.name != 'home'" class="navbar-brand" href="/">
+          <img src="../public/coffresh.png" alt="Bootstrap" width="30" height="24" />
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -67,26 +70,31 @@ export default {
     </nav>
   </header>
   <div class="container">
-    <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
+    <!-- <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
       Logged in as: {{ user?.name }}
     </RouterLink>
-    <!-- <h2 class="info">Logged in as: {{ user?.name }}</h2> -->
-    <br />
-    <p class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</p>
-    <br />
-    <div style="margin: auto; text-align: center">
-      <img
-        src="../public/coffresh.png"
-        alt="A description of your image"
-        width="100"
-        height="100"
-      />
-    </div>
+    <p class="info">Socket connected: {{ connected ? 'yes' : 'no' }}</p> -->
+
     <!-- <p class="info">{{ currentTime }}</p> -->
     <Suspense>
       <RouterView />
     </Suspense>
   </div>
+  <footer class="info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
+          Logged in as:
+          <span style="color: crimson; font-weight: bold">{{ user?.name }}</span>
+        </RouterLink>
+        <p class="info">
+          Socket connected:
+          <span style="color: crimson; font-weight: bold">{{ connected ? 'yes' : 'no' }}</span>
+        </p>
+        <p style="color: royalblue; font-weight: bold">© 2023 Cof~f~resh</p>
+      </div>
+    </nav>
+  </footer>
 </template>
 
 <style scoped>
@@ -95,17 +103,15 @@ export default {
   margin-right: 0;
   text-align: right;
 }
-</style>
-
-<!-- <style scoped>
+/*
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
+} */
 .info {
   font-size: 16px;
   font-weight: bold;
-  color: #c90808;
+  color: royalblue;
   text-align: left;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -116,7 +122,13 @@ header {
   margin: 0 auto 2rem;
 }
 
-nav {
+.container {
+  max-width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -139,9 +151,9 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
+} */
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
@@ -150,8 +162,8 @@ nav a:first-of-type {
 
   .logo {
     margin: 0 2rem 0 0;
-  }
-
+  } */
+/*
   header .wrapper {
     display: flex;
     place-items: flex-start;
@@ -165,6 +177,12 @@ nav a:first-of-type {
 
     padding: 1rem 0;
     margin-top: 1rem;
-  }
+  } */
+/* } */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
-</style> -->
+</style>
