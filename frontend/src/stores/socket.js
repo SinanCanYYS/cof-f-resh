@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { io } from 'socket.io-client'
 
-export const socket = io('')
+export const socket = io('http://127.0.0.1:3000', {
+  withCredentials: true
+})
 
 export const useSocketStore = defineStore('Socket', {
   state: () => ({

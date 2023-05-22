@@ -5,6 +5,7 @@ const User = require('../models/user')
 
 router.get('/session', async function (req, res, next) {
   console.log('the current user is', req.user)
+  console.log('the current session is', req.session)
   res.send(req.user)
 })
 
