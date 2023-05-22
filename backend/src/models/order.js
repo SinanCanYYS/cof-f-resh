@@ -6,7 +6,7 @@ const autopopulate = require('mongoose-autopopulate')
 
 const orderSchema = new mongoose.Schema(
   {
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 1 } },
+    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: { maxDepth: 2 } },
     restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', autopopulate: { maxDepth: 2 } },
     //restaurant: String,
     orderType: String,

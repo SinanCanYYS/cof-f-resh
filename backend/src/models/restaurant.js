@@ -15,7 +15,7 @@ const restaurantSchema = new mongoose.Schema({
     default: [],
   },
   orderList: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order', autopopulate: { maxDepth: 1 } }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order', autopopulate: { maxDepth: 2 } }],
     default: [],
   },
   sales: [],
@@ -38,7 +38,7 @@ class Restaurant {
   //   }
 
   get pendingOrders() {
-    return this.orderList.filter(order => order.status === 'pending')
+    return this.orderList.filter((order) => order.status === 'pending')
   }
 
   // static create({ name, owner, city, district }) {
