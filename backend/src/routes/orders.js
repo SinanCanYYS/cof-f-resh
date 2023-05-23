@@ -5,6 +5,7 @@ const User = require('../models/user')
 const Restaurant = require('../models/restaurant')
 const MenuItem = require('../models/menu')
 const OrderElement = require('../models/order-element')
+// const socketIO = require('socket.io')
 
 /* GET Order details. */
 router.get('/:orderID', async function (req, res, next) {
@@ -22,6 +23,7 @@ router.get('/', async function (req, res, next) {
 
 /* create a new order */
 router.post('/', async function (req, res, next) {
+  const io = req.app.get('io')
   // const user = await User.findById(req.body.customer)
   const restaurant = await Restaurant.findById(req.body.restaurant)
   const newOrder = await req.user.createOrder({
@@ -31,6 +33,8 @@ router.post('/', async function (req, res, next) {
     notes: req.body.notes,
     items: req.body.items,
   })
+  console.log('Socket Order created (backend):', newOrder._id)
+  io.emit('orderCreated', { orderId: newOrder._id })
   res.send(newOrder)
 })
 
@@ -45,10 +49,12 @@ router.post('/:orderID/order-elements', async function (req, res, next) {
 
 /* change the status of an order */
 router.patch('/:orderID', async function (req, res, next) {
+  const io = req.app.get('io') // socket.io instance
   const user = req.user
   const order = await Order.findById(req.params.orderID)
   try {
     const updatedOrder = await user.changeStatus(order, req.body.status)
+    io.emit('orderUpdated', { orderId: updatedOrder._id })
     res.send(updatedOrder)
   } catch (error) {
     res.status(400).send(error.message)

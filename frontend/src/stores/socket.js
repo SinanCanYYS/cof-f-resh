@@ -20,6 +20,12 @@ export const useSocketStore = defineStore('Socket', {
         this.connected = false
         console.log('disconnected')
       })
+      socket.on('orderCreated', (data) => {
+        console.log('Socket Order created (frontend):', data)
+        // Perform any desired actions with the received data
+        // For example, update the restaurant owner's UI or display a notification
+      })
+      console.log('Socket Order created (frontend test):')
     }
   }
 })
