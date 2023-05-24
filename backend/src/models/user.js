@@ -28,13 +28,14 @@ class User {
   //   this.type = type
   // }
 
-  async createOrder({ restaurant, orderType, targetDate, notes, items }) {
+  async createOrder({ restaurant, orderType, targetDate, targetTime, notes, items }) {
     if (this.type !== 'Customer') throw new Error('You are not a customer')
     const newOrder = await Order.create({
       customer: this._id,
       restaurant: restaurant,
       orderType: orderType,
       targetDate: targetDate,
+      targetTime: targetTime,
       notes: notes,
     })
     newOrder.items.push(...items)

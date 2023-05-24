@@ -34,7 +34,7 @@ const orderSchema = new mongoose.Schema(
     // date: new Date().toLocaleDateString('en-gb'),
     // time: String,
     targetDate: String,
-    // targetTime: String,
+    targetTime: String,
     notes: String,
   },
   {

@@ -30,6 +30,7 @@ router.post('/', async function (req, res, next) {
     restaurant: restaurant,
     orderType: req.body.type,
     targetDate: req.body.targetDate,
+    targetTime: req.body.targetTime,
     notes: req.body.notes,
     items: req.body.items,
   })

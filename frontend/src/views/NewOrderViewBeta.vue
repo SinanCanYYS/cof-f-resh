@@ -12,6 +12,7 @@ export default {
       restaurant: '',
       orderType: '',
       targetDate: '',
+      targetTime: '',
       notes: '',
       restaurantList: [],
       quantity: 1,
@@ -66,6 +67,7 @@ export default {
         this.restaurant,
         this.orderType,
         this.targetDate,
+        this.targetTime,
         this.notes,
         this.cart
       )
