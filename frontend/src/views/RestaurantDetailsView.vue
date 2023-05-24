@@ -16,7 +16,7 @@ export default {
 
   computed: {
     sortedOrder() {
-      return this.restaurant.orderList.sort((a, b) => {
+      return this.restaurant.orderList?.sort((a, b) => {
         if (this.sortType === 'Ascending') {
           return new Date(a[this.sortBy]) - new Date(b[this.sortBy])
         } else {
@@ -102,14 +102,22 @@ div
               th Action
           tbody
             tr(v-for="order in sortedOrder" :key="order._id" style="vertical-align: middle;")
-              td {{ (new Date(order.createdAt)).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '.') }}
-              td {{ (new Date(order.createdAt)).toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric' }) }}
-              td {{ order.customer.name}}
-              td {{ order.orderType }}
-              td {{ order.targetDate }}
-              td {{ order.notes }}
-              td {{ order.totalCost }} €
-              td {{ order.status }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ (new Date(order.createdAt)).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '.') }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ (new Date(order.createdAt)).toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric' }) }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.customer.name}}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.orderType }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.targetDate }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.notes }}
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.totalCost }} €
+              td
+                RouterLink(:to="`/orders/${order._id}`") {{ order.status }}
               td
                 button.btn.btn-info.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'confirmed')") Confirm
                 button.btn.btn-danger.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'rejected')") Reject

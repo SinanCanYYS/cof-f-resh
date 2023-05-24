@@ -64,7 +64,7 @@ div.row
           td( align="center")
             RouterLink(:to="`/orders/${order._id}`") {{ (new Date(order.createdAt)).toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric' }) }}
           td( align="left")
-            RouterLink(:to="`/restaurants/${order.restaurant._id}`") {{ order.restaurant.name }}
+            RouterLink(:to="`/orders/${order._id}`") {{ order.restaurant.name }}
           td( align="center")
             RouterLink(:to="`/orders/${order._id}`") {{ order.targetDate }}
           td( align="center")

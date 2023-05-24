@@ -69,7 +69,7 @@ export default {
       </div>
     </nav>
   </header>
-  <div class="container">
+  <div class="container scrollable">
     <!-- <RouterLink class="info" :to="user?.type === 'Owner' ? '/ownerhome' : '/customerhome'">
       Logged in as: {{ user?.name }}
     </RouterLink>
@@ -128,6 +128,13 @@ header {
   margin: 0 auto;
 }
 
+.scrollable {
+  overflow-y: scroll;
+  height: 100%;
+  margin-bottom: 128px;
+  margin-top: 64px;
+}
+
 /* nav {
   width: 100%;
   font-size: 12px;
@@ -184,5 +191,12 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
 }
 </style>
