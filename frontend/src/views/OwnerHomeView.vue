@@ -31,25 +31,33 @@ export default {
 </script>
 
 <template lang="pug">
-br
-h2 Owner Home Page
-br
-h3 Restaurant List of {{ user.name }}
-br
-table(cellpadding='0' border='1')
-  thead(align="center")
-    tr
-      th( align="center") Restaurant Name
-  tbody(align="left")
-    tr(v-for="restaurant in ownersRestaurants" :key="restaurant._id")
-      td
-        RouterLink(:to="`/restaurants/${restaurant._id}`") {{ restaurant.name }}
-
-//- ul Restaurant List of {{ user.name }}
-//-   li(v-for="restaurant in restaurants" :key="restaurant._id")
-//-   RouterLink(:to="`/restaurants/${restaurant._id}`") {{ restaurant.name }} - {{ restaurant.city }} - {{ restaurant.district }}
-br
-button(@click="$router.push('/newrestaurant')") Add Restaurant
+div.row
+  div.col-md-12
+    h2(align="center") Owner Home Page
+    br
+    h3(align="center")  Restaurant List of {{ user.name }}
+    br
+    div.table-container
+      table.table.table-hover(cellpadding='0' border='1')
+        thead(align="center")
+          tr
+            th(style="font-weight: bold") Restaurant Name
+        tbody(align="left")
+          tr(v-for="restaurant in ownersRestaurants" :key="restaurant._id")
+            td
+              RouterLink(:to="`/restaurants/${restaurant._id}`") {{ restaurant.name }}
+      button.btn.btn-outline-warning(@click="$router.push('/newrestaurant')" style="width: 100px;") Add New Restaurant
 //- RouterLink(to="/newrestaurant") Add new Restaurant
 
 </template>
+<style scoped>
+.table-container {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+```

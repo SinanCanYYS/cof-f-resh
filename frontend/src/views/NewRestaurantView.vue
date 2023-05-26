@@ -28,17 +28,25 @@ export default {
 </script>
 
 <template lang="pug">
-h2 Add Restaurant
-
-  form(@submit.prevent="doAddRestaurant")
-    div
-      label(for="name") Name :
-      input#name(v-model="name" type="text" required)
-    div
-      label(for="city") City        :
-      input#city(v-model="city" type="text" required)
-    div
-      label(for="district") District:
-      input#district(v-model="district" type="text" required)
-    button#submit(type="submit") Add
+.d-flex.flex-column.align-items-center.justify-content-center.min-vh-100
+  h5.mb-4 Add New Restaurant
+  .container.my-5
+    .row.justify-content-center
+      .col-sm-6
+        form(@submit.prevent="doAddRestaurant" class="my-3")
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="name") Name :
+            .col-sm-8
+              input#name.form-control(v-model="name" type="text" required)
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="city") City :
+            .col-sm-8
+              input#city.form-control(v-model="city" type="text" required)
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="district") District:
+            .col-sm-8
+              input#district.form-control(v-model="district" type="text" required)
+          .form-group.row
+            .col-sm-8.offset-sm-4
+              button#submit.btn.btn-outline-warning(type="submit") Add Restaurant
 </template>

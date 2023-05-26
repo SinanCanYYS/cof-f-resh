@@ -76,6 +76,5 @@ div.row
           td
             button.btn.btn-info.btn-sm.me-2(v-if="(order.status === 'pending')" style="width:80px" @click="doChangeStatus(order._id, 'cancelled')") Cancel
 
-    button(@click="$router.push('/neworder')") Add Order
-    button(@click="$router.push('/neworderBeta')") Add Order Beta
+    button(@click="$router.push('/neworderBeta')") Add New Order
 </template>

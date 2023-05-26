@@ -32,18 +32,25 @@ export default {
 }
 </script>
 <template lang="pug">
-h1 Add New Ingredient
-
-form(@submit.prevent="doAddIngredient")
-  div
-    label(for="name") Name
-    input#name(v-model="name")
-  div
-    label(for="type") Type
-    input#type(v-model="type")
-  div
-    label(for="subType") Unit
-    input#subType(v-model="unit")
-  div
-    button(type="submit") Add Ingredient
+.d-flex.flex-column.align-items-center.justify-content-center.min-vh-100
+  h5.mb-4 Add New Ingredient
+  .container.my-5
+    .row.justify-content-center
+      .col-sm-6
+        form(@submit.prevent="doAddIngredient" class="my-3")
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="name") Name
+            .col-sm-8
+              input#name.form-control(v-model="name" type="text" required)
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="type") Type
+            .col-sm-8
+              input#type.form-control(v-model="type" type="text" required)
+          .form-group.row.align-items-center.mb-3
+            label.col-sm-4(for="unit") Unit
+            .col-sm-8
+                input#subType.form-control(v-model="unit" type="text" required)
+          .form-group.row
+            .col-sm-8.offset-sm-4
+              button.btn.btn-outline-warning(type="submit") Add Ingredient
 </template>
