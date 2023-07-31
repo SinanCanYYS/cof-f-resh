@@ -21,7 +21,11 @@ export default {
   },
   methods: {
     ...mapActions(useAccountStore, ['fetchUser', 'logout']),
-    ...mapActions(useSocketStore, ['init'])
+    ...mapActions(useSocketStore, ['init']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/')
+    }
   },
   computed: {
     ...mapState(useAccountStore, ['user']),
@@ -62,7 +66,7 @@ export default {
               <RouterLink class="nav-link" to="/signup">Sign up</RouterLink>
             </li>
             <li class="nav-item" v-if="user">
-              <a class="nav-link" @click="logout">Log out</a>
+              <a class="nav-link" @click="doLogout">Log out</a>
             </li>
           </ul>
         </div>

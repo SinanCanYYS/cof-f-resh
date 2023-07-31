@@ -16,6 +16,7 @@ export default {
     async doLogin() {
       const user = await this.login(this.email, this.password)
       console.log('login successful', user)
+      console.log('test August')
       user.type === 'Customer'
         ? this.$router.push('/customerhome')
         : this.$router.push('/ownerhome')
