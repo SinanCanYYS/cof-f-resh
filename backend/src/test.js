@@ -61,3 +61,5 @@ setTimeout(() => {
 // Input Purchase Data
 // sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 01, 100)
 // sinancan.inputPurchaseData(federal, federalCoffeeBean, 2023, 02, 150)
+
+console.log('alles gut')
